@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "domanda": "L’Agenzia delle Entrate può 'vedere' cosa ho sul mio Ledger o Trezor?",
+    "risposta": "No, l'Agenzia delle Entrate non possiede tecnologie onniscienti per scansionare automaticamente i dispositivi fisici offline. Tuttavia, monitora con quale regolarità sposti fondi dagli Exchange italiani verso indirizzi esterni (conoscendo la Blockchain pubblica). Il possesso di un Hardware Wallet ti mette al riparo totale da sequestri bancari o hacker digitali, ma per la legge sei tenuto a dichiararne in anticipo volontariamente il controvalore nel Quadro RW.",
+    "tags": "ledger trezor fisco ade agenzia entrate spiare vedere controlli vedere saldo",
+    "href": "/wallets",
+    "link_label": "Sicurezza Hardware Wallets"
+  },
+  {
+    "id": 2,
+    "domanda": "Registro OAM: Cosa comunicano gli Exchange italiani o iscritti (es. Binance, Young Platform)?",
+    "risposta": "Agli iscritti all'OAM (Organismo Agenti e Mediatori) in Italia, viene imposto l'invio trimestrale di un report al Governo comunicando: i tuoi dati anagrafici esatti (KYC), il saldo totale all'inizio e fine del periodo, e il numero di transazioni eseguite fiat-to-crypto. In sostanza l'OAM elimina in toto qualsiasi forma di anonimato se usi Exchange centralizzati con licenza in Italia.",
+    "tags": "oam registro binance young platform kyc carta exchange informazioni controlli trimestrale",
+    "href": "/exchange",
+    "link_label": "Scopri Piattaforme No-KYC"
+  },
+  {
+    "id": 3,
+    "domanda": "Usare una VPN mi rende anonimo quando faccio transazioni sulla Blockchain?",
+    "risposta": "Falso. La VPN maschera esclusivamente il tuo indirizzo IP (geo-localizzazione) a chiunque intercetti la connessione locale con il provider di rete, impedendo di associare la tua connessione fisica ai movimenti. Ma la Blockchain resta 100% trasparente e accessibile a tutti: ogni tuo incasso o pagamento on-chain è scolpito in pubblico a vita. La VPN risolve la sorveglianza lato Internet, non lato criptovalute.",
+    "tags": "vpn anonimo ip privacy blockchain trasparenza tracciato nascondersi",
+    "href": "/varie",
+    "link_label": "Vai alla Sicurezza VPN"
+  },
+  {
+    "id": 4,
+    "domanda": "Comprare Crypto in contanti o P2P (Peer-to-Peer) è illegale in Italia?",
+    "risposta": "Non esiste nessuna legge dello Stato che vieti la stipula di compravendita di software digitale (come Bitcoin) tra due cittadini privati consenzienti. Piattaforme come HodlHodl fungono unicamente da bacheca tra venditore e compratore minimizzando così i KYC societari. Bisogna tuttavia restare attenti ai massimali normati per il contante, o adoperare bonifici SEPA puliti.",
+    "tags": "p2p contanti peer bisq hodlhodl peach illegale riciclaggio scambio privati",
+    "href": "/exchange",
+    "link_label": "Lista Exchange P2P"
+  },
+  {
+    "id": 5,
+    "domanda": "Lo Stato o Guardia di Finanza può risalire alla mia identità avendo un mio indirizzo MetaMask/Ledger?",
+    "risposta": "Se quell'inidirzzo ha subìto interazioni anche 'una singola volta' con un Exchange dove hai fornito i documenti (KYC con la tua patente), la risposta è SÌ. Attraverso software forensi di Chain Analysis si tracciano tutti gli sbocchi, collegando formalmente la tua vera persona a tutti gli infiniti wallet a valle dove hai mandato in passato anche minuscoli importi partendo da quell'Exchange identificato.",
+    "tags": "identità kyc stato finanza guardia risalire indirizzo address 0x eth btc traccia metamask",
+    "href": "/exchange",
+    "link_label": "Analisi Privacy P2P"
+  },
+  {
+    "id": 6,
+    "domanda": "Non ho mai ritirato le mie Crypto in Euro sul conto banca, devo lo stesso pagare o dichiarare?",
+    "risposta": "Sì. L'Italia applica regole estese: vige l'obbligo formale di 'Monitoraggio Fiscale' (Quadro RW). Indipendentemente da dove si trovino segretamente i tuoi fondi, per le leggi vigenti vi è l'obbligo da parte tua di rendicontazione fiscale allo scoccare di Dicembre, pagando solo gli aborriti oneri percentuali sulle giacenze pure o qualora convertissi valuta.",
+    "tags": "dichiarazione quadro rw tasse incassare cashout monitoraggio mai venduto",
+    "href": "/fisco",
+    "link_label": "Leggi Norme Fisco 2026"
+  },
+  {
+    "id": 7,
+    "domanda": "Ho perso le mie crypto, ho perso il Backup (Seed) o l'Exchange ha chiuso. Come mi muovo col Fisco?",
+    "risposta": "Se hai subìto un Hack irreversibile e un furto dei fondi, e in passato li avevi regolarmente dichiarati, l'unico scudo normativo per spiegare legalmente l'evaporamento al fine di smettere di redigere quel patrimonio anno su anno al fisco, è possedere una regolare denuncia sporta alla Polizia o Carabinieri per 'smarrimento Password/Infiltrazione telematica'. Senza, il Fisco formalmente stimerà che tu le possieda ancor oggi, colpendoti per mancata documentazione d'evasione su fondi svaniti.",
+    "tags": "rubate perse hack drainer quadro rw denuncia polizia carabinieri tolte smarrimento",
+    "href": "/fisco",
+    "link_label": "Risorse Legali Quadro RW"
+  },
+  {
+    "id": 8,
+    "domanda": "Se vendo Bitcoin convertendolo in Stablecoin (es. USDT) devo pagare le tasse del 33% (Quadro RT)?",
+    "risposta": "Sì, per le manovre vigenti post-Legge di Bilancio (2023). Scambiare una Criptovaluta come Bitcoin o Monero, con token stabili con valore rigidamente equiparato ad una moneta sovrana fiat governativa (e-Money Tokens o Stablecoin USDC/USDT) è stato categoricamente definito come evento di realizzo 'fiscalmente rilevante' che innesca il ricalcolo per accertare o tassare eventuali plusvalenze enormi generatesi nello scambio precedente, equiparando l'azione a scambiarli per Euro Veri.",
+    "tags": "usdt stablecoin usdc conversione tasse 26% 33% bilancio plusvalenza rt usdt a btc tasso",
+    "href": "/fisco",
+    "link_label": "Tabelle Tassazioni e Deroghe"
+  },
+  {
+    "id": 9,
+    "domanda": "Staking e Cashback: Come sono tassate le rendite in Criptovaluta o gli interessi passivi?",
+    "risposta": "Tutti i rendimenti passivi forniti o distribuiti in modo certo dalle reti automatizzate (Staking Rewards annualizzati) non godono dello scaglione della speculazione finanziaria sulle differenze d'aquisto. Vengono di norma inglobati nel calderone di base tra i 'Redditi di Capitale purissimii' (Quadro RM), incassando una Tassa secca da decurtare usando il controvalore Euro stabilizzato unicamente all'atto materiale che l'hanno incassato sui server personali.",
+    "tags": "staking reward cashback airdrop rendite interessi passivi rm proventi delegazione calcolo",
+    "href": "/fisco",
+    "link_label": "Linee Guida Staking/DeFi"
+  },
+  {
+    "id": 10,
+    "domanda": "Come si calcola esattamente l'Imposta di Bollo sulle Criptovalute (IVAFE)?",
+    "risposta": "A differenza delle vecchie soglie illimitate free, si deve versare religiosamente un dazio dello 0.20% totale sulla giacenza annua lorda scattata istantaneamente sui controvalori del 31 Dicembre dell'anno fiscale calcolato, versato entro Giugno col modello PF. Qualora si fosse scaricato un conto exchange si opererebbe per ragguaglio dei vari mesi per cui vigeva l'attività sul suolo estero.",
+    "tags": "bollo ivafe 0.2% patrimoniale tassa fissa rw calcolo dicembre 31 0,2 percentuale pagare quanti",
+    "href": "/fisco",
+    "link_label": "Modelli Calcoli Fiscali Crypto"
+  },
+  {
+    "id": 11,
+    "domanda": "Motivazione dei Blocchi SEPA: Perché Intesa, Poste o UniCredit bloccano o rifiutano l'Exchange?",
+    "risposta": "Le Banche Europee sono terrorizzate dall'entità degli accertamenti e dalle direttive Antiriciclaggio penali del KYC Bancario interno. L'alta frizione crypto ha convinto la moltitudine ad azionare Algoritmi draconiani. Se da Poste bonifici di punto in bianco oltre 10.000Euros, la banca reputa il rischio come fuori dalla tua profilatura del Reddito ed i sistemi congelano bonifico e C/C fino a colloquio forzoso esibendo certificazioni fiscali redatte.",
+    "tags": "blocco conto corrente banca chiusura bonifico aml rifiutato sospetto intesa poste unicredit revolut blocchi bloccati sospeso soldi bcc bloccata fineco accertamento",
+    "href": "/spend",
+    "link_label": "Scopri Alternative Liquide Bancarie"
+  },
+  {
+    "id": 12,
+    "domanda": "Cosa cambia dal 2026 in Europa con l'apocalittica direttiva automatica DAC8 sulle criptovalute?",
+    "risposta": "Con la Direttiva Auto-Scambio (DAC8), dal 1 Gen. 2026 qualsiasi Provider crypto con entità localizzata giuridicamente e affari radicati in macro-stati Europei sarà obbligato unilateralmente ad allacciare intersezioni telematiche precompilate dei conti dell'utente interfacciandone ID e codici esatti ai registri esteri del fisco natio in tempo simultaneo. Sostanzialmente i CEX fungeranno quasi da succursale statale informativa spietata.",
+    "tags": "dac8 europea normativa esdebitamenti trasparenza 2026 finiti legge agenzia",
+    "href": "/fisco",
+    "link_label": "Controlla Esposizione della Nuova Autorità"
+  },
+  {
+    "id": 13,
+    "domanda": "Come posso proteggere un Hot Wallet dai furti (drainer) e dai link malevoli?",
+    "risposta": "L'evoluzione della sicurezza Web3 ha portato alla creazione di wallet di nuova generazione che integrano funzionalità proattive. Invece di limitarsi a firmare tutto ciò che viene cliccato, questi wallet simulano la transazione in background (pre-esecuzione) e analizzano gli smart contract, bloccando o segnalando con un allarme rosso i tentativi di furto (drainer). Tra gli esempi di mercato che adottano questi filtri di sicurezza avanzati troviamo Rabby Wallet per estensione browser e DeGate Wallet per un'esperienza app integrata.",
+    "tags": "hot wallet metamask rabby degate sicurezza drainer hack furto proteggere",
+    "href": "/wallets",
+    "link_label": "Confronto Modelli Wallets App"
+  },
+  {
+    "id": 14,
+    "domanda": "Airdrops (Regali Token su Rete): Devo pagarci tasse esplicite se li tengo li in Holding morti?",
+    "risposta": "Ammantato di oscurità dal vuoto normativo Italiano. Diversi raccordi documentati da Interpelli delle Agenzie per analogia (Tokens gratuiti) hanno propeso che gli airdrop sono da configurare come Valore Puro Plusvalente incassato a Importo d'Entrata Zero. In parole misere l'Ade vuole esser pagata a valuta vigente non appena li liquidi (Tassando quindi l'Intera e Massima plusvalenza).",
+    "tags": "airdrop regalo tasse ade rt inaspettati hold holding regalato",
+    "href": "/fisco",
+    "link_label": "Vedi Normative Dettagliate"
+  },
+  {
+    "id": 15,
+    "domanda": "Posso registrarmi in Anonimo o ByPassare restrizioni di nazione con Certificato d'Identità Palau (RNS.ID)?",
+    "risposta": "L'Isola di Palau (supportata privatamente alle spalle da emissari istituzionali collegati a reti blockchain es: Ethereum Vitalik's circles) elargisce Carte NFT valevoli localmente. Ma gli sgarbi e blocchi non verranno superati sui Tier1 Centralizzati (come Coinbase/Bybit), i quali subodorando carte esterne e nazionalità diverse dai fusi ti sbarreranno l'ingresso bloccando via IP o necessitando di Bollette Luce gas domestiche reali della tua fittizia reggia su Palau, fallendo miseramente su tutta la fila.",
+    "tags": "palau rnsid account estero residenza vpn identificare documenti identita kyc passaporto patenti bybit finte o rns.id fake id bypass",
+    "href": "/varie",
+    "link_label": "Analizziamo il Mercato delle Identità"
+  },
+  {
+    "id": 16,
+    "domanda": "NFT Digitali di pura Collezionistica/Arte. Vanno scritti o no sul Quadro R-W patrimoniale o se ne fregano?",
+    "risposta": "Paradossalmente sì per l'Agenzia sebbene sfavilli lo statuto d'Arte. Onde evitare impuntature su classificazione intrinseca o estrinseca utilitaristica o meramente visiva (Mancanza d'Aliquota plusvalente da rivendita esagerata ma mera ritenzione estetica pura). Restano asset tangibili valutari transfrontalieri posseduti telematicamente e quindi ricadenti nell'orizzonte Fiscale e IVAFE (solo come obbligo statistico).",
+    "tags": "nft art opensea quadro rw foto jped scimmie scimmia dichiarare tasse cryptoarte arte cryptokitties",
+    "href": "/fisco",
+    "link_label": "Trattato Tributario su CryptoAsset Generici"
+  },
+  {
+    "id": 17,
+    "domanda": "Ho Binance e un Ledger: Spostare fondi cripto dal mio CEX Italiano all'Hardware Freddo in stanza conta come Plusvalenza (Evento Tassabile)?",
+    "risposta": "No! Assolutamente categoricamente no. Il semplice travaso o bonifico fiduciario peer-2-peer dal portafogli digitale sinistro di Mario Rossi, a quello portafogli destro hardware di Mario Rossi è ritenuto e normato a logica neutra esente qual'è (Spostamento senza liquidazione). Non rileva base imponibile o prelievo da segnalare tassando se il proprietario in testa rimane sempre la Stessa Entelechia Indivisa.",
+    "tags": "spostare trasferire da binance a ledger da ledger ad exchange tasse plusvalenza invio crypto invio wallet",
+    "href": "/wallets",
+    "link_label": "Regole auree sui Trasferimenti Centrali"
+  },
+  {
+    "id": 18,
+    "domanda": "Cash-Out Sicuro e Antiriciclaggio Bancario Eccessivo: Come prelevare 60.000€ sul mio conto senza trovarmi i sigilli o la Guardia alle strette?",
+    "risposta": "Una delle paure ataviche è rientrare dei denari al tempo del Bear market chiusosi. Il sistema è scientifico e matematico: non sperare nel nascondersi, si notifica PREVENTIVAMENTE inviando Documentazioni per tempo. Contatti il Tuo direttivo della Succursale Filiale dicendo che è un evento eccezionale. Apporti una cartellina completa con: A) Lo scarico PDF Cronistorico estrapolato via CVS dall'exchange per palesare da quali piccoli centesimi è partito per logica speculazione onesta d'alta efficenza, escludendo traffici o versamenti mafiosi. B) Gli atti redatti lodevolmente o parimenti sigillati dal Commercialista coi RW passati conformati in fase formale per palesare purezza assoluta procedimentale.",
+    "tags": "prelevare grossi fondi cifra incassare bonifico banca 50mila ritirare euros guadagno chiusura grossi patrimoni contanti fiat ritirare",
+    "href": "/spend",
+    "link_label": "Risorse Off-Ramp Contanti e Spese"
+  }
+]

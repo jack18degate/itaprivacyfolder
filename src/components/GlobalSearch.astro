@@ -1,0 +1,258 @@
+---
+import faqsDB from '../data/global_faq.json';
+import exchanges from '../data/exchanges.json';
+import spend from '../data/spend.json';
+import wallets from '../data/wallets.json';
+import vpn from '../data/vpn.json';
+import fisco from '../data/fisco.json';
+
+let masterFaqs = [...faqsDB];
+
+// Indicizza anche le F.A.Q. specifiche del Fisco
+fisco.faq.forEach(f => {
+    masterFaqs.push({
+        domanda: f.domanda,
+        risposta: f.risposta,
+        tags: "fisco tasse agenzia " + f.domanda.toLowerCase() + " " + f.risposta.toLowerCase(),
+        href: "/fisco#faq",
+        link_label: "Apri Sezione Fisco"
+    });
+});
+
+// Indicizza le F.A.Q. Exchange e Acquisto
+if (exchanges.faq_exchange) {
+    exchanges.faq_exchange.forEach(f => {
+        masterFaqs.push({
+            domanda: f.domanda,
+            risposta: f.risposta,
+            tags: "exchange cex dex " + f.domanda.toLowerCase() + " " + f.risposta.toLowerCase(),
+            href: "/exchange#faq",
+            link_label: "Apri Sezione Exchange"
+        });
+    });
+}
+if (exchanges.faq_acquisto) {
+    exchanges.faq_acquisto.forEach(f => {
+        masterFaqs.push({
+            domanda: f.domanda,
+            risposta: f.risposta,
+            tags: "acquisto p2p onramp " + f.domanda.toLowerCase() + " " + f.risposta.toLowerCase(),
+            href: "/acquisto#faq",
+            link_label: "Apri Sezione Acquisto"
+        });
+    });
+}
+
+const addToIndex = (dbObj, url) => {
+    Object.values(dbObj).forEach(val => {
+       if(Array.isArray(val)) {
+           val.forEach(item => {
+               if(item.nome) { // Se l'oggetto ha un 'nome', è uno strumento/piattaforma
+                   masterFaqs.push({
+                      domanda: item.nome + (item.badge ? ` - ${item.badge}` : ''),
+                      risposta: item.consigliato || (item.caratteristiche ? item.caratteristiche.join(", ") : "Visita la sezione dedicata per scoprire le funzionalità e i vantaggi orientati alla privacy."),
+                      tags: (item.pro ? item.pro.join(" ") : "") + " " + item.nome,
+                      href: url,
+                      link_label: "Apri la Sezione"
+                   });
+               }
+           });
+       }
+    });
+};
+
+addToIndex(exchanges, "/exchange");
+addToIndex(spend, "/spend");
+addToIndex(wallets, "/wallets");
+addToIndex(vpn, "/varie");
+---
+
+<div class="w-full max-w-4xl mx-auto relative z-50 mb-6 md:mb-10" id="global-search-container">
+  
+  <div class="relative group">
+    <div class="absolute -inset-1 bg-gradient-to-r from-[#03a66d] via-blue-500 to-purple-600 rounded-2xl blur opacity-25 group-focus-within:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+    <div class="relative flex items-center bg-[var(--bg-input)] border border-[var(--border-card)] rounded-2xl p-1.5 sm:p-2 shadow-xl">
+      <svg class="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 ml-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input 
+        type="text" 
+        id="mega-search-input" 
+        placeholder="Cosa ti preoccupa o cosa vuoi sapere?" 
+        class="w-full bg-transparent text-white text-[13.5px] sm:text-[15px] font-medium outline-none py-1.5 sm:py-2.5 placeholder-slate-500"
+        autocomplete="off"
+      />
+      <div class="hidden sm:flex items-center gap-1.5 mr-4 text-xs font-bold text-slate-500 border border-[var(--border-card)] px-2 py-1 rounded-md bg-[var(--bg-card)]">
+        <kbd>Ctrl</kbd>+<kbd>K</kbd>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tendina Suggerimenti & Risultati -->
+  <div id="search-dropdown" class="absolute top-full left-0 w-full mt-4 bg-[var(--menu-bg)] backdrop-blur-2xl border border-[var(--border-card)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden hidden transform transition-all origin-top">
+    
+    <!-- Header Tendina -->
+    <div class="bg-white/[0.02] border-b border-[var(--border-card)] px-6 py-3 flex justify-between items-center">
+       <span id="dropdown-title" class="text-xs uppercase tracking-widest font-black text-slate-500">🔥 Domande più cliccate in Italia</span>
+       <button id="close-search" class="text-slate-500 hover:text-white">&times; Chiudi</button>
+    </div>
+
+    <!-- Lista Risultati -->
+    <div id="results-list" class="max-h-[60vh] overflow-y-auto">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- Box Oracolo (Mostra la risposta estesa) -->
+    <div id="oracle-box" class="hidden border-t border-[#03a66d]/30 bg-gradient-to-br from-[#03a66d]/10 to-transparent p-5 sm:p-8 relative">
+       <button id="back-to-results" class="absolute top-3 sm:top-4 right-4 text-slate-400 hover:text-white flex items-center gap-1 text-[10px] sm:text-xs font-bold uppercase">
+         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg> Indietro
+       </button>
+       <h3 id="oracle-q" class="text-xl sm:text-2xl font-bold text-white mb-4 pr-16 leading-tight mt-6 sm:mt-0"></h3>
+       <p id="oracle-a" class="text-slate-300 text-sm md:text-lg leading-relaxed font-medium mb-5"></p>
+       <a id="oracle-link" href="#" class="hidden inline-flex items-center gap-2 bg-[var(--bg-input)] border border-[var(--border-card)] hover:border-[#03a66d]/50 hover:bg-[#03a66d]/10 text-white text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-full shadow-lg transition-all w-fit">
+          <span id="oracle-link-text">Approfondisci</span>
+          <svg class="w-3.5 h-3.5 text-[#03a66d]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+       </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ faqs: masterFaqs }}>
+  document.addEventListener('astro:page-load', () => {
+     const input = document.getElementById('mega-search-input');
+     if (!input) return;
+     const dropdown = document.getElementById('search-dropdown');
+     const resultsList = document.getElementById('results-list');
+     const oracleBox = document.getElementById('oracle-box');
+     const oracleQ = document.getElementById('oracle-q');
+     const oracleA = document.getElementById('oracle-a');
+     const dropdownTitle = document.getElementById('dropdown-title');
+     const closeBtn = document.getElementById('close-search');
+     const backBtn = document.getElementById('back-to-results');
+
+     // Fuzzy Token Matcher
+     function search(query) {
+       if (!query) return faqs; // Ritorna tutte/le default
+       const tokens = query.toLowerCase().split(' ').filter(Boolean);
+       return faqs.filter(faq => {
+          const matchTarget = (faq.domanda + " " + faq.risposta + " " + faq.tags).toLowerCase();
+          // Tutte le parole scritte dall'utente devono essere in parte contenute nel target
+          return tokens.every(token => matchTarget.includes(token));
+       });
+     }
+
+     function renderList(items, isSearching = false) {
+        oracleBox.classList.add('hidden');
+        resultsList.classList.remove('hidden');
+        resultsList.innerHTML = '';
+        dropdownTitle.textContent = isSearching ? `Trovate ${items.length} risposte` : '🔥 Domande più cliccate in Italia';
+
+         if (items.length === 0) {
+           resultsList.innerHTML = `
+              <div class="px-5 py-5">
+                 <p class="text-slate-400 font-medium text-[13px] mb-4">Nessuna risposta esatta per "${input.value.trim()}". Esplora per macro aree:</p>
+                 <div class="grid grid-cols-2 gap-2.5">
+                    <a href="/fisco" class="flex flex-col p-3 bg-red-500/5 hover:bg-red-500/10 border border-red-500/10 rounded-xl transition-colors group">
+                       <span class="text-red-400 font-bold text-[13px] mb-0.5 flex items-center justify-between">Fisco & DAC8 <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></span>
+                       <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold">Obblighi 2026</span>
+                    </a>
+                    <a href="/exchange" class="flex flex-col p-3 bg-orange-500/5 hover:bg-orange-500/10 border border-orange-500/10 rounded-xl transition-colors group">
+                       <span class="text-orange-400 font-bold text-[13px] mb-0.5 flex items-center justify-between">Exchange <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></span>
+                       <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold">CEX vs DEX</span>
+                    </a>
+                    <a href="/wallets" class="flex flex-col p-3 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/10 rounded-xl transition-colors group">
+                       <span class="text-blue-400 font-bold text-[13px] mb-0.5 flex items-center justify-between">Web3 Wallets <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></span>
+                       <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold">Self Custodial</span>
+                    </a>
+                    <a href="/varie" class="flex flex-col p-3 bg-purple-500/5 hover:bg-purple-500/10 border border-purple-500/10 rounded-xl transition-colors group">
+                       <span class="text-purple-400 font-bold text-[13px] mb-0.5 flex items-center justify-between">VPN & Varie <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></span>
+                       <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold">Strumenti Extra</span>
+                    </a>
+                 </div>
+              </div>
+           `;
+           return;
+        }
+
+        items.forEach(faq => {
+           const btn = document.createElement('button');
+           btn.className = "w-full text-left px-5 py-3 hover:bg-[var(--bg-card-hover)] border-b border-[var(--border-card)] last:border-none transition-colors group";
+           btn.innerHTML = `
+              <h4 class="text-white font-semibold text-[14px] group-hover:text-[#03a66d] transition-colors leading-tight">${faq.domanda}</h4>
+              <p class="text-slate-500 text-[12.5px] mt-1 line-clamp-1">${faq.risposta}</p>
+           `;
+           btn.onclick = () => showOracle(faq);
+           resultsList.appendChild(btn);
+        });
+     }
+
+     const oracleLink = document.getElementById('oracle-link');
+     const oracleLinkText = document.getElementById('oracle-link-text');
+
+     function showOracle(faq) {
+        resultsList.classList.add('hidden');
+        oracleBox.classList.remove('hidden');
+        dropdownTitle.textContent = "Risposta dell'Oracolo";
+        oracleQ.textContent = faq.domanda;
+        
+        oracleA.innerHTML = faq.risposta;
+
+        if (faq.href) {
+           oracleLink.href = faq.href;
+           oracleLinkText.textContent = faq.link_label || "Leggi Guida Completa";
+           oracleLink.classList.remove('hidden');
+        } else {
+           oracleLink.classList.add('hidden');
+        }
+     }
+
+     // Listeners
+     const openDropdown = () => {
+        dropdown.classList.remove('hidden');
+        if(!input.value) renderList(faqs.slice(0, 5)); // Mostra top 5
+     };
+     input.addEventListener('focus', openDropdown);
+     input.addEventListener('click', openDropdown);
+
+     input.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if(val.length > 0) {
+           renderList(search(val), true);
+        } else {
+           renderList(faqs.slice(0, 5), false);
+        }
+     });
+
+     input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+           e.preventDefault();
+           const val = e.target.value.trim();
+           if (val.length > 0) {
+              const res = search(val);
+              if (res.length > 0) {
+                 showOracle(res[0]);
+              }
+           }
+        }
+     });
+
+     closeBtn.onclick = () => { dropdown.classList.add('hidden'); };
+     backBtn.onclick = () => {
+        const val = input.value.trim();
+        renderList(val ? search(val) : faqs.slice(0, 5), !!val);
+     };
+
+     // Global Shortcut Ctrl+K
+     document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+           e.preventDefault();
+           input.focus();
+        }
+     });
+
+     // Click outside chiude
+     document.addEventListener('click', (e) => {
+        if(!document.getElementById('global-search-container').contains(e.target)) {
+           dropdown.classList.add('hidden');
+        }
+     });
+  });
+</script>

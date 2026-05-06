@@ -1,0 +1,282 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="WordPress-Style Admin">
+  <div class="max-w-4xl mx-auto mt-10">
+    <div class="mb-8 flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">Italian Privacy CMS</h1>
+        <p class="text-zinc-400 mt-1">Gestisci i contenuti con semplicità.</p>
+      </div>
+      <a href="/" class="text-[#03a66d] hover:text-white transition-colors text-sm font-semibold">Torna al sito</a>
+    </div>
+
+    <!-- Schermata di Login -->
+    <div id="login-screen" class="bento-card max-w-md mx-auto mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6 text-center">Accesso Area Riservata</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-zinc-400 mb-2">Password Amministratore</label>
+          <input type="password" id="login-pass" class="w-full bg-black border border-zinc-700 text-white rounded-xl focus:ring-[#03a66d] focus:border-[#03a66d] p-3 transition-colors" placeholder="••••••••" />
+        </div>
+        <button id="btn-login" class="w-full text-white bg-[#03a66d] hover:bg-green-600 font-bold rounded-xl text-md px-5 py-3 transition-colors shadow-lg">
+          Entra nel CMS
+        </button>
+        <p id="login-error" class="text-red-500 text-sm font-semibold text-center hidden"></p>
+      </div>
+    </div>
+
+    <!-- Schermata CMS (nascosta inizialmente) -->
+    <div id="cms-screen" class="hidden">
+      <!-- Topbar selezione -->
+      <div class="bg-zinc-900/40 backdrop-blur-xl border border-white/[0.06] rounded-2xl p-4 mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <select id="file-select" class="bg-black border border-zinc-700 text-white font-medium rounded-xl focus:ring-[#03a66d] focus:border-[#03a66d] block w-full sm:w-64 p-3 cursor-pointer">
+          <option value="" disabled selected>Seleziona Pagina...</option>
+          <option value="fisco.json">Pagina Fisco & Tasse</option>
+          <option value="exchanges.json">Pagina Exchanges</option>
+          <option value="wallets.json">Pagina Wallets</option>
+          <option value="identity.json">Pagina Identity Card</option>
+          <option value="communities.json">Pagina Communities</option>
+        </select>
+        <span id="status-msg" class="text-sm font-medium text-zinc-400"></span>
+        <button id="btn-save" class="text-black bg-white hover:bg-zinc-200 font-bold rounded-xl text-sm px-6 py-3 transition-colors shrink-0 disabled:opacity-50">
+          Pubblica Modifiche
+        </button>
+      </div>
+
+      <!-- Editor Area (WordPress Style) -->
+      <div id="editor-area" class="w-full space-y-6">
+        <div class="bento-card text-center text-zinc-500 py-20 flex flex-col items-center">
+            <svg class="w-12 h-12 mb-4 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            Seleziona una pagina dal menu in alto per iniziare a scrivere.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // State
+    const state = {
+      password: '',
+      currentFile: '',
+      data: null
+    };
+
+    // DOM
+    const elLogin = document.getElementById('login-screen');
+    const elCms = document.getElementById('cms-screen');
+    const btnLogin = document.getElementById('btn-login');
+    const inputPass = document.getElementById('login-pass');
+    const errLogin = document.getElementById('login-error');
+    
+    const selFile = document.getElementById('file-select');
+    const areaEditor = document.getElementById('editor-area');
+    const btnSave = document.getElementById('btn-save');
+    const statusMsg = document.getElementById('status-msg');
+
+    // MOCK LOGIN CHECK (We just verify it locally first, real API verify on save)
+    btnLogin.addEventListener('click', () => {
+      if(inputPass.value === "privacy2026") {
+        state.password = inputPass.value;
+        elLogin.classList.add('hidden');
+        elCms.classList.remove('hidden');
+      } else {
+        errLogin.textContent = "Password Errata.";
+        errLogin.classList.remove('hidden');
+      }
+    });
+
+    // LOAD JSON
+    selFile.addEventListener('change', async (e) => {
+      state.currentFile = e.target.value;
+      statusMsg.textContent = "Caricamento...";
+      statusMsg.className = "text-yellow-400";
+      
+      try {
+        const res = await fetch('/api/admin-data?file=' + state.currentFile);
+        if(!res.ok) throw new Error("Errore");
+        state.data = await res.json();
+        
+        statusMsg.textContent = "Editor pronto";
+        statusMsg.className = "text-[#03a66d]";
+        renderEditor();
+      } catch(e) {
+        statusMsg.textContent = "Errore di caricamento.";
+        statusMsg.className = "text-red-500";
+      }
+    });
+
+    // AUTO RENDERER: Builds a form dynamically based on the JSON shape.
+    function renderEditor() {
+      areaEditor.innerHTML = ''; // pulizia
+      
+      if(!state.data) return;
+
+      const container = document.createElement('div');
+      container.className = "space-y-6";
+
+      // Iterate through root keys
+      for(const [key, value] of Object.entries(state.data)) {
+        if(typeof value === 'string' || typeof value === 'boolean') {
+           // Basic fields like page_title
+           container.appendChild(createFieldEditor(key, value, state.data));
+        } else if (Array.isArray(value)) {
+           // Sections like 'normative' (blocks like WP Gutenberg)
+           container.appendChild(createArrayEditor(key, value, state.data));
+        } else if (typeof value === 'object') {
+           // Objects like hero_info
+           const wrapper = document.createElement('div');
+           wrapper.className = "bento-card border border-blue-500/30";
+           wrapper.innerHTML = `<h3 class="text-xl font-bold text-white mb-4 capitalize">${key.replace('_',' ')}</h3>`;
+           for(const [cKey, cValue] of Object.entries(value)) {
+              wrapper.appendChild(createFieldEditor(cKey, cValue, value));
+           }
+           container.appendChild(wrapper);
+        }
+      }
+      areaEditor.appendChild(container);
+    }
+
+    // Creates a basic input or textarea 
+    function createFieldEditor(key, value, targetObj) {
+      const wrapper = document.createElement('div');
+      wrapper.className = "mb-4";
+      
+      const label = document.createElement('label');
+      label.className = "block text-zinc-400 text-xs font-bold uppercase tracking-wider mb-2";
+      label.textContent = key.replace('_', ' ');
+      wrapper.appendChild(label);
+
+      if(typeof value === 'boolean') {
+         const btn = document.createElement('button');
+         btn.className = `px-4 py-2 rounded-xl text-sm font-bold ${value ? 'bg-green-600 text-white' : 'bg-zinc-700 text-zinc-300'}`;
+         btn.textContent = value ? "Abilitato" : "Disabilitato";
+         btn.onclick = () => {
+            targetObj[key] = !targetObj[key];
+            renderEditor(); // re-render to update
+         };
+         wrapper.appendChild(btn);
+         return wrapper;
+      }
+
+      // Se il testo è lungo o è una descrizione, usa textarea
+      const isLong = value.length > 50 || key.includes('desc') || key.includes('spiega');
+      const input = document.createElement(isLong ? 'textarea' : 'input');
+      
+      input.className = "w-full bg-black border border-zinc-700 text-white rounded-xl focus:ring-[#03a66d] focus:border-[#03a66d] p-4 transition-colors font-sans";
+      if(isLong) input.rows = 4;
+      else input.type = "text";
+      
+      input.value = value;
+      input.addEventListener('input', (e) => {
+         targetObj[key] = e.target.value;
+      });
+
+      wrapper.appendChild(input);
+      return wrapper;
+    }
+
+    // Creates a WordPress Gutenberg style block for arrays (e.g. Exchanges list)
+    function createArrayEditor(key, arr, targetObj) {
+       const wrapper = document.createElement('div');
+       wrapper.className = "bento-card relative";
+       
+       const header = document.createElement('div');
+       header.className = "flex justify-between items-center mb-6";
+       header.innerHTML = `<h3 class="text-2xl font-bold text-white capitalize bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Gestione ${key.replace('_',' ')}</h3>`;
+       
+       // Tasto aggiungi nuovo
+       const btnAdd = document.createElement('button');
+       btnAdd.innerHTML = `+ Nuovo Elemento`;
+       btnAdd.className = "text-[#03a66d] hover:text-white bg-[#03a66d]/10 hover:bg-[#03a66d] font-bold rounded-lg text-sm px-4 py-2 transition-all";
+       btnAdd.onclick = () => {
+          // Clone the structure of the first item
+          const base = arr.length > 0 ? arr[0] : {};
+          const newItem = JSON.parse(JSON.stringify(base)); 
+          // clear strings
+          for(let k in newItem) { if(typeof newItem[k] === 'string') newItem[k]=''; }
+          arr.push(newItem);
+          renderEditor();
+       };
+       header.appendChild(btnAdd);
+       wrapper.appendChild(header);
+
+       // Render each item as a block
+       arr.forEach((item, index) => {
+          const itemBox = document.createElement('div');
+          itemBox.className = "bg-black/50 border border-white/[0.05] rounded-2xl p-5 mb-4 relative group";
+          
+          const removeBtn = document.createElement('button');
+          removeBtn.className = "absolute top-4 right-4 text-zinc-600 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100";
+          removeBtn.innerHTML = `&times; Esci/Rimuovi`;
+          removeBtn.onclick = () => {
+             if(confirm("Rimuovere questo elemento?")) {
+                arr.splice(index, 1);
+                renderEditor();
+             }
+          };
+          itemBox.appendChild(removeBtn);
+
+          // Render inputs for properties
+          for(const [cKey, cValue] of Object.entries(item)) {
+              if (Array.isArray(cValue)) {
+                  // E.g. array of pros/cons (features)
+                  const miniWrapper = document.createElement('div');
+                  miniWrapper.className = "mb-4 p-3 bg-white/[0.02] rounded-xl";
+                  miniWrapper.innerHTML = `<p class="text-xs font-bold text-zinc-400 mb-2 uppercase">${cKey}</p>`;
+                  
+                  // a comma separated input is easiest here
+                  const csvInput = document.createElement('input');
+                  csvInput.className = "w-full bg-black border border-zinc-700 text-white rounded-lg p-2 text-sm";
+                  csvInput.value = cValue.join(', ');
+                  csvInput.oninput = (e) => {
+                      item[cKey] = e.target.value.split(',').map(s=>s.trim()).filter(Boolean);
+                  };
+                  miniWrapper.appendChild(csvInput);
+                  itemBox.appendChild(miniWrapper);
+              } else {
+                  itemBox.appendChild(createFieldEditor(cKey, cValue, item));
+              }
+          }
+          wrapper.appendChild(itemBox);
+       });
+
+       return wrapper;
+    }
+
+    // SAVE LOGIC
+    btnSave.addEventListener('click', async () => {
+      if(!state.currentFile || !state.data) return;
+
+      btnSave.textContent = "Salvataggio...";
+      btnSave.disabled = true;
+
+      try {
+        const res = await fetch('/api/admin-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-password': state.password
+          },
+          body: JSON.stringify({ file: state.currentFile, content: state.data })
+        });
+
+        const result = await res.json();
+        if(!res.ok) throw new Error(result.error || "Errore sconosciuto");
+
+        statusMsg.textContent = "✔ Pubblicato con successo!";
+        statusMsg.className = "text-[#03a66d] font-bold";
+        
+        // fade out message
+        setTimeout(() => { statusMsg.textContent = ""; }, 3000);
+      } catch(e) {
+        statusMsg.textContent = "Errore: " + e.message;
+        statusMsg.className = "text-red-500 font-bold";
+      } finally {
+        btnSave.textContent = "Pubblica Modifiche";
+        btnSave.disabled = false;
+      }
+    });
+  </script>
+</Layout>

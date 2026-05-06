@@ -1,0 +1,132 @@
+{
+  "page_title": "Tasse & Burocrazia",
+  "page_description": "La guida definitiva, spiegata facile. Sei un utente italiano con delle Crypto e non sai cosa fare? Ecco esattamente i tuoi obblighi.",
+  "hero_question": "Ho delle Crypto. Cosa devo fare esattamente?",
+  "hero_answer": "In Italia la legge non vieta il possesso di criptovalute, ma impone regole severissime a partire dal 2025/2026: devi dichiarare sempre allo Stato di possederle (Monitoraggio) e, se le converti in FIAT o ne trai 'proventi', dovrai pagare le tasse sui profitti. Attenzione: la vecchia franchigia di 2.000€ è stata abolita.",
+  "obblighi_principali": [
+    {
+      "step": "01",
+      "titolo": "Dichiara di averle (Quadro RW)",
+      "badge": "Sempre Obbligatorio",
+      "descrizione": "Anche se possiedi 1 solo Euro in Bitcoin, devi inserire il valore del tuo portafoglio al 31 Dicembre all'interno della tua Dichiarazione dei Redditi (nel famigerato 'Quadro RW'). Non pagherai tasse su questo, serve allo Stato solo per sapere che quei soldi esistono (Monitoraggio Fiscale).",
+      "importante": "Consiglio: Fai uno screenshot dei tuoi wallet ogni 31 Dicembre per facilitare il lavoro al tuo commercialista."
+    },
+    {
+      "step": "02",
+      "titolo": "Tassazione Plusvalenze (dal 26% al 33%)",
+      "badge": "Abolita Franchigia 2000€",
+      "descrizione": "Una mazzata enorme: a partire dal 2025 la famosa soglia 'esentasse' di 2.000€ non esiste più. Inoltre, a partire dal 2026, l'aliquota sulle plusvalenze derivanti da cripto-attività è salita in modo discriminatorio al 33% (invece del 26%). Se hai investito 10.000€ e prelevi 11.000€, il guadagno di 1.000€ sarà tassato al 33%.",
+      "importante": "Nota: Anche la conversione da Crypto a Stablecoin (USDT/USDC) è un evento fiscalmente rilevante ai fini della tassazione."
+    },
+    {
+      "step": "03",
+      "titolo": "L'Imposta di bollo (IVAFE)",
+      "badge": "Tassa Patrimoniale 0.2%",
+      "descrizione": "Oltre a dichiararle, lo stato italiano richiede il pagamento di uno 0,2% calcolato sul valore totale delle tue crypto a fine anno. Funziona esattamente come l'imposta di bollo che paghi sui normali conti correnti in banca.",
+      "importante": "Nota: Secondo molti legali, l'imposta si applica certamente per i saldi tenuti sugli Exchange (Binance, Kraken). C'è ancora dibattito se vada pagato anche sui wallet offline privati (Ledger)."
+    }
+  ],
+  "neutralita_crypto": {
+    "titolo": "Scambi Crypto e il 'Caso Stablecoin'",
+    "spiegazione": "In origine, vigeva la Neutralità per scambi Crypto-to-Crypto (es. BTC con ETH non è tassato). Tuttavia, l'Agenzia delle Entrate ha recentemene chiarito, allineandosi al protocollo MiCA, che convertire criptovalute pure verso E-Money Token (ovvero Stablecoin come USDT o USDC legate all'Euro/Dollaro) PURE costituisce un evento fiscalmente rilevante. Quindi occhio ad uscire in Stablecoin."
+  },
+  "normative": [
+    {
+      "titolo": "Ma lo Stato sa cosa ho su Binance?",
+      "spiegazione": "Sì, e sa molto più di quanto credi. Non serve aspettare la famigerata DAC8 nel 2026: gli Exchange iscritti all'OAM comunicano GIÀ ORA tutte le tue transazioni all'Agenzia delle Entrate. Se accedi con SPID alla tua Area Riservata (Fascicolo Fiscale), troverai una riga intestata a Binance o altri CEX con l'esatto ammontare dei tuoi movimenti crittografici già pre-segnalato.",
+      "video_link": "https://www.youtube.com/shorts/8OyRwrwjMoA",
+      "tooltip_term": "Perché le transazioni On-Chain sono immuni",
+      "tooltip_desc": "La direttiva AdE colpisce le 'Aziende' fisiche (CEX). Le transazioni on-chain (effettuate da wallet Self-Custodial No-KYC) non possono essere inviate in automatico a questi enti per natura strutturale: sono regolate da Smart Contract decentralizzati e non da 'aziende' registrate nell'OAM. Nessuno detiene i tuoi dati, quindi nessuno può trasmetterli."
+    },
+    {
+      "titolo": "Il Grande Blocco: l'Oscuramento degli Exchange",
+      "spiegazione": "L'Italia sta chiudendo i recinti. Se un Exchange estero si rifiuta di iscriversi all'OAM (il registro ufficiale italiano) e non collabora scambiando i dati col fisco, viene dichiarato abusivo. Consob e AGCOM hanno ora il potere di ordinare ai provider (TIM, Vodafone, Fastweb) di oscurare e bloccare totalmente l'accesso a questi Exchange dall'Italia. I tuoi soldi potrebbero rimanere bloccati dietro un muro di censura web.",
+      "tooltip_term": "L'immunità dei Wallet (No-KYC)",
+      "tooltip_desc": "I Wallet Self-Custodial (sia app come Rabby, sia offline come Ledger) sono puri software matematici. Non sono 'aziende' che conservano i tuoi soldi, non hanno server da oscurare e non chiedono documenti. Pertanto, sfuggono totalmente a questi blocchi di Stato."
+    }
+  ],
+  "riferimenti_ufficiali": [
+    {
+      "titolo": "Legge di Bilancio (L. 197/2022, commi 126-147)",
+      "descrizione": "Nuovo inquadramento fiscale delle cripto-attività in Italia. Introduzione della tassa sulle plusvalenze (Quadro RT) e obblighi di monitoraggio (Quadro RW).",
+      "link": "https://www.gazzettaufficiale.it/eli/id/2022/12/29/22G00211/sg"
+    },
+    {
+      "titolo": "Circolare Agenzia Entrate n. 30/E (27 Ott 2023)",
+      "descrizione": "Il caposaldo interpretativo dell'AdE sulla tassazione, che delinea la neutralità degli scambi crypto-to-crypto e sanzioni per omessa dichiarazione.",
+      "link": "https://www.agenziaentrate.gov.it/portale/documents/20143/5598150/Circolare+n+30+del+27+ottobre+2023.pdf"
+    },
+    {
+      "titolo": "Direttiva Europea DAC8 (2023/2226/UE)",
+      "descrizione": "Le regole di sorveglianza UE che obbligheranno gli Exchange (Centralizzati) allo scambio automatico di informazioni con il fisco dal 1 Gennaio 2026.",
+      "link": "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32023L2226"
+    },
+    {
+      "titolo": "Decreto MEF (Registro OAM per le Crypto)",
+      "descrizione": "Testo che obbliga Binance, Young Platform ecc. a iscriversi in Italia e trasmettere per legge l'ammontare e i tuoi dati ogni 3 mesi allo Stato.",
+      "link": "https://www.organismo-am.it/elenchi-registri/operatori-valute-virtuali/"
+    }
+  ],
+  "faq": [
+    {
+      "domanda": "Se non converto le mie crypto in Euro, devo dichiararle lo stesso?",
+      "risposta": "Assolutamente SI. Sotto il profilo del monitoraggio fiscale (Quadro RW), l'Agenza delle Entrate vuole semplicemente 'sapere' che tu possiedi quegli asset, a fini anti-riciclaggio, a prescindere dal fatto che tu abbia incassato euro in banca."
+    },
+    {
+      "domanda": "Uso Binance e faccio moltissimo trading spot. Devo calcolare ogni singola operazione entro la fine dell'anno?",
+      "risposta": "No, grazie alla neutralita' crypto-to-crypto. Se tutte le tue migliaia di operazioni avvengono passando da crypto a crypto (es: BTC/USDT o SOL/ETH), non devi rendicontarle come tassabili singolarmente. Devi rendicontare solo l'eventuale momento finale in cui estrai o contabilizzi i guadagni in Euro."
+    },
+    {
+      "domanda": "Come calcolo la soglia dei famosi 2000€ di guadagno esentasse?",
+      "risposta": "Dimenticala. A partire dall'aggiornamento della Legge di Bilancio 2025, la franchigia di 2000 Euro è stata soppressa e rimossa. Ora ogni singolo prelievo o conversione in fiat/stablecoin che genera plusvalenza è passibile di tassazione, partendo dal primo centesimo di guadagno."
+    },
+    {
+      "domanda": "Ho convertito in Euro e inviato i soldi sulla mia carta (es: Revolut). Li vedono?",
+      "risposta": "Sì. Le banche italiane e le carte FinTech operanti in EU (come Revolut, che ha banca Lituana e comunica) sono tenute a rispettare lo schema CRS. I bonifici in entrata derivanti da scambi crypto (es: Kraken o Coinbase verso N26) sono completamente visibili e spesso flaggati dai motori antifrode per verifica fondi."
+    },
+    {
+      "domanda": "Se ho le monete sul Ledger (Hardware Wallet) nel cassetto in Italia, è ritenuto 'conto estero'?",
+      "risposta": "No, ma sono comunque annoverate come 'crypto-attivita''. Anche se custodite offline senza intermediari o su app Non-Custodial, vanno inserite nel Quadro RW scrivendo il controvalore al 31/12. Cambiano però potenzialmente le logiche interpretative (spesso dibattute tra fiscalisti) sull'obbligo di bollo 0,2% per chiavi private puramente offline."
+    },
+    {
+      "domanda": "Da chi o cosa sono obbligato in ambito CEX No-KYC?",
+      "risposta": "Attualmente scambiare su CEX che non richiedono documenti (No-KYC) bypassa di fatto il caricamento dei tuoi dati in origine. Ma ricaricare quegli exchange con carte di debito a te intestate, o effettuare cash-out su sistemi SEPA a te intestati, de-anonimizza istantaneamente la tua operazione tracciandoti."
+    },
+    {
+      "domanda": "Cosa succede se dichiaro il falso o 'mi scordo' di dichiarare?",
+      "risposta": "L'omessa compilazione del Quadro RW o indicazioni erronee prevedono sanzioni amministrative pecuniarie che vanno dal 3% al 15% del montante non dichiarato. Se il valore deriva da stati a fiscalita' privilegiata, la sanzione raddoppia dal 6% al 30%."
+    },
+    {
+      "domanda": "Staking, Airdrops e Cashback delle carte crypto, sono tassati?",
+      "risposta": "Purtroppo sì. L'AdE (Agenzia delle Entrate) considera lo Staking, il Farming, gli Airdrop e il Cashback non come fluttuazioni di valore, ma come 'Proventi' (Reddito puro). Questo significa che andrebbero dichiarati nel momento in cui ti vengono erogati, assumendo il loro valore in Euro in quel preciso istante."
+    },
+    {
+      "domanda": "Posso inserire le criptovalute nell'ISEE per bonus o agevolazioni universitarie?",
+      "risposta": "Il buonsenso e le ultime pronunce suggeriscono di includere obbligatoriamente il saldo delle cripto-attività all'interno dell'ISEE in maniera speculare a quanto si inserisce nel Quadro RW dell'anno corrispondente, proprio essendo ormai inquadrate istituzionalmente come asset finanziario a tutti gli effetti."
+    },
+    {
+      "domanda": "Ho perso le mie crypto su un Exchange fallito (Es. FTX) o sono stato hackerato. Devo continuare a dichiararle?",
+      "risposta": "Se non le possiedi più, non devi dichiararle nel Quadro RW. Tuttavia attenzione all'Onere della Prova: in caso di accertamento sarai obbligato a dimostrare in modo inconfutabile allo Stato e all'AdE la perdita (es. con denunce formali rese alla Polizia Postale, estratti del fallimento, CSV scaricati in tempo, cronologia blockchain). Senza prove inossidabili lo stato prentenderà la sanzione accusandoti di averle solo occultate."
+    },
+    {
+      "domanda": "Cos'è la Rivalutazione (Affrancamento) delle crypto e perché la consigliano?",
+      "risposta": "Di tanto in tanto le Finanziarie aprono una 'finestra' volontaria dove permettono di pagare subito una Flat Tax (es. al 18% invece che al 33%) sull'intero portafoglio, per elevarne ufficialmente il prezzo di carico al mercato attuale. Torna utilissima per chi ha comprato Bitcoin tantissimi anni fa e ha smarrito completamente lo storico dei vecchi CSV/Bonifici e non saprebbe come dimostrarne l'acquisto originario all'Agenzia."
+    },
+    {
+      "domanda": "Riassunto definitivo: Come, quanto e dove pago queste tasse in Italia nel 2026?",
+      "risposta": "Tiriamo le somme amare: 1. Fai il Monitoraggio Fiscale (Quadro RW) a prescindere per evitare multe. 2. Non esiste più il buffer di 2.000€ e l'aliquota Crypto è schizzata al 33% nel Quadro RT, che va pagata quando converti in Fiat o USDT. 3. Va versato lo 0,2% patrimoniale sotto la voce IVAFE."
+    },
+    {
+      "domanda": "Come fare tax reporting senza compromettere la privacy? È sicuro usare software automatici?",
+      "risposta": "Esistono valide opzioni italiane come <a href=\"https://cryptobooks.tax/\" target=\"_blank\" class=\"text-[#0066FF] hover:underline\">Cryptobooks.tax</a> e piattaforme globali come Koinly o Blockpit. Tuttavia, vige una regola di sicurezza estrema: <strong>NON inserire mai il tuo vero nome, il tuo codice fiscale o l'indirizzo di casa reale in questi software in cloud.</strong> Un eventuale data leak di queste piattaforme collegherebbe per sempre i tuoi wallet on-chain alla tua identità fisica e residenza, esponendoti a rischi fisici reali (furti, estorsioni). Inserisci pseudonimi e usa email dedicate al solo reporting."
+    },
+    {
+      "domanda": "Quali sono i criteri per definire le sanzioni amministrative e penali sulle criptovalute?",
+      "risposta": "Esiste una netta differenza legale tra sanzione amministrativa e reato penale. La mancata compilazione del <strong>Quadro RW</strong> (monitoraggio) è una violazione <strong>amministrativa</strong>, sanzionata dal 3% al 15% del capitale non dichiarato (raddoppiato se in black list). Si entra nel <strong>penale</strong> (D.Lgs. 74/2000) solo in presenza di un'effettiva evasione fiscale sulle plusvalenze (Quadro RT): scatta il reato di <em>dichiarazione omessa</em> (Art. 5) se l'imposta evasa supera i 50.000€, o di <em>dichiarazione infedele</em> (Art. 4) se l'imposta evasa supera i 100.000€ superando congiuntamente specifiche soglie relative. Omettere il solo Quadro RW senza evadere tasse NON costituisce reato penale."
+    },
+    {
+      "domanda": "Se sposto tutto su un wallet Self-Custody evito i controlli della DAC8 e le sanzioni passate?",
+      "risposta": "È un grave e pericoloso malinteso. Spostare le crypto su un Ledger nel 2026 <strong>non cancella</strong> la cronologia delle tue azioni passate sui CEX. Gli exchange centralizzati riporteranno comunque i saldi passati e i prelievi verso il tuo wallet privato tramite la DAC8. Il Self-Custody protegge il tuo futuro (i wallet privati non inviano report), ma per mettersi in regola con gli anni pregressi la via corretta è accedere al meccanismo del <strong>Ravvedimento Operoso</strong>, che permette di pagare sanzioni ridotte (da 1/10 a 1/5) prima che scatti l'accertamento formale."
+    }
+  ]
+}

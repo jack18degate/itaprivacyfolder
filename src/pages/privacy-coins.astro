@@ -1,0 +1,225 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Accordion from '../components/Accordion.astro';
+
+const page_title = "Privacy Coins (XMR, ZEC)";
+const page_description = "Scopri cosa sono le Privacy Coins, perché rappresentano l'unico vero contante digitale intracciabile del Web3, e come acquistare e utilizzare Monero e Zcash.";
+
+const faqs = [
+  {
+    domanda: "Le Privacy Coins sono illegali?",
+    risposta: "No, le Privacy Coins come Monero e Zcash non sono intrinsecamente illegali in gran parte del mondo (inclusa l'Europa). Tuttavia, a causa delle pressioni normative (come la direttiva MiCA e AML), molti exchange centralizzati (CEX) preferiscono delistarle per evitare di dover implementare controlli troppo complessi per dimostrare l'origine dei fondi. L'uso personale per la privacy finanziaria è perfettamente legale."
+  },
+  {
+    domanda: "Perché Bitcoin non basta per la privacy?",
+    risposta: "Bitcoin è un registro pubblico (blockchain) pseudonimo ma completamente trasparente. Chiunque conosca il tuo indirizzo può vedere il tuo saldo, a chi hai inviato fondi e da chi li hai ricevuti. Le aziende di blockchain analytics (come Chainalysis) mappano costantemente queste transazioni. Le Privacy Coins, al contrario, oscurano queste informazioni, rendendo impossibile tracciare mittente, destinatario e importo."
+  },
+  {
+    domanda: "Qual è la differenza principale tra Monero (XMR) e Zcash (ZEC)?",
+    risposta: "Monero offre privacy di default su ogni singola transazione usando tecnologie come Ring Signatures e Stealth Addresses. Zcash, invece, offre privacy opzionale: puoi fare transazioni pubbliche (simili a Bitcoin) o transazioni 'shielded' (schermate) che usano la crittografia zk-SNARKs per oscurare i dettagli. Monero è considerato lo standard per l'anonimato totale, mentre Zcash è spesso scelto per la sua forte crittografia matematica sperimentale."
+  },
+  {
+    domanda: "Perché non trovo Monero su Binance o Coinbase?",
+    risposta: "I grandi exchange centralizzati (CEX) sono soggetti a rigide normative KYC/AML e pressioni dai regolatori. Poiché le transazioni di Monero non possono essere tracciate per verificare se provengano da attività illecite, i CEX spesso lo rimuovono dai listini (delisting) per non rischiare sanzioni. Per questo motivo, le Privacy Coins si acquistano principalmente su DEX, swap cross-chain o P2P."
+  },
+  {
+    domanda: "Come faccio a dichiarare le Privacy Coins al fisco?",
+    risposta: "Come per qualsiasi altra criptovaluta, in Italia esiste l'obbligo di monitoraggio (Quadro RW) e, in caso di plusvalenza sopra la soglia, il pagamento del capital gain. Il fatto che la moneta sia 'intracciabile' on-chain non ti esenta legalmente dalla dichiarazione. Tuttavia, spetta a te tenere traccia dei tuoi acquisti e vendite, poiché non esistono 'estratti conto' automatici forniti da queste reti."
+  },
+  {
+    domanda: "Se perdo la mia seed phrase di Monero, qualcuno può aiutarmi?",
+    risposta: "No. Esattamente come per Bitcoin, se perdi la frase di recupero (seed phrase) del tuo wallet Monero, i fondi sono persi per sempre. Anzi, essendo completamente opaco, non c'è nemmeno la possibilità di vedere se i fondi sono ancora lì su un block explorer pubblico senza la tua view key."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(item => ({
+    "@type": "Question",
+    "name": item.domanda,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.risposta.replace(/<[^>]+>/g, '') // Strip HTML for schema
+    }
+  }))
+};
+---
+
+<Layout title={page_title} description={page_description} maxWidth="max-w-[1300px] xl:max-w-[1400px]">
+
+  <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 xl:gap-12 items-start mt-2">
+    <!-- Sidebar -->
+    <div class="hidden lg:block w-[240px] xl:w-[270px] shrink-0 sticky top-24 order-2 lg:order-1">
+      <div class="bento-card p-6 border-white/[0.03] shadow-2xl bg-[#0a0a12]">
+         <h4 class="text-xs uppercase tracking-widest font-black text-slate-600 mb-5">Indice della Guida</h4>
+         <nav class="flex flex-col space-y-3.5">
+            <a href="#introduzione" class="text-sm text-slate-500 hover:text-rose-500 font-medium flex items-center justify-between group transition-colors">Cosa sono<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#monete" class="text-sm text-slate-500 hover:text-rose-500 font-medium flex items-center justify-between group transition-colors">Monero & Zcash<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#casi-pratici" class="text-sm text-slate-500 hover:text-rose-500 font-medium flex items-center justify-between group transition-colors">Casi Pratici<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#acquisto" class="text-sm text-slate-500 hover:text-rose-500 font-medium flex items-center justify-between group transition-colors">Come Acquistarle<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#faq" class="text-sm text-slate-500 hover:text-purple-400 font-medium flex items-center justify-between group transition-colors">F.A.Q. Ampia<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+         </nav>
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-0 space-y-6 lg:space-y-10 order-1 lg:order-2 w-full">
+      <header class="mb-6 lg:mb-8 border-b border-white/[0.05] pb-5 lg:pb-6">
+        <div class="inline-block px-3 py-1 mb-3 border border-rose-500/20 bg-rose-500/10 rounded-full text-xs font-bold tracking-wider text-rose-500 uppercase">Directory</div>
+        <h1 class="text-2xl lg:text-4xl font-extrabold tracking-tight mb-3 text-white">{page_title}</h1>
+        <div class="p-4 lg:p-5 bg-[#0a0a12] border-l-[3px] border-rose-500 rounded-r-xl">
+          <p class="text-slate-400 text-[15px] md:text-base leading-relaxed">{page_description}</p>
+        </div>
+      </header>
+
+      <!-- SEZIONE 1: INTRODUZIONE -->
+      <div class="mb-4" id="introduzione">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">1. Cosa sono le Privacy Coins</h2>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">Le Privacy Coins sono criptovalute progettate specificamente per garantire l'anonimato completo delle transazioni finanziarie online. A differenza di Bitcoin, dove ogni movimento è permanentemente visibile su un registro pubblico accessibile a chiunque, le Privacy Coins utilizzano crittografia avanzata per offuscare il mittente, il destinatario e l'importo della transazione.</p>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">Rappresentano la vera evoluzione del <strong class="text-white">contante fisico</strong> nel mondo digitale: quando usi una banconota da 50 Euro, non c'è una banca centrale che registra che l'hai passata al panettiere. Le Privacy Coins ricreano questa libertà e assenza di sorveglianza nel Web3.</p>
+      </div>
+
+      <!-- SEZIONE 2: LE PRINCIPALI -->
+      <div class="mb-4 mt-16" id="monete">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">2. Le Protagoniste: Monero e Zcash</h2>
+      </div>
+
+      <section class="scroll-mt-24">
+        <div class="w-full bento-card p-6 lg:p-10 border border-[#F26822]/40 bg-gradient-to-br from-[#F26822]/10 via-transparent to-transparent shadow-[0_0_60px_-15px_rgba(242,104,34,0.3)] relative overflow-hidden mb-8">
+          <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+             <!-- Monero Logo SVG outline -->
+             <svg class="w-32 h-32 text-[#F26822]" viewBox="0 0 256 256" fill="currentColor"><path d="M128,256C57.31,256,0,198.69,0,128S57.31,0,128,0s128,57.31,128,128S198.69,256,128,256z M128,25.6C71.43,25.6,25.6,71.43,25.6,128 S71.43,230.4,128,230.4S230.4,184.57,230.4,128S184.57,25.6,128,25.6z"/><path d="M128,189.44l-48.64-48.64V64H38.4v125.44l89.6,89.6l89.6-89.6V64h-40.96v76.8L128,189.44z"/><path d="M102.4,102.4h51.2v25.6h-51.2V102.4z"/></svg>
+          </div>
+
+          <div class="flex justify-between items-start mb-6 relative z-10">
+             <div>
+               <div class="inline-block px-3 py-1 bg-[#F26822]/10 border border-[#F26822]/30 text-[#F26822] text-xs font-bold rounded-full uppercase tracking-wider mb-4">Lo Standard dell'Anonimato</div>
+               <h3 class="text-2xl md:text-3xl font-black text-white mb-3">Monero (XMR)</h3>
+               <p class="text-slate-400 text-sm md:text-base leading-relaxed max-w-xl">Monero è la privacy coin più famosa e utilizzata. Il suo punto di forza è la <strong class="text-white">Privacy by Default</strong>: ogni singola transazione è anonima, non si può "sbagliare" facendo una transazione pubblica. Utilizza Ring Signatures, RingCT e Stealth Addresses per nascondere tutti i dettagli.</p>
+             </div>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8 relative z-10">
+             <div class="bg-[var(--bg-input)] backdrop-blur p-4 rounded-2xl border border-[var(--border-card)]">
+               <span class="block text-slate-500 text-xs uppercase tracking-wider font-bold mb-1">Emissione</span>
+               <span class="font-bold text-lg text-white">Infinita (Tail Emission)</span>
+             </div>
+             <div class="bg-[var(--bg-input)] backdrop-blur p-4 rounded-2xl border border-[var(--border-card)]">
+               <span class="block text-slate-500 text-xs uppercase tracking-wider font-bold mb-1">Consenso</span>
+               <span class="font-bold text-lg text-white">Proof of Work (ASIC Res.)</span>
+             </div>
+             <div class="bg-[var(--bg-input)] backdrop-blur p-4 rounded-2xl border border-[var(--border-card)]">
+               <span class="block text-slate-500 text-xs uppercase tracking-wider font-bold mb-1">Tracciabilità</span>
+               <span class="font-bold text-lg text-rose-500">Zero Assoluto</span>
+             </div>
+          </div>
+        </div>
+
+        <div class="w-full bento-card p-6 lg:p-10 border border-[#f4b728]/40 bg-gradient-to-br from-[#f4b728]/10 via-transparent to-transparent shadow-[0_0_60px_-15px_rgba(244,183,40,0.3)] relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+             <!-- Zcash Logo SVG outline -->
+             <svg class="w-32 h-32 text-[#f4b728]" viewBox="0 0 256 256" fill="currentColor"><path d="M128,0C57.3,0,0,57.3,0,128s57.3,128,128,128s128-57.3,128-128S198.7,0,128,0z M180.5,185.3c0,4-3.2,7.2-7.2,7.2H82.7 c-4,0-7.2-3.2-7.2-7.2v-17l64.2-76.3H82.7c-4,0-7.2-3.2-7.2-7.2V67.5c0-4,3.2-7.2,7.2-7.2h90.6c4,0,7.2,3.2,7.2,7.2v17l-64.2,76.3 h57.1C177.3,160.8,180.5,164,180.5,168V185.3z"/></svg>
+          </div>
+
+          <div class="flex justify-between items-start mb-6 relative z-10">
+             <div>
+               <div class="inline-block px-3 py-1 bg-[#f4b728]/10 border border-[#f4b728]/30 text-[#f4b728] text-xs font-bold rounded-full uppercase tracking-wider mb-4">La Magia ZK</div>
+               <h3 class="text-2xl md:text-3xl font-black text-white mb-3">Zcash (ZEC)</h3>
+               <p class="text-slate-400 text-sm md:text-base leading-relaxed max-w-xl">Zcash è famosa per aver implementato la tecnologia Zero-Knowledge Proofs (zk-SNARKs). A differenza di Monero, offre una <strong class="text-white">Privacy Opzionale</strong>: l'utente può scegliere di fare transazioni in chiaro (t-address) o completamente schermate (z-address) che sono matematicamente inviolabili.</p>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEZIONE 3: CASI PRATICI -->
+      <div class="mb-4 mt-16" id="casi-pratici">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">3. Casi Pratici: Perché usarle?</h2>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">Se non hai nulla da nascondere, perché ti serve la privacy? La privacy non riguarda il nascondere crimini, riguarda il <strong class="text-white">proteggere le tue informazioni personali</strong> da abusi.</p>
+      </div>
+
+      <section class="scroll-mt-24">
+        <div class="space-y-4">
+            <div class="bento-card border-rose-500/10 p-5 md:p-6 bg-gradient-to-br from-rose-500/5 to-transparent">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">Protezione dal Data Scraping Assicurativo</h4>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">Immagina se un'assicurazione sanitaria potesse analizzare il tuo storico di transazioni pubbliche di Bitcoin e vedere che compri regolarmente medicinali, alcool o cibi non sani, e di conseguenza alzarti il premio assicurativo. Le Privacy Coins ti difendono da questa sorveglianza commerciale algoritmica.</p>
+            </div>
+            
+            <div class="bento-card border-rose-500/10 p-5 md:p-6 bg-gradient-to-br from-rose-500/5 to-transparent">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">Evitare di Essere un Bersaglio</h4>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">Se paghi un fornitore o un negozio con Bitcoin, loro possono vedere quanti soldi hai sul tuo address di provenienza. Se vedono che hai un milione di euro, potresti diventare un bersaglio per estorsioni o truffe. Con Monero, paghi il caffè e il barista vede solo l'importo del caffè, nient'altro.</p>
+            </div>
+
+            <div class="bento-card border-rose-500/10 p-5 md:p-6 bg-gradient-to-br from-rose-500/5 to-transparent">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">Fuga dai Regimi Autoritari</h4>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">In nazioni con governi oppressivi o sanzioni finanziarie estreme, donare a un partito politico di opposizione tramite bonifico bancario o persino Bitcoin trasparente ti espone al rischio di prigione o al congelamento dei fondi. Le Privacy Coins sono letteralmente strumenti salvavita.</p>
+            </div>
+        </div>
+      </section>
+
+      <!-- SEZIONE 4: ACQUISTO -->
+      <div class="mb-4 mt-16" id="acquisto">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">4. Come Acquistarle e Dove Trovarle</h2>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">Essendo state delistate da exchange come Binance, Kraken o Coinbase, comprare Privacy Coins richiede di usare piattaforme alternative (spesso molto più in linea con l'ethos Web3 originale).</p>
+      </div>
+
+      <section class="scroll-mt-24">
+        <div class="space-y-6">
+            <div class="bento-card relative p-6 border-white/[0.05]">
+                <h4 class="text-lg md:text-xl font-bold text-white mb-3">L'uso di CoinMarketCap (I "Markets")</h4>
+                <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-4">
+                    Il modo migliore per trovare dove viene scambiata una moneta è usare <a href="https://coinmarketcap.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">CoinMarketCap</a> o <a href="https://www.coingecko.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">CoinGecko</a>. Cerca la moneta (es. Monero), scorri la pagina e clicca sulla tab <strong>"Markets"</strong> (Mercati). Lì vedrai l'elenco di tutti gli exchange, divisi per CEX e DEX, che supportano scambi per quella specifica moneta, indicando i volumi e l'affidabilità.
+                </p>
+            </div>
+
+            <div class="bento-card relative p-6 border-white/[0.05]">
+                <h4 class="text-lg md:text-xl font-bold text-white mb-3">1. Swap Cross-Chain (Il Metodo Più Comune)</h4>
+                <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-4">
+                    Il modo più semplice è comprare una crypto con basse commissioni (come Litecoin o USDT su reti layer 2) su un exchange normale, e poi usare un bridge o un servizio di swap decentralizzato (es. <strong>Trocador.app</strong>, <strong>Sideshift.ai</strong>, o swap integrati in portafogli come Cake Wallet) per scambiarli in Monero o Zcash senza KYC.
+                </p>
+            </div>
+
+            <div class="bento-card relative p-6 border-white/[0.05]">
+                <h4 class="text-lg md:text-xl font-bold text-white mb-3">2. Atomic Swaps e DEX Nativi</h4>
+                <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-4">
+                    Gli Atomic Swaps permettono di scambiare (ad esempio) Bitcoin per Monero in modo trustless: senza intermediari, direttamente on-chain. Esistono protocolli decentralizzati (come Thorchain, o DEX basati su Atomic Swaps come <strong>Haveno</strong> o <strong>BasicSwapDEX</strong>) che facilitano queste operazioni rendendo impossibile censurare l'acquisto.
+                </p>
+            </div>
+            
+            <div class="bento-card relative p-6 border-white/[0.05]">
+                <h4 class="text-lg md:text-xl font-bold text-white mb-3">3. P2P (Da persona a persona)</h4>
+                <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-4">
+                    Piattaforme come <strong>LocalMonero</strong> (ora chiusa ma sostituita da piattaforme come Haveno e Bisq) o gruppi Telegram fidati permettono lo scambio diretto (Peer-to-Peer) pagando spesso in contanti di persona, tramite bonifici bancari esteri, o gift card.
+                </p>
+            </div>
+        </div>
+      </section>
+
+      <!-- Combined FAQ -->
+      <section id="faq" class="scroll-mt-24 mt-16">
+        <h3 class="text-xl md:text-2xl font-bold text-white mb-5 px-1 flex items-center gap-2.5">
+            <div class="w-1.5 h-6 bg-rose-500 rounded-full"></div>
+            Domande Frequenti Ampia Sulle Privacy Coins
+        </h3>
+        <div class="space-y-2.5">
+          {faqs.map(f => (
+            <Accordion title={f.domanda}>
+              <p class="text-sm md:text-[15px] font-medium leading-relaxed" set:html={f.risposta}></p>
+            </Accordion>
+          ))}
+        </div>
+      </section>
+      
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Layout>
