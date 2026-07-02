@@ -1,0 +1,25 @@
+{
+  "name": "privacy-folder-degate",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/indexnow.js",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "npx vercel --prod --yes"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/vercel": "^10.0.4",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.2",
+    "@vercel/analytics": "^2.0.1",
+    "astro": "^6.1.6",
+    "isomorphic-git": "^1.37.5",
+    "tailwindcss": "^4.2.2"
+  }
+}

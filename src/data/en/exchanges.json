@@ -1,0 +1,309 @@
+{
+  "page_title_exchange": "Exchange: CEX vs DEX",
+  "page_description_exchange": "Understand the fundamental differences between Centralized Exchanges (CEX) and Decentralized Exchanges (DEX). Discover which type of platform best suits your needs for privacy, security, and control over your funds.",
+  "page_title_acquisto": "Buy Crypto: On-Ramp vs P2P",
+  "page_description_acquisto": "All methods to convert Euros into Cryptocurrencies. From quick brokers with light KYC to fully anonymous Peer-to-Peer exchanges between private individuals.",
+  "cex": [
+    {
+      "nome": "Kraken",
+      "badge": "Tier 1",
+      "kyc": "Mandatory (Strict)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Limited use as primary On/Off-ramp to bank. NOTE: Data shared with Tax Authorities.",
+      "pro": [
+        "Low SEPA fees",
+        "Audited & Proof of Reserves",
+        "Fast"
+      ],
+      "link": "https://www.kraken.com",
+      "logo": "https://www.google.com/s2/favicons?domain=kraken.com&sz=128"
+    },
+    {
+      "nome": "Binance",
+      "badge": "Surveilled",
+      "kyc": "Mandatory",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Quick Altcoin purchases. Withdraw immediately to Cold Wallet after buying. Data sent to Tax Authorities.",
+      "pro": [
+        "Immense liquidity",
+        "Altcoin support"
+      ],
+      "link": "https://www.binance.com",
+      "logo": "https://www.google.com/s2/favicons?domain=binance.com&sz=128"
+    },
+    {
+      "nome": "Bybit",
+      "badge": "Surveilled",
+      "kyc": "Mandatory",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Speculative trading (Perpetuals). Remember that your trading style is analyzed upstream.",
+      "pro": [
+        "High leverage",
+        "Internal P2P liquidity"
+      ],
+      "link": "https://www.bybit.com",
+      "logo": "https://www.google.com/s2/favicons?domain=bybit.com&sz=128"
+    }
+  ],
+  "dex": [
+    {
+      "nome": "Uniswap",
+      "badge": "DEX Leader",
+      "kyc": "Private (Zero KYC)",
+      "on_ramp": false,
+      "off_ramp": false,
+      "consigliato": "Industry standard for on-chain swaps on Ethereum, Base, Polygon, Arbitrum.",
+      "pro": [
+        "Enormous liquidity",
+        "Censorship-resistant",
+        "New altcoin support"
+      ],
+      "link": "https://app.uniswap.org",
+      "logo": "https://www.google.com/s2/favicons?domain=uniswap.org&sz=128"
+    },
+    {
+      "nome": "Jupiter",
+      "badge": "Solana Aggregator",
+      "kyc": "Private (Zero KYC)",
+      "on_ramp": false,
+      "off_ramp": false,
+      "consigliato": "Ultimate routing for anyone operating with a Solana wallet.",
+      "pro": [
+        "Best price guaranteed",
+        "Native DCA",
+        "Premium interface"
+      ],
+      "link": "https://jup.ag",
+      "logo": "https://www.google.com/s2/favicons?domain=jup.ag&sz=128"
+    },
+    {
+      "nome": "Near Intent",
+      "badge": "Intent-Based",
+      "kyc": "Private (Zero KYC)",
+      "on_ramp": false,
+      "off_ramp": false,
+      "consigliato": "Fast multichain swaps based on optimal execution intents (MEV-protected).",
+      "pro": [
+        "Smart routing",
+        "No gas fees for failed trans."
+      ],
+      "link": "https://near-intents.org/",
+      "logo": "https://www.google.com/s2/favicons?domain=near-intents.org&sz=128"
+    },
+    {
+      "nome": "Thorchain",
+      "badge": "DEX Cross-Chain",
+      "kyc": "Private (Zero KYC)",
+      "on_ramp": false,
+      "off_ramp": false,
+      "consigliato": "Massive and decentralized exchange between native Bitcoin and native Ethereum (no wBTC or centralized bridges).",
+      "pro": [
+        "Native L1 Swaps",
+        "No Bridge/Wrapped tokens",
+        "Unstoppable Liquidity"
+      ],
+      "link": "https://swap.thorchain.org/",
+      "logo": "https://www.google.com/s2/favicons?domain=thorchain.org&sz=128"
+    }
+  ],
+  "p2p": [
+    {
+      "nome": "Peach Bitcoin",
+      "badge": "P2P Mobile",
+      "kyc": "None / Light",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Buy Bitcoin via SEPA bank transfer (or Revolut) by trading directly with another user, managed via mobile App.",
+      "pro": [
+        "Intuitive design",
+        "High privacy",
+        "Multi-payment"
+      ],
+      "link": "https://peachbitcoin.com",
+      "logo": "https://www.google.com/s2/favicons?domain=peachbitcoin.com&sz=128"
+    },
+    {
+      "nome": "RoboSats",
+      "badge": "Lightning P2P",
+      "kyc": "None (TOR & LN)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Buy and sell via Lightning Network in complete anonymity using Robot Avatars.",
+      "pro": [
+        "Fully anonymous",
+        "Lightning-fast on Lightning",
+        "Low fees"
+      ],
+      "link": "https://learn.robosats.com",
+      "logo": "https://www.google.com/s2/favicons?domain=robosats.com&sz=128"
+    },
+    {
+      "nome": "Bisq",
+      "badge": "Desktop Software",
+      "kyc": "None (Pure P2P)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Decentralized network based on the Tor network for hard-privacy maximalists.",
+      "pro": [
+        "Uncensorable",
+        "No central server"
+      ],
+      "link": "https://bisq.network",
+      "logo": "https://www.google.com/s2/favicons?domain=bisq.network&sz=128"
+    },
+    {
+      "nome": "Vexl",
+      "badge": "Social P2P",
+      "kyc": "None (Social Trust)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "P2P exchanges based on your contact list (friends or friends of friends). Perfect for trusted in-person meetups and cash/SEPA trades.",
+      "pro": [
+        "No central servers",
+        "Zero platform fees",
+        "Maximum mobile privacy"
+      ],
+      "link": "https://vexl.it/",
+      "logo": "https://www.google.com/s2/favicons?domain=vexl.it&sz=128"
+    },
+    {
+      "nome": "ZK P2P",
+      "badge": "Smart Contract ZK",
+      "kyc": "None (Trustless)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Use Venmo or Revolut to instantly convert fiat currency into on-chain USDC. Zero human intermediaries, mathematical validation via Zero-Knowledge.",
+      "pro": [
+        "No Human Escrow",
+        "Cryptographic Proof of Payment",
+        "Fully Decentralized Dapp"
+      ],
+      "link": "https://www.zkp2p.xyz/?tab=buy",
+      "logo": "https://www.google.com/s2/favicons?domain=zkp2p.xyz&sz=128"
+    },
+    {
+      "nome": "VoucherBot (TG)",
+      "badge": "P2P Telegram",
+      "kyc": "None",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Lightning-fast trades on Lightning/Onchain network using the Telegram interface for rapid matching.",
+      "pro": [
+        "Blazing fast",
+        "Familiar UX",
+        "Instant routing"
+      ],
+      "link": "https://p2p.bitcoinvoucher.bot/",
+      "logo": "https://www.google.com/s2/favicons?domain=p2p.bitcoinvoucher.bot&sz=128"
+    },
+    {
+      "nome": "HodlHodl",
+      "badge": "Global P2P",
+      "kyc": "None (Open)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Great for P2P trading both locally and internationally thanks to the Multisig smart contract that locks the funds.",
+      "pro": [
+        "Native Multisig Escrow",
+        "Very High Global Liquidity",
+        "No platform fund locks"
+      ],
+      "link": "https://hodlhodl.com/",
+      "logo": "https://www.google.com/s2/favicons?domain=hodlhodl.com&sz=128"
+    }
+  ],
+  "light_kyc": [
+    {
+      "nome": "Relai",
+      "badge": "European",
+      "kyc": "Light KYC",
+      "on_ramp": true,
+      "off_ramp": false,
+      "consigliato": "Good compromise for direct Bitcoin purchase to a non-custodial wallet with small bank transfers.",
+      "pro": [
+        "Instant Self-Custody",
+        "Minimal design"
+      ],
+      "link": "https://relai.app",
+      "logo": "https://www.google.com/s2/favicons?domain=relai.app&sz=128"
+    },
+    {
+      "nome": "MT Pelerin",
+      "badge": "Swiss Non-Custodial",
+      "kyc": "Zero KYC (<1000€)",
+      "on_ramp": true,
+      "off_ramp": true,
+      "consigliato": "Fiat OnRamp via SEPA/Swiss bank transfer. Crypto arrives directly in your private wallet without being held by the platform.",
+      "pro": [
+        "Swiss Banking Infrastructure",
+        "No selfie up to 1k per day",
+        "Immediate Self-Custody"
+      ],
+      "link": "https://www.mtpelerin.com/buy-crypto",
+      "logo": "https://www.google.com/s2/favicons?domain=mtpelerin.com&sz=128"
+    }
+  ],
+  "faq_exchange": [
+    {
+      "domanda": "What is the fundamental difference between CEX and DEX?",
+      "risposta": "A CEX (Centralized Exchange) is a private company that holds your funds and requires identity verification (KYC). You have an 'account' managed by them, like a bank. A DEX (Decentralized Exchange) is a set of Smart Contracts on a blockchain: there is no company, no account, and nobody asks for your ID. You connect your wallet, sign the transaction, and the swap happens automatically on-chain."
+    },
+    {
+      "domanda": "Why should I use a DEX and pay gas fees if Binance is free?",
+      "risposta": "On a DEX, you have 100% control of your funds. Nobody can freeze your account and no company owns your data or your keys. You pay a gas fee to the network in exchange for true financial freedom and zero risk of FTX-style bankruptcy."
+    },
+    {
+      "domanda": "Does the government know what I have on a CEX?",
+      "risposta": "Yes, and they know much more than you think. Many exchanges are already required to share transaction records with government tax authorities, even before new international reporting frameworks take effect. If you access your tax profile through government portals, you may find a line attributed to Binance or other CEXs with the exact amount of your crypto movements already pre-reported."
+    },
+    {
+      "domanda": "Which exchange is the least risky for holding coins long-term?",
+      "risposta": "No Exchange. The golden rule is 'Not your keys, not your coins'. Use exchanges (like Kraken) only for swapping and buying, then always withdraw everything to your own Personal Wallet (Cold Storage)."
+    },
+    {
+      "domanda": "Are DEX transactions visible to tax authorities?",
+      "risposta": "Tax reporting directives target physical 'Companies' (CEXs). On-chain transactions made from Self-Custodial No-KYC wallets cannot be automatically sent to these agencies: they are governed by decentralized Smart Contracts, not by registered companies. Nobody holds your data, so nobody can transmit it."
+    },
+    {
+      "domanda": "How to buy or sell BTC in USDC/USDT without KYC?",
+      "risposta": "To swap native assets like Bitcoin into Stablecoins (USDC/USDT) without going through centralized exchanges that require ID verification, the optimal solution is to use an advanced Web3 Wallet with integrated swap. For example, <a href=\"https://app.degate.com/?s=jack18&utm_source=en_privacy_site&utm_content=faq_exchange\" target=\"_blank\" class=\"text-[#0066FF] hover:underline\">DeGate</a> wallet supports multi-chain, including Bitcoin, Ethereum, Solana and more. You can use USDC on any chain to buy Bitcoin, and vice versa sell Bitcoin for USDC directly within your wallet while maintaining absolute privacy (zero KYC) and total control of your own keys."
+    },
+    {
+      "domanda": "How to move USDC between different chains?",
+      "risposta": "Normally, moving USDC from one blockchain to another requires using risky external bridges, which apply hidden 'bridge fees' and complex token approval procedures. Using <a href=\"https://app.degate.com/?s=jack18&utm_source=en_privacy_site&utm_content=faq_exchange\" target=\"_blank\" class=\"text-[#0066FF] hover:underline\">DeGate</a>, cross-chain routing for USDC happens natively and automatically: you can move USDC from Ethereum to Arbitrum (or other supported networks) without paying expensive bridge fees, paying only minimal gas directly in USDC."
+    },
+    {
+      "domanda": "Can I move USDC from Ethereum to Solana? Are my wallets being tracked?",
+      "risposta": "Yes, and it's crucial to consider privacy. Traditional bridges leave a public on-chain footprint, unequivocally linking your Ethereum address to your Solana address. By leveraging Zero-Knowledge technologies like those integrated in <a href=\"https://app.degate.com/?s=jack18&utm_source=en_privacy_site&utm_content=faq_exchange\" target=\"_blank\" class=\"text-[#0066FF] hover:underline\">DeGate</a>, it's possible to isolate the identity of the source wallet from the destination wallet. Furthermore, using the DeGate USDC Bridge within the wallet, you can move USDC 1:1 between supported chains: there is no bridge fee, you only pay the native gas fee."
+    },
+    {
+      "domanda": "How to swap from ETH to Solana (SOL)? What are the best fees?",
+      "risposta": "There are various methods: CEXs (which require KYC and apply fixed withdrawal fees), traditional Bridges (which have high gas costs on the ETH network, often exceeding $10-20), and cross-chain wallet aggregators. The most cost-effective solution to drastically save on fees without sacrificing anonymity is <a href=\"https://app.degate.com/?s=jack18&utm_source=en_privacy_site&utm_content=faq_exchange\" target=\"_blank\" class=\"text-[#0066FF] hover:underline\">DeGate</a>. Compared to a classic bridge, transaction costs are minimized through MPC and batching, making it the most economical and secure approach for moving funds from Ethereum to Solana."
+    }
+  ],
+  "faq_acquisto": [
+    {
+      "domanda": "Why does the site recommend P2P networks first and foremost?",
+      "risposta": "Because of government surveillance. CEXs like Binance and Kraken automatically report your transactions to tax authorities under international tax reporting frameworks (such as DAC8 in the EU). P2P networks like Peach or RoboSats eliminate the central company: you buy Bitcoin directly from another citizen's phone, legally, and the crypto goes straight into your private crypto wallet off the radar."
+    },
+    {
+      "domanda": "Can I buy cryptocurrencies while protecting my identity (Without KYC)?",
+      "risposta": "On traditional CEXs it is now prohibited by law. The only possible route is using decentralized P2P (Peer-to-Peer) platforms, physical Bitcoin ATMs with cash, or receiving crypto payments/gifts from other wallets via private Smart Contracts."
+    },
+    {
+      "domanda": "How does P2P buying work with Peach or Bisq?",
+      "risposta": "The app only acts as a bulletin board and guarantor (Escrow Contract). You physically send the money from your private bank account to the private bank account of users from different countries (via normal SEPA bank transfer). When they receive the money, the Smart Contract unlocks their crypto and sends it directly to your private wallet."
+    },
+    {
+      "domanda": "What is an On-Ramp and how does it differ from P2P?",
+      "risposta": "An On-Ramp (or Light KYC Broker) is a service that converts your Euros into Crypto via bank transfer to a company (e.g., Relai, MT Pelerin), often with reduced identity verification. P2P instead is a direct exchange between two private individuals without corporate intermediaries: no company touches your money or knows your identity."
+    },
+    {
+      "domanda": "Do Light KYC Brokers like Relai send my data to tax authorities?",
+      "risposta": "It depends on the Broker's jurisdiction. Relai is Swiss and operates under FINMA regulation. With international automatic exchange of information directives (such as DAC8 in the EU) taking effect, even foreign providers serving clients in participating countries will be progressively required to report. The low limits of Relai and MT Pelerin still minimize exposure compared to large CEXs."
+    }
+  ]
+}

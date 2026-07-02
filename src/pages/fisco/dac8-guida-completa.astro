@@ -1,0 +1,208 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Accordion from '../../components/Accordion.astro';
+
+const pageTitle = "DAC8 — Guida Completa per Cripto Italiani (2026)";
+const pageDescription = "Tutto quello che c'è da sapere sulla Direttiva DAC8, il CARF, lo scambio automatico di dati OAM e come prepararsi allo scenario normativo europeo.";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": pageTitle,
+  "description": pageDescription,
+  "inLanguage": "it",
+  "image": "https://privacy-crypto.com/og-image.jpg",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://privacy-crypto.com/fisco/dac8-guida-completa/"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Privacy Crypto IT"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Privacy Crypto",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://privacy-crypto.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-04-28",
+  "dateModified": "2026-06-11",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["article h2", "article h3", "article p"]
+  },
+  "about": [
+    { "@type": "Thing", "name": "DAC8", "sameAs": "https://eur-lex.europa.eu/eli/dir/2023/2226/oj" },
+    { "@type": "Thing", "name": "CARF" },
+    { "@type": "Thing", "name": "Tassazione criptovalute Italia" }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://privacy-crypto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Fisco & Tasse", "item": "https://privacy-crypto.com/fisco/" },
+    { "@type": "ListItem", "position": 3, "name": "DAC8 Guida Completa" }
+  ]
+};
+
+const faqData = [
+  {
+    "domanda": "Il DAC8 è già in vigore?",
+    "risposta": "La direttiva è stata formalmente adottata a livello UE. Gli Stati membri, inclusa l'Italia, devono recepirla entro il 31 dicembre 2025. Lo scambio automatico effettivo di informazioni partirà ufficialmente dal 1° gennaio 2026 per i dati relativi al 2025."
+  },
+  {
+    "domanda": "Se sposto le mie criptovalute su un DEX sono completamente invisibile al fisco?",
+    "risposta": "No. Le blockchain pubbliche (es. Ethereum, Solana) sono registri aperti e tracciabili. Pur non essendoci un'azienda obbligata a segnalare l'attività del DEX tramite DAC8, le transazioni on-chain rimangono visibili. Se il punto di ingresso (fiat on-ramp) o di uscita (cash-out in Euro) passa attraverso entità regolamentate KYC, l'intero flusso è teoricamente ricostruibile da un'autorità preposta."
+  },
+  {
+    "domanda": "Come funziona uno Swap cross-chain da un wallet self-custodial?",
+    "risposta": "Tradizionalmente, per scambiare asset tra blockchain diverse da un wallet self-custodial bisogna usare bridge esterni o aprire più dApp in sequenza — un processo tecnico e con rischi di sicurezza non banali. Alcuni wallet di nuova generazione integrano l'aggregazione Swap multi-chain direttamente nell'app, semplificando il flusso. Tra gli esempi attualmente disponibili: DeGate Wallet, che aggrega liquidità su più chain e permette di pagare il gas in USDC. Nota: trattandosi di wallet self-custodial, l'utente mantiene il controllo diretto delle proprie chiavi e dei propri fondi."
+  },
+  {
+    "domanda": "Devo dichiarare spontaneamente l'indirizzo del mio wallet self-custodial?",
+    "risposta": "Allo stato normativo attuale, la normativa sul Quadro RW impone di dichiarare il controvalore in Euro delle cripto-attività detenute al 31 dicembre per il monitoraggio fiscale. Non è obbligatorio, né tecnicamente previsto dal modello ministeriale corrente, incollare le stringhe crittografiche pubbliche (gli address) del proprio wallet. Tuttavia, occorre conservare le evidenze documentali dell'origine e della consistenza dei fondi in caso di controlli."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(item => ({
+    "@type": "Question",
+    "name": item.domanda,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.risposta
+    }
+  }))
+};
+---
+
+<Layout title={pageTitle} description="Guida completa e definitiva alla direttiva europea DAC8. Cosa cambia per gli utenti crypto italiani dal 2026 e come tutelare la propria privacy finanziaria." maxWidth="max-w-[900px]">
+  <div class="py-8 md:py-12">
+    <!-- Intestazione Articolo -->
+    <header class="mb-12 border-b border-white/[0.05] pb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="px-3 py-1 bg-red-500/10 border border-red-500/20 text-red-500 rounded-full text-xs font-bold uppercase tracking-widest">Approfondimento Legale</span>
+        <span class="text-slate-500 text-sm font-semibold">Aggiornato: Aprile 2026</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6 tracking-tight">DAC8 — Guida Completa per Utenti Cripto Italiani</h1>
+      <p class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-3xl">Un'analisi profonda sull'imminente scambio automatico di dati finanziari in Europa. Come funziona, chi viene segnalato, e le strategie legali e tecnologiche per la gestione degli asset crittografici.</p>
+    </header>
+
+    <article class="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-slate-300 prose-a:text-[#0066FF] hover:prose-a:text-[#0055DD] prose-strong:text-white">
+      
+      <!-- Fact Blocks -->
+      <div class="not-prose grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+        <div class="bg-[#0a0a12] border-l-4 border-[#0066FF] p-5 rounded-r-xl shadow-lg">
+          <div class="text-xs text-slate-500 uppercase font-black tracking-widest mb-1">Entrata in Vigore</div>
+          <div class="text-3xl font-black text-white mb-2">1 Gen 2026</div>
+          <p class="text-sm text-slate-400 font-medium">Data ufficiale d'inizio dello scambio automatico dati tra i paesi membri UE.</p>
+        </div>
+        <div class="bg-[#0a0a12] border-l-4 border-red-500 p-5 rounded-r-xl shadow-lg">
+          <div class="text-xs text-slate-500 uppercase font-black tracking-widest mb-1">Aliquota Crypto</div>
+          <div class="text-3xl font-black text-white mb-2">33%</div>
+          <p class="text-sm text-slate-400 font-medium">Nuova tassazione sulle plusvalenze per redditi derivanti da cripto-attività.</p>
+        </div>
+        <div class="bg-[#0a0a12] border-l-4 border-[#03a66d] p-5 rounded-r-xl shadow-lg">
+          <div class="text-xs text-slate-500 uppercase font-black tracking-widest mb-1">Portata CARF</div>
+          <div class="text-3xl font-black text-white mb-2">47 Paesi</div>
+          <p class="text-sm text-slate-400 font-medium">Estensione globale OCSE per la rendicontazione extra-europea entro il 2027.</p>
+        </div>
+      </div>
+
+      <h2>1. Cos'è la direttiva DAC8 e come cambia lo scenario europeo</h2>
+      <p>La direttiva <strong>2023/2226/UE</strong>, nota comunemente come <strong>DAC8 (Directive on Administrative Cooperation)</strong>, rappresenta l'ottavo emendamento al quadro normativo europeo sulla cooperazione amministrativa nel settore fiscale. Il suo scopo principale è eliminare le zone d'ombra che hanno caratterizzato il primo decennio delle criptovalute, introducendo un sistema di rendicontazione obbligatoria per i prestatori di servizi per le cripto-attività (CASP).</p>
+      
+      <p>A partire dal <strong>1° gennaio 2026</strong>, tutti i fornitori di servizi legati alle criptovalute (inclusi Exchange come Binance, Coinbase, Kraken, e persino emittenti di stablecoin) saranno obbligati a raccogliere, verificare e trasmettere all'Agenzia delle Entrate i dati completi sulle transazioni dei loro utenti residenti nell'UE.</p>
+
+      <h3>Il calendario legislativo dell'Unione Europea</h3>
+      <ul>
+        <li><strong>Ottobre 2023:</strong> Adozione formale della direttiva da parte del Consiglio UE.</li>
+        <li><strong>Dicembre 2024:</strong> Scadenza per gli Stati membri per recepire le norme nel diritto nazionale.</li>
+        <li><strong>31 Dicembre 2025:</strong> Ultimo giorno di applicazione delle vecchie norme.</li>
+        <li><strong>1 Gennaio 2026:</strong> Entrata in vigore effettiva e inizio dello scambio automatico transfrontaliero.</li>
+      </ul>
+
+      <h2>2. Chi rientra nel perimetro DAC8 e chi ne è escluso</h2>
+      <p>L'architettura della normativa è costruita attorno al concetto di "Soggetto Obbligato". La legge colpisce l'intermediario, non il protocollo informatico. Questa è una distinzione vitale per comprendere il futuro della privacy nel Web3.</p>
+
+      <h3>Chi è "Dentro" (Soggetti Obbligati alla segnalazione)</h3>
+      <p>Rientrano nel raggio d'azione diretto della DAC8:</p>
+      <ul>
+        <li><strong>Exchange Centralizzati (CEX):</strong> Tutti gli exchange iscritti o operanti sul suolo europeo (tramite l'iscrizione all'albo OAM in Italia) sono obbligati a trasmettere i saldi e le transazioni.</li>
+        <li><strong>Wallet Custoditi:</strong> Qualsiasi servizio in cui l'azienda detiene le chiavi private dei fondi per conto dell'utente (ad esempio, servizi di custodia istituzionale, broker come eToro o carte FinTech come Revolut).</li>
+        <li><strong>Emittenti di E-Money Token (Stablecoin):</strong> Le aziende che emettono stablecoin coperte da riserve fiat ricadono parzialmente sotto gli oneri informativi incrociati con il regolamento MiCA.</li>
+      </ul>
+
+      <h3>Chi è "Fuori" (Fuori dal perimetro di segnalazione)</h3>
+      <p>Non avendo una sede centrale, un amministratore delegato o un dipartimento di compliance, diverse architetture tecnologiche non possono materialmente adempiere agli obblighi di trasmissione dati:</p>
+      <ul>
+        <li><strong>Wallet Self-Custodial (Non-Custodial):</strong> Se possiedi le chiavi private (le famose 12 o 24 parole della Seed Phrase), tu sei la banca. Non esistendo un intermediario, non esiste un soggetto in grado di trasmettere autonomamente i tuoi dati al fisco tramite DAC8.</li>
+        <li><strong>Smart Contract On-Chain:</strong> Le interazioni pure con contratti automatizzati su reti decentralizzate non sono intercettabili da questo specifico quadro normativo.</li>
+        <li><strong>Transazioni P2P in contanti o non tracciate:</strong> Il trasferimento peer-to-peer puro tra due nodi privati rimane al di fuori dello scopo della direttiva.</li>
+      </ul>
+      
+      <div class="not-prose p-4 bg-[#0066FF]/10 border-l-4 border-[#0066FF] rounded-r-lg my-6">
+        <p class="text-sm font-semibold text-slate-300 leading-relaxed mb-0"><strong>Il futuro dei DEX (MiCA Phase 2):</strong> Attualmente la DeFi e gli exchange decentralizzati (DEX) sfuggono alla prima tranche normativa. Le istituzioni europee stanno già valutando come inquadrare la finanza decentralizzata nel prossimo pacchetto (spesso soprannominato MiCA 2.0). Tuttavia, stime degli esperti indicano che l'iter burocratico e le insormontabili sfide tecnologiche richiederanno almeno altri 5 anni prima che venga formulato un testo attuabile.</p>
+      </div>
+
+      <h2>3. L'Integrazione tra CARF (2027) e CRS</h2>
+      <p>Mentre la DAC8 è una direttiva prettamente europea, il mondo non si ferma ai confini dell'UE. L'OCSE (Organizzazione per la cooperazione e lo sviluppo economico) ha sviluppato il <strong>CARF (Crypto-Asset Reporting Framework)</strong>. Questo standard globale estenderà la sorveglianza e lo scambio di informazioni a livello internazionale.</p>
+      
+      <p>Attualmente, ben <strong>47 Paesi</strong> hanno già firmato accordi per recepire il CARF nei rispettivi ordinamenti entro il 2027. Questo significa che aprire un account su un Exchange basato a Singapore, in Svizzera o negli Emirati Arabi Uniti non garantirà più "l'invisibilità" fiscale, poiché queste giurisdizioni inizieranno a scambiare in automatico le informazioni con l'Agenzia delle Entrate italiana, esattamente come avviene oggi con i conti bancari classici (tramite il CRS - Common Reporting Standard).</p>
+
+      <h2>4. Guida Operativa: Cosa fare se possiedi già Criptovalute</h2>
+      <p>Alla luce di questo restringimento globale delle maglie di controllo, l'approccio dell'investitore deve evolversi per garantire la massima sicurezza legale e personale.</p>
+
+      <h3>Step 1: Prelevare dai CEX verso un Wallet Self-Custodial</h3>
+      <p>Il primo passo fondamentale per prendere possesso reale dei propri asset è rimuoverli dai server di terze parti. Finchè i fondi risiedono su un exchange centralizzato, tu sei semplicemente titolare di un "pagherò", mentre l'azienda è il reale proprietario on-chain.</p>
+
+      <h3>Step 2: Archiviazione sicura della Seed Phrase</h3>
+      <p>Il passaggio al self-custody comporta enormi responsabilità. La tua Seed Phrase deve essere trascritta su un supporto fisico, possibilmente resistente a fuoco e acqua (come capsule in titanio o piastre in acciaio). Non va mai digitata sulla tastiera o memorizzata sul cloud.</p>
+
+      <h3>Step 3: Gestione delle transazioni future (La Terza Via)</h3>
+      <p>Una volta ottenuta la piena sovranità sui fondi tramite un wallet self-custodial, si pone il problema di come effettuare operazioni di trading o scambio senza dover re-inviare i fondi su un Exchange centralizzato.</p>
+      
+      <p>L'approccio tradizionale costringeva l'utente a interfacciarsi con complessi DEX, aprire ponti (bridge) cross-chain lenti e costosi, col rischio di sbagliare reti. Oggi esiste una soluzione che combina la privacy del self-custody con la semplicità di un CEX. <strong>Alcuni wallet di nuova generazione integrano l'aggregazione Swap multi-chain direttamente nell'app</strong>.</p>
+
+      <p>Tra gli esempi attualmente disponibili spicca <strong>DeGate Wallet</strong>: aggregando liquidità su diverse chain (Ethereum, Solana, Arbitrum, BSC, Base) permette agli utenti di scambiare asset rimanendo in totale regime di self-custody. Il tutto senza necessità di acquisire il token nativo della chain di destinazione, dato che il gas può essere pagato interamente in USDC. Questo ecosistema rispetta la sicurezza, preserva la detenzione personale delle chiavi e non richiede interfacciamento con entità sottoposte agli stringenti vincoli DAC8/OAM.</p>
+
+      <h2>5. Errori Comuni e Falsi Miti</h2>
+
+      <h3>"Usare un DEX mi rende davvero del tutto anonimo?"</h3>
+      <p>Assolutamente no. Questo è uno degli errori più pericolosi. L'on-chain è pseudonimo, non anonimo. Tutte le transazioni sono incise indelebilmente in un registro pubblico distribuito. Anche se il DEX non richiede documenti d'identità, le società di analisi forense specializzate (come Chainalysis) collaborano attivamente con i governi. L'on-chain è altamente tracciabile, la differenza cruciale è che non c'è un soggetto obbligato (un CEX) alla trasmissione "push" dei dati pre-confezionati; tuttavia l'Autorità, in caso di indagine, può ricostruire in chiaro l'intero flusso.</p>
+
+      <h3>"Il semplice possesso va dichiarato?"</h3>
+      <p>Il semplice possesso di un wallet self-custodial va dichiarato ai fini del solo Monitoraggio Fiscale (Quadro RW, per il valore al 31 dicembre). La tassazione al 33% (Quadro RT) scatta unicamente al momento di realizzo delle <strong>plusvalenze</strong>, ovvero quando converti le crypto verso FIAT, verso E-Money Tokens (Stablecoin come USDT) o le utilizzi per l'acquisto diretto di beni o servizi.</p>
+      <p class="text-sm italic text-slate-500 mt-2">*Attenzione: le dinamiche fiscali cambiano di anno in anno. Le indicazioni qui riportate sono di natura didattica e tecnica. Consulta sempre un fiscalista o un commercialista esperto per la redazione corretta della tua dichiarazione dei redditi.*</p>
+
+    </article>
+
+    <!-- F.A.Q. Educative -->
+    <section class="mt-16 pt-10 border-t border-white/[0.05]">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-2.5">
+        <div class="w-1.5 h-6 bg-[#03a66d] rounded-full"></div>
+        Domande Frequenti (F.A.Q)
+      </h2>
+      <div class="space-y-4">
+        {faqData.map((item) => (
+          <Accordion title={item.domanda}>
+            <p class="text-[15px] md:text-base font-normal leading-relaxed text-slate-400">{item.risposta}</p>
+          </Accordion>
+        ))}
+      </div>
+    </section>
+
+  </div>
+  
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</Layout>

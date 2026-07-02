@@ -1,0 +1,732 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Accordion from '../components/Accordion.astro';
+import micaData from '../data/mica_registry.json';
+
+// Filter to notable exchanges only
+const notableProviders = micaData.providers.filter(p => p.notoriety_rank < 999);
+const totalNotable = notableProviders.length;
+const lastUpdated = micaData.last_updated;
+const serviceLabels = micaData.service_labels;
+
+// Unique countries from notable providers for filter dropdown
+const uniqueCountries = [...new Set(notableProviders.map(p => p.country))].sort();
+
+// Country name map
+const countryNames: Record<string, string> = {
+  AT: 'Austria', BE: 'Belgio', BG: 'Bulgaria', CY: 'Cipro', CZ: 'Repubblica Ceca',
+  DE: 'Germania', DK: 'Danimarca', EE: 'Estonia', EL: 'Grecia', ES: 'Spagna',
+  FI: 'Finlandia', FR: 'Francia', GR: 'Grecia', HR: 'Croazia', HU: 'Ungheria',
+  IE: 'Irlanda', IS: 'Islanda', IT: 'Italia', LI: 'Liechtenstein', LT: 'Lituania',
+  LU: 'Lussemburgo', LV: 'Lettonia', MT: 'Malta', NL: 'Paesi Bassi', NO: 'Norvegia',
+  PL: 'Polonia', PT: 'Portogallo', RO: 'Romania', SE: 'Svezia', SI: 'Slovenia',
+  SK: 'Slovacchia',
+};
+
+// All service keys for checkboxes
+const allServiceKeys = Object.keys(serviceLabels) as Array<keyof typeof serviceLabels>;
+
+// Helper to safely extract hostname from URL
+function getFaviconUrl(website: string): string {
+  if (!website) return '';
+  try {
+    const hostname = new URL(website).hostname;
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
+  } catch {
+    return '';
+  }
+}
+
+// Country flag helper
+const countryFlag = (code: string) => {
+  const flags: Record<string,string> = {AT:'🇦🇹',BE:'🇧🇪',BG:'🇧🇬',CY:'🇨🇾',CZ:'🇨🇿',DE:'🇩🇪',DK:'🇩🇰',EE:'🇪🇪',ES:'🇪🇸',FI:'🇫🇮',FR:'🇫🇷',GR:'🇬🇷',HR:'🇭🇷',HU:'🇭🇺',IE:'🇮🇪',IS:'🇮🇸',IT:'🇮🇹',LI:'🇱🇮',LT:'🇱🇹',LU:'🇱🇺',LV:'🇱🇻',MT:'🇲🇹',NL:'🇳🇱',NO:'🇳🇴',PL:'🇵🇱',PT:'🇵🇹',RO:'🇷🇴',SE:'🇸🇪',SI:'🇸🇮',SK:'🇸🇰'};
+  return flags[code] || '🏳️';
+};
+
+// Exchange principali con servizi chiave
+const featuredExchanges = [
+  { name: 'Kraken', logo: '🐙', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: true, hasPSD2: false, mifidLabel: 'Licenza MiFID Attiva', swapFiat: true, tradingPerp: true, description: 'Uno degli exchange più sicuri e affidabili al mondo. Licenza MiFID per derivati crypto, azioni e indici tradizionali.', fees: { spotMaker: '0.16%', spotTaker: '0.26%', derivMaker: '0.02%', derivTaker: '0.05%' }, country: 'Irlanda', countryFl: '🇮🇪', website: 'https://www.kraken.com', pros: ['Licenza MiFID per derivati in Europa', 'Storica affidabilità e sicurezza', 'Commissioni competitive'] },
+  { name: 'OKX', logo: '📈', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: true, hasPSD2: false, mifidLabel: 'Licenza MiFID Attiva', swapFiat: true, tradingPerp: true, description: 'Colosso globale dei volumi su contratti future. App mobile eccellente. Derivati su crypto, azioni e finanza integrata.', fees: { spotMaker: '0.08%', spotTaker: '0.10%', derivMaker: '0.02%', derivTaker: '0.05%' }, country: 'Malta', countryFl: '🇲🇹', website: 'https://www.okx.com', pros: ['Commissioni tra le più basse', 'App mobile eccellente', 'Derivati su mercati tradizionali'] },
+  { name: 'Backpack', logo: '🎒', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: true, hasPSD2: false, mifidLabel: 'Licenza MiFID Attiva', swapFiat: true, tradingPerp: true, description: 'Exchange di nuova generazione con licenza MiFID. Derivati crypto e trading su azioni tradizionali.', fees: { spotMaker: '0.08%', spotTaker: '0.10%', derivMaker: '0.02%', derivTaker: '0.05%' }, country: 'UE', countryFl: '🇪🇺', website: 'https://backpack.exchange', pros: ['Licenza MiFID per derivati', 'Trading su azioni tradizionali', 'Ecosistema moderno'] },
+  { name: 'Bitpanda', logo: '🐼', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: true, hasPSD2: true, mifidLabel: 'Licenza MiFID Attiva', swapFiat: true, tradingPerp: true, description: 'Broker multi-asset austriaco: crypto, azioni frazionate, ETF, metalli preziosi e commodity.', fees: { spotMaker: 'Spread', spotTaker: 'Variabile', derivMaker: 'Variabile', derivTaker: 'Variabile' }, country: 'Austria', countryFl: '🇦🇹', website: 'https://www.bitpanda.com', pros: ['Broker multi-asset completo', 'PAC automatico', 'Bonifici istantanei'] },
+  { name: 'Nexo', logo: '🏦', status: 'compliant' as const, statusLabel: 'Compliant (Partner)', hasMiFID: true, hasPSD2: true, mifidLabel: 'MiFID via Partner', swapFiat: true, tradingPerp: true, description: 'Compliant tramite partner europei regolamentati. Derivati attivi, rendimenti passivi e carte di debito.', fees: { spotMaker: 'Spread', spotTaker: 'Variabile', derivMaker: 'Variabile', derivTaker: 'Variabile' }, country: 'UE (Partner)', countryFl: '🇪🇺', website: 'https://nexo.com', pros: ['Derivati attivi senza interruzioni', 'Rendimenti passivi e carte', 'Nessun cambiamento operativo'] },
+  { name: 'Bitvavo', logo: '🇳🇱', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: false, mifidLabel: 'Solo Spot — In attesa MiFID', swapFiat: true, tradingPerp: false, description: 'Leader assoluto per liquidità in Euro. Oltre 400 coppie crypto/EUR. Max 0.25% senza spread nascosti.', fees: { spotMaker: '0.15%', spotTaker: '0.25%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Paesi Bassi', countryFl: '🇳🇱', website: 'https://bitvavo.com', pros: ['Liquidità in Euro #1 al mondo', 'Max 0.25% (no spread nascosto)', 'Interfaccia pulita e semplice'] },
+  { name: 'Coinbase', logo: '🔵', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: true, mifidLabel: 'Solo Spot — In attesa MiFID', swapFiat: true, tradingPerp: false, description: "L'unico exchange quotato al Nasdaq. Affidabilità istituzionale ideale per principianti.", fees: { spotMaker: '0.40%', spotTaker: '0.60%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Lussemburgo', countryFl: '🇱🇺', website: 'https://www.coinbase.com', pros: ['Quotata al NASDAQ', 'Massima reputazione', "Semplicità d'uso"] },
+  { name: 'Bybit EU', logo: '🔶', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: false, mifidLabel: 'Solo Spot — In attesa MiFID', swapFiat: true, tradingPerp: false, description: 'Opera in Europa con licenza CASP. Solo trading Spot, in attesa MiFID per derivati.', fees: { spotMaker: '0.10%', spotTaker: '0.10%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Austria', countryFl: '🇦🇹', website: 'https://www.bybit.eu', pros: ['Ottima liquidità sulle altcoin', 'Interfaccia web fluida', 'Commissioni competitive'] },
+  { name: 'Crypto.com', logo: '🦁', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: true, mifidLabel: 'Solo Spot — In attesa MiFID', swapFiat: true, tradingPerp: false, description: 'Famoso per le carte di debito in metallo con cashback. Ampio ecosistema crypto.', fees: { spotMaker: 'Spread', spotTaker: 'Variabile', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Malta', countryFl: '🇲🇹', website: 'https://crypto.com', pros: ['Carte Visa con cashback', 'Ecosistema completo', 'Ampia selezione altcoin'] },
+  { name: 'eToro', logo: '📊', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: true, mifidLabel: 'Solo Spot — In attesa MiFID', swapFiat: true, tradingPerp: false, description: 'Piattaforma social trading. Copia i trader più performanti. Anche azioni e ETF.', fees: { spotMaker: 'Spread', spotTaker: '1%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Cipro', countryFl: '🇨🇾', website: 'https://www.etoro.com', pros: ['Social e Copy Trading', 'Azioni e ETF inclusi', 'Interfaccia intuitiva'] },
+  { name: 'Young Platform', logo: '🇮🇹', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: false, mifidLabel: 'Solo Spot', swapFiat: true, tradingPerp: false, description: 'Principale operatore italiano. Licenza CASP MiCA da Consob e Banca d\'Italia. Gestione fiscale integrata.', fees: { spotMaker: 'Spread', spotTaker: '~1.99%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Italia', countryFl: '🇮🇹', website: 'https://youngplatform.com', pros: ['Licenza MiCA italiana (Consob/BdI)', 'Gestione fiscale integrata', 'Assistenza 100% Italia'] },
+  { name: 'WhiteBIT', logo: '⬜', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: false, mifidLabel: 'Solo Spot — In attesa MiFID', swapFiat: true, tradingPerp: false, description: 'Exchange in forte espansione in Europa. Pienamente conforme MiCA per acquisto e custodia crypto.', fees: { spotMaker: '0.10%', spotTaker: '0.10%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'UE', countryFl: '🇪🇺', website: 'https://whitebit.com', pros: ['Commissioni basse e fisse', 'Interfaccia reattiva', 'Staking disponibile'] },
+  { name: 'CheckSig', logo: '🔐', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: false, mifidLabel: 'Solo Spot', swapFiat: true, tradingPerp: false, description: 'Unico operatore crypto italiano con SOC 1 e SOC 2 Tipo II (Deloitte). Custodia professionale e regime amministrato.', fees: { spotMaker: 'Variabile', spotTaker: 'Variabile', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Italia', countryFl: '🇮🇹', website: 'https://checksig.com', pros: ['Regime amministrato (tasse alla fonte)', 'SOC 1/SOC 2 (Deloitte)', 'Custodia eccellenza italiana'] },
+  { name: 'Conio', logo: '🛡️', status: 'compliant' as const, statusLabel: 'MiCA Compliant', hasMiFID: false, hasPSD2: false, mifidLabel: 'Solo Spot', swapFiat: true, tradingPerp: false, description: 'Piattaforma italiana con sistema multi-firma per massima sicurezza. Partner con banche tradizionali.', fees: { spotMaker: '~1.25%', spotTaker: '~1.25%', derivMaker: 'N/A', derivTaker: 'N/A' }, country: 'Italia', countryFl: '🇮🇹', website: 'https://conio.com', pros: ['Custodia multi-firma 3 su 3', 'Partner bancari', 'Sede in Italia'] },
+  { name: 'Binance', logo: '🟡', status: 'rejected' as const, statusLabel: 'Sospeso in UE — No MiCA', hasMiFID: false, hasPSD2: false, mifidLabel: 'Servizi Sospesi', swapFiat: false, tradingPerp: false, description: "Il colosso globale NON ha ottenuto l'autorizzazione CASP. Servizi cessati per utenti retail europei dal 1° luglio 2026.", fees: { spotMaker: 'Sospeso', spotTaker: 'Sospeso', derivMaker: 'Sospeso', derivTaker: 'Sospeso' }, country: 'Internazionale', countryFl: '🌍', website: 'https://www.binance.com', pros: ['⚠️ SERVIZI SOSPESI IN EUROPA', 'Prelevare i fondi immediatamente'] },
+];
+
+// FAQ data
+const faqItems = [
+  {
+    domanda: "Cos'è il regolamento MiCA e perché è importante?",
+    risposta: `Il <strong class="text-white">MiCA (Markets in Crypto-Assets Regulation)</strong> è il Regolamento UE 2023/1114, il primo quadro normativo organico europeo per i crypto-asset. Entrato pienamente in vigore il <strong class="text-white">30 giugno 2025</strong>, impone a tutti i Crypto-Asset Service Provider (CASP) di ottenere un'autorizzazione da un'autorità nazionale competente (come la CONSOB in Italia o la BaFin in Germania) per operare legalmente nell'Unione Europea. MiCA è importante perché standardizza le regole in tutti i 27 Stati membri, eliminando il patchwork di normative nazionali e garantendo requisiti minimi di trasparenza, protezione dei consumatori e riserve di capitale per gli emittenti di stablecoin.`
+  },
+  {
+    domanda: "Quali exchange sono MiCA compliant in Italia?",
+    risposta: `Tra gli exchange più noti che hanno ottenuto la licenza MiCA e operano in Italia tramite passaporto europeo troviamo: <strong class="text-white">Bitpanda</strong> (autorizzato da FMA Austria), <strong class="text-white">Bybit</strong> (autorizzato da FMA Austria), <strong class="text-white">eToro</strong> (autorizzato da CySEC Cipro), <strong class="text-white">Revolut</strong> (autorizzato da CySEC Cipro), <strong class="text-white">Kraken</strong> (autorizzato da CBI Irlanda), <strong class="text-white">KuCoin EU</strong> (autorizzato da FMA Austria), <strong class="text-white">WhiteBIT EU</strong> (autorizzato da FMA Austria) e <strong class="text-white">Trading 212</strong> (autorizzato da CySEC Cipro). La lista completa e aggiornata quotidianamente è disponibile nella tabella sopra, estratta direttamente dal registro ufficiale ESMA.`
+  },
+  {
+    domanda: "Posso usare un exchange non MiCA in Europa?",
+    risposta: `Tecnicamente, dal <strong class="text-white">30 giugno 2025</strong>, un provider non autorizzato MiCA <strong class="text-white">non può offrire legalmente servizi crypto</strong> a residenti dell'UE. Le autorità nazionali possono bloccare l'accesso ai siti non autorizzati, congelare fondi e imporre sanzioni. Alcuni exchange non-MiCA potrebbero ancora essere accessibili tramite VPN, ma utilizzarli comporta rischi significativi: nessuna protezione legale per il consumatore, impossibilità di ricorso in caso di controversie e potenziali problemi fiscali, dato che le transazioni su piattaforme non regolamentate possono essere considerate sospette dalle autorità tributarie.`
+  },
+  {
+    domanda: "Qual è la differenza tra MiCA, MiFID II e PSD2?",
+    risposta: `Le tre licenze coprono ambiti diversi: <strong class="text-white">MiCA</strong> (Reg. UE 2023/1114) è specifica per i servizi su crypto-asset — custodia, scambio fiat↔crypto e crypto↔crypto, esecuzione ordini, trasferimento e collocamento. <strong class="text-white">MiFID II</strong> (Dir. 2014/65/UE) regola i servizi d'investimento tradizionali come azioni, obbligazioni, derivati e fondi — alcuni exchange la ottengono per offrire prodotti finanziari regolamentati accanto alle crypto. <strong class="text-white">PSD2</strong> (Dir. 2015/2366/UE) disciplina i servizi di pagamento — bonifici, carte, portafogli elettronici — ed è necessaria per gli exchange che offrono anche funzionalità bancarie. Un exchange completo potrebbe avere tutte e tre le licenze.`
+  },
+  {
+    domanda: "Un exchange MiCA-compliant protegge la mia privacy?",
+    risposta: `<strong class="text-white">Assolutamente no.</strong> MiCA impone requisiti di <strong class="text-white">KYC (Know Your Customer) obbligatorio</strong>: per usare qualsiasi exchange autorizzato devi fornire documento d'identità, selfie, prova di residenza e spesso anche verifica bancaria. Inoltre, con la direttiva <strong class="text-white">DAC8</strong> (in vigore dal 2026), tutti i CASP autorizzati sono obbligati a trasmettere automaticamente i dati delle transazioni dei clienti alle autorità fiscali di ogni Stato membro. Se la privacy finanziaria è la tua priorità, la soluzione è usare <strong class="text-white">exchange decentralizzati (DEX)</strong> e <strong class="text-white">wallet self-custodial</strong> che non richiedono KYC e non sono soggetti a DAC8.`
+  },
+  {
+    domanda: "Cosa succede se uso un exchange non regolamentato?",
+    risposta: `Usare un exchange non autorizzato comporta <strong class="text-white">rischi concreti</strong>: nessuna protezione legale in caso di perdita dei fondi (come avvenuto con FTX, che non era regolamentato nell'UE), impossibilità di fare ricorso presso le autorità di vigilanza nazionali, rischio di frode senza alcun meccanismo di compensazione, potenziali problemi con le autorità fiscali (le transazioni potrebbero essere considerate sospette o non dichiarabili correttamente) e rischio di sequestro dei fondi se l'exchange viene chiuso dalle autorità. Un exchange MiCA offre almeno garanzie di riserve di capitale, segregazione dei fondi e procedure di reclamo obbligatorie.`
+  },
+  {
+    domanda: "Come verifico se un exchange è autorizzato MiCA?",
+    risposta: `Puoi verificare l'autorizzazione MiCA di un exchange in due modi: consultando il <a href="https://www.esma.europa.eu/databases-library/registers-and-data/crypto-assets-service-providers-registers" target="_blank" rel="noopener noreferrer" class="text-[#0066FF] hover:underline">registro ufficiale ESMA</a> (European Securities and Markets Authority), che raccoglie tutte le autorizzazioni rilasciate dalle autorità nazionali competenti dei 27 Stati membri, oppure <strong class="text-white">consultando questa pagina</strong>, che estrae e aggiorna quotidianamente i dati direttamente dal registro ESMA, presentandoli in un formato più leggibile e filtrabile. Se un exchange non appare nel registro ESMA, non è autorizzato ad operare nell'UE sotto MiCA.`
+  },
+  {
+    domanda: "Binance è MiCA compliant?",
+    risposta: `Al momento dell'ultimo aggiornamento di questa pagina (<strong class="text-white">${lastUpdated}</strong>), <strong class="text-white">Binance non risulta nel registro ufficiale ESMA</strong> come provider autorizzato MiCA. Binance ha avuto un percorso complesso con i regolatori europei: ha ritirato la domanda di licenza in diversi paesi e opera attraverso entità locali con status diversi. È fondamentale verificare sempre il registro ESMA per informazioni aggiornate, poiché la situazione normativa può evolversi. Se stai cercando un exchange MiCA-compliant, consulta la tabella sopra per alternative autorizzate che operano legalmente in Italia e nell'UE.`
+  }
+];
+
+// Structured data: FAQ schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "it",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.domanda,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.risposta.replace(/<[^>]*>/g, '')
+    }
+  }))
+};
+
+// Structured data: Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://privacy-crypto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Exchange", "item": "https://privacy-crypto.com/exchange/" },
+    { "@type": "ListItem", "position": 3, "name": "Exchange Crypto Autorizzati MiCA" }
+  ]
+};
+---
+
+<Layout title="Exchange Crypto Autorizzati MiCA in Europa" description="Lista completa e aggiornata degli exchange crypto autorizzati MiCA (EU 2023/1114) dal registro ESMA. Verifica quali piattaforme sono legali in Italia e in Europa." maxWidth="max-w-[1300px] xl:max-w-[1400px]">
+
+  <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 xl:gap-12 items-start mt-2">
+    <!-- Sidebar Navigation Left -->
+    <div class="hidden lg:block w-[240px] xl:w-[270px] shrink-0 sticky top-24 order-2 lg:order-1">
+      <div class="bento-card p-6 border-white/[0.03] shadow-2xl bg-[var(--bg-sidebar)]">
+         <h4 class="text-xs uppercase tracking-widest font-black text-slate-600 mb-5">Indice della Pagina</h4>
+         <nav class="flex flex-col space-y-3.5">
+            <a href="#mica-info" class="text-sm text-slate-500 hover:text-[#0066FF] font-medium flex items-center justify-between group transition-colors">
+               Regolamento MiCA
+               <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <hr class="border-white/[0.03]" />
+            <a href="#exchange-cards" class="text-sm text-slate-500 hover:text-[#0066FF] font-medium flex items-center justify-between group transition-colors">
+               Exchange Principali
+               <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <hr class="border-white/[0.03]" />
+            <a href="#mica-table" class="text-sm text-slate-500 hover:text-[#0066FF] font-medium flex items-center justify-between group transition-colors">
+               Registro ESMA
+               <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <hr class="border-white/[0.03]" />
+            <a href="#faq" class="text-sm text-slate-500 hover:text-[#0066FF] font-medium flex items-center justify-between group transition-colors">
+               F.A.Q.
+               <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <hr class="border-white/[0.03]" />
+            <a href="/exchange/" class="text-sm text-[#0066FF] hover:text-[#0066FF] font-bold flex items-center justify-between group transition-colors mt-2">
+               → Exchange CEX vs DEX
+               <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+         </nav>
+       </div>
+    </div>
+
+    <!-- Main Content Right -->
+    <div class="flex-1 min-w-0 space-y-6 lg:space-y-10 order-1 lg:order-2 w-full">
+
+      <!-- Header -->
+      <header class="mb-6 lg:mb-8 border-b border-white/[0.05] pb-5 lg:pb-6">
+        <div class="inline-block px-3 py-1 mb-3 border border-amber-500/20 bg-amber-500/10 rounded-full text-xs font-bold tracking-wider text-amber-500 uppercase">Registro Ufficiale</div>
+        <h1 class="text-2xl lg:text-4xl font-extrabold tracking-tight mb-3 text-white">Exchange Crypto Autorizzati MiCA in Europa</h1>
+        <div class="p-4 lg:p-5 bg-[var(--bg-sidebar)] border-l-[3px] border-[#0066FF] rounded-r-xl">
+          <p class="text-slate-400 text-[15px] md:text-base leading-relaxed">
+            Dal <strong class="text-white">30 giugno 2025</strong>, ai sensi del Regolamento UE 2023/1114 (<strong class="text-white">MiCA — Markets in Crypto-Assets</strong>), tutti i fornitori di servizi su crypto-asset devono essere autorizzati da un'autorità nazionale competente per operare legalmente nell'Unione Europea. Questa pagina elenca gli exchange ufficialmente autorizzati, estratti dal <a href="https://www.esma.europa.eu/databases-library/registers-and-data/crypto-assets-service-providers-registers" target="_blank" rel="noopener noreferrer" class="text-[#0066FF] hover:underline font-semibold">registro ufficiale ESMA</a> e aggiornati quotidianamente.
+          </p>
+        </div>
+      </header>
+
+      <!-- Privacy Warning Banner -->
+      <section class="scroll-mt-24">
+        <div class="bento-card p-5 md:p-7 border-red-500/30 bg-gradient-to-br from-red-900/15 to-red-900/5 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-48 h-48 rounded-full bg-red-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-red-500/5 translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+          <div class="relative z-10">
+            <h2 class="text-xl md:text-2xl font-bold text-red-400 mb-3.5 flex items-center gap-2">
+              <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+              ⚠️ Un CEX Rimane la Scelta Peggiore per la Tua Privacy
+            </h2>
+            <p class="text-slate-350 text-[16px] leading-relaxed mb-4.5">
+              Usare un Exchange Centralizzato significa <strong class="text-white font-bold">consegnare volontariamente la tua identità finanziaria</strong> a un'azienda privata che è <strong class="text-white font-bold">obbligata per legge</strong> a condividerla con le autorità fiscali di tutta Europa.
+            </p>
+            <ul class="space-y-3 text-[15px] text-slate-350 mb-4.5">
+              <li class="flex items-start gap-2.5">
+                <svg class="w-4.5 h-4.5 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                <span><strong class="text-white font-bold">KYC Totale:</strong> Documento d'identità, selfie, verifica bancaria — la tua identità è completamente esposta.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <svg class="w-4.5 h-4.5 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                <span><strong class="text-white font-bold">DAC8 Reporting:</strong> Ogni transazione, deposito e prelievo viene trasmessa automaticamente all'Agenzia delle Entrate del tuo Paese.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <svg class="w-4.5 h-4.5 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                <span><strong class="text-white font-bold">Custodial:</strong> Non possiedi le tue chiavi private. L'azienda può congelare, sequestrare o perdere i tuoi fondi (ricordi FTX?).</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <svg class="w-4.5 h-4.5 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                <span><strong class="text-white font-bold">Profilazione:</strong> I tuoi pattern di trading, le tue abitudini e i tuoi volumi sono analizzati e condivisi con terze parti.</span>
+              </li>
+            </ul>
+            <div class="bg-black/30 rounded-xl p-4.5 border border-red-500/10">
+              <p class="text-[15px] text-slate-300 leading-relaxed">
+                Se <strong>devi</strong> usare un CEX, almeno assicurati che sia <strong class="text-white font-bold">MiCA-compliant</strong>. Questa pagina ti aiuta a verificarlo. Ma la vera libertà finanziaria passa per <strong class="text-white font-bold">DEX</strong> e <strong class="text-white font-bold">self-custody</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cosa Significa MiCA per Te -->
+      <section id="mica-info" class="scroll-mt-24">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">Cosa Significa MiCA per Te</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <!-- MiCA Card -->
+          <div class="bento-card p-5.5 border-[#0066FF]/20 bg-gradient-to-br from-[#0066FF]/8 to-transparent relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 rounded-full bg-[#0066FF]/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-2.5 mb-3.5">
+                <div class="w-10 h-10 rounded-lg bg-[#0066FF]/15 border border-[#0066FF]/30 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#0066FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-white font-bold text-[17px]">MiCA</h3>
+                  <span class="text-[12px] text-[#0066FF] font-bold uppercase tracking-wider">Essenziale</span>
+                </div>
+              </div>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                La licenza fondamentale. Dal <strong class="text-white">30 giugno 2025</strong>, senza MiCA un exchange <strong class="text-white font-bold">non può operare legalmente</strong> nell'UE. Copre: custodia crypto-asset, scambio fiat↔crypto e crypto↔crypto, esecuzione ordini, trasferimento crypto.
+              </p>
+            </div>
+          </div>
+
+          <!-- MiFID II Card -->
+          <div class="bento-card p-5.5 border-purple-500/15 bg-gradient-to-br from-purple-900/8 to-transparent relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 rounded-full bg-purple-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-2.5 mb-3.5">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/15 border border-purple-500/30 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-white font-bold text-[17px]">MiFID II</h3>
+                  <span class="text-[12px] text-purple-400 font-bold uppercase tracking-wider">Investimenti</span>
+                </div>
+              </div>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Per servizi d'investimento tradizionali (azioni, derivati). Alcuni CEX la ottengono per offrire <strong class="text-white font-bold">prodotti finanziari regolamentati</strong> oltre alle crypto.
+              </p>
+            </div>
+          </div>
+
+          <!-- PSD2 Card -->
+          <div class="bento-card p-5.5 border-orange-500/15 bg-gradient-to-br from-orange-900/8 to-transparent relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 rounded-full bg-orange-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-2.5 mb-3.5">
+                <div class="w-10 h-10 rounded-lg bg-orange-500/15 border border-orange-500/30 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-white font-bold text-[17px]">PSD2</h3>
+                  <span class="text-[12px] text-orange-400 font-bold uppercase tracking-wider">Pagamenti</span>
+                </div>
+              </div>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Per servizi di pagamento (bonifici, carte). Necessaria per gli exchange che offrono anche <strong class="text-white font-bold">servizi bancari</strong> e di pagamento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exchange Principali -->
+      <section id="exchange-cards" class="scroll-mt-24">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Exchange Principali: Servizi e Status</h2>
+        <p class="text-[15px] text-slate-500 mb-6 leading-relaxed">Dati basati sulle licenze MiCA e MiFID II attive. <strong class="text-slate-400 font-bold">Swap Crypto-Fiat</strong> = conversione euro↔crypto. <strong class="text-slate-400 font-bold">Trading Perp con Leva</strong> = derivati perpetui (richiede licenza MiFID).</p>
+        
+        <!-- Filtro Licenze (MiCA, MiFID, PSD2) -->
+        <div class="flex flex-wrap items-center gap-4 mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+          <span class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider">Filtra per Licenza:</span>
+          <div class="flex flex-wrap gap-2.5">
+            <label class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.04] transition-all cursor-pointer select-none text-slate-350 hover:text-white" id="label-filter-mica">
+              <input type="checkbox" id="filter-mica" class="w-4 h-4 rounded border-slate-700 bg-slate-900 accent-[#0066FF] filter-checkbox" />
+              <span class="text-sm font-semibold">MiCA</span>
+            </label>
+            <label class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.04] transition-all cursor-pointer select-none text-slate-350 hover:text-white" id="label-filter-mifid">
+              <input type="checkbox" id="filter-mifid" class="w-4 h-4 rounded border-slate-700 bg-slate-900 accent-[#0066FF] filter-checkbox" />
+              <span class="text-sm font-semibold">MiFID II</span>
+            </label>
+            <label class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.04] transition-all cursor-pointer select-none text-slate-355 hover:text-white" id="label-filter-psd2">
+              <input type="checkbox" id="filter-psd2" class="w-4 h-4 rounded border-slate-700 bg-slate-900 accent-[#0066FF] filter-checkbox" />
+              <span class="text-sm font-semibold">PSD2</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="featured-no-results" class="hidden p-8 text-center text-slate-500 text-[15px] border border-dashed border-white/[0.05] rounded-xl bg-white/[0.01]">
+          Nessun exchange principale corrisponde ai criteri selezionati.
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {featuredExchanges.map(ex => (
+            <div class={`featured-card bento-card p-5 md:p-6 relative overflow-hidden transition-all hover:border-white/[0.1] ${ex.status === 'rejected' ? 'border-red-500/20 opacity-60' : ''}`}
+                 data-mica={ex.status === 'compliant' ? 'true' : 'false'}
+                 data-mifid={ex.hasMiFID ? 'true' : 'false'}
+                 data-psd2={ex.hasPSD2 ? 'true' : 'false'}>
+              {/* Status badge */}
+              <div class="absolute top-3 right-3">
+                <span class={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${ex.status === 'compliant' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
+                  <span class={`w-1.5 h-1.5 rounded-full ${ex.status === 'compliant' ? 'bg-emerald-500' : 'bg-red-500'}`}></span>
+                  {ex.statusLabel}
+                </span>
+              </div>
+              {/* Header */}
+              <div class="flex items-center gap-3.5 mb-3.5 pr-28 sm:pr-36">
+                <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-2xl shrink-0">{ex.logo}</div>
+                <div class="min-w-0">
+                  <h3 class="text-lg font-bold text-white truncate">{ex.name}</h3>
+                  <span class="text-xs text-slate-500 font-medium">{ex.countryFl} {ex.country}</span>
+                </div>
+              </div>
+              {/* Description */}
+              <p class="text-sm text-slate-400 mb-3.5 leading-relaxed">{ex.description}</p>
+              {/* Service indicators */}
+              <div class="grid grid-cols-2 gap-2 mb-3.5">
+                <div class={`rounded-lg p-2.5 text-center border ${ex.swapFiat ? 'bg-emerald-500/[0.06] border-emerald-500/15' : 'bg-white/[0.015] border-white/[0.04]'}`}>
+                  <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Swap Crypto-Fiat</div>
+                  <div class={`text-base font-bold ${ex.swapFiat ? 'text-emerald-400' : 'text-slate-600'}`}>{ex.swapFiat ? 'Si' : 'No'}</div>
+                </div>
+                <div class={`rounded-lg p-2.5 text-center border ${ex.tradingPerp ? 'bg-blue-500/[0.06] border-blue-500/15' : 'bg-white/[0.015] border-white/[0.04]'}`}>
+                  <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Trading Perp Leva</div>
+                  <div class={`text-base font-bold ${ex.tradingPerp ? 'text-blue-400' : 'text-slate-600'}`}>{ex.tradingPerp ? 'Si' : 'No'}</div>
+                </div>
+              </div>
+              {/* MiFID badge */}
+              <div class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold mb-3.5 ${ex.hasMiFID ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : 'bg-white/[0.02] text-slate-500 border border-white/[0.05]'}`}>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                {ex.mifidLabel}
+              </div>
+              {/* Fees */}
+              {ex.status !== 'rejected' && (
+                <div class="grid grid-cols-2 gap-1.5 mb-3.5">
+                  <div class="bg-white/[0.02] rounded-md p-1.5 text-center">
+                    <div class="text-[10px] text-slate-500 uppercase">Spot Maker</div>
+                    <div class="text-sm font-bold text-white">{ex.fees.spotMaker}</div>
+                  </div>
+                  <div class="bg-white/[0.02] rounded-md p-1.5 text-center">
+                    <div class="text-[10px] text-slate-500 uppercase">Spot Taker</div>
+                    <div class="text-sm font-bold text-white">{ex.fees.spotTaker}</div>
+                  </div>
+                  {ex.hasMiFID && (
+                    <>
+                      <div class="bg-blue-500/[0.03] rounded-md p-1.5 text-center border border-blue-500/10">
+                        <div class="text-[10px] text-blue-400/60 uppercase">Deriv. Maker</div>
+                        <div class="text-sm font-bold text-blue-400">{ex.fees.derivMaker}</div>
+                      </div>
+                      <div class="bg-blue-500/[0.03] rounded-md p-1.5 text-center border border-blue-500/10">
+                        <div class="text-[10px] text-blue-400/60 uppercase">Deriv. Taker</div>
+                        <div class="text-sm font-bold text-blue-400">{ex.fees.derivTaker}</div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+              {/* Pros */}
+              <ul class="space-y-1 mb-3.5">
+                {ex.pros.map(p => (
+                  <li class="flex items-start gap-1.5 text-[13px] text-slate-350 font-medium">
+                    <svg class={`w-3.5 h-3.5 shrink-0 mt-0.5 ${ex.status === 'rejected' ? 'text-red-500' : 'text-emerald-500'}`} fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              {/* Link */}
+              {ex.status !== 'rejected' && (
+                <a href={ex.website} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm text-[#0066FF] hover:text-blue-400 font-bold transition-colors">
+                  Visita {ex.name} →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Registro ESMA Completo -->
+      <section id="mica-table" class="scroll-mt-24">
+        <details class="bento-card p-0 overflow-hidden border-white/[0.04]" id="esma-details">
+          <summary class="p-5 md:p-6 cursor-pointer flex items-center justify-between hover:bg-white/[0.02] transition-colors select-none list-none [&::-webkit-details-marker]:hidden">
+            <div>
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">📋 Registro Completo ESMA <span class="text-sm font-normal text-slate-500">({totalNotable} exchange)</span></h2>
+              <p class="text-xs text-slate-500 mt-1">Ultimo aggiornamento: <span class="text-slate-400 font-semibold">{lastUpdated}</span> — <a href="https://www.esma.europa.eu/databases-library/registers-and-data/crypto-assets-service-providers-registers" target="_blank" rel="noopener noreferrer" class="text-[#0066FF] hover:underline">Fonte: ESMA</a></p>
+            </div>
+            <svg class="w-5 h-5 text-slate-500 transition-transform duration-200 shrink-0 ml-4 details-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <!-- Table Header -->
+          <div class="p-5 md:p-6 border-t border-white/[0.05]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+              <div>
+                <p class="text-xs text-slate-500">Cerca e filtra tra tutti i provider autorizzati</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <!-- Search -->
+                <div class="relative">
+                  <svg class="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <input
+                    type="text"
+                    id="mica-search"
+                    placeholder="Cerca exchange..."
+                    class="w-full sm:w-56 pl-10 pr-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-[#0066FF]/40 focus:ring-1 focus:ring-[#0066FF]/20 transition-all"
+                  />
+                </div>
+                <!-- Country Filter -->
+                <select
+                  id="mica-country-filter"
+                  class="px-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-slate-300 focus:outline-none focus:border-[#0066FF]/40 appearance-none cursor-pointer pr-8 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23666%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22/%3E%3C/svg%3E')] bg-[length:16px] bg-[right_8px_center] bg-no-repeat"
+                >
+                  <option value="">Tutti i paesi</option>
+                  {uniqueCountries.map(code => (
+                    <option value={code}>{countryNames[code] || code} ({code})</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+             <!-- Service Filter Checkboxes -->
+            <div class="flex flex-wrap gap-2.5">
+              {allServiceKeys.map(key => (
+                <label class="mica-filter-pill cursor-pointer">
+                  <input type="checkbox" value={key} class="mica-svc-filter hidden" />
+                  <span class="inline-block px-3.5 py-1.5 rounded-full text-[13px] font-semibold border border-white/[0.08] bg-white/[0.03] text-slate-500 hover:border-white/[0.15] hover:text-slate-400 transition-all select-none">
+                    {serviceLabels[key]?.it || key}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Provider Count -->
+          <div class="px-5 md:px-6 py-3.5 bg-white/[0.01] border-b border-white/[0.03]">
+            <p class="text-sm text-slate-500" id="mica-results-count">
+              <span class="text-slate-400 font-bold" id="mica-shown-count">{totalNotable}</span> / {totalNotable} exchange principali
+            </p>
+          </div>
+
+          <!-- Table (Desktop) -->
+          <div class="hidden md:block overflow-x-auto">
+            <table class="w-full text-base" id="mica-table-el">
+              <thead>
+                <tr class="border-b border-white/[0.05] text-left text-sm text-slate-500 uppercase tracking-wider">
+                  <th class="px-6 py-4 font-bold">Exchange</th>
+                  <th class="px-4 py-4 font-bold">Paese</th>
+                  <th class="px-4 py-4 font-bold">Servizi</th>
+                  <th class="px-4 py-4 font-bold">Paesi EU</th>
+                  <th class="px-4 py-4 font-bold text-right">Data Autorizzazione</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/[0.03] text-[15px]">
+                {notableProviders.map((p) => (
+                  <tr class="mica-row hover:bg-white/[0.02] transition-colors"
+                       data-name={`${p.name} ${p.legal_name}`.toLowerCase()}
+                       data-country={p.country}
+                       data-services={p.services.join(',')}>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <img
+                          src={getFaviconUrl(p.website)}
+                          alt=""
+                          class="w-6.5 h-6.5 rounded-md bg-white/[0.05] shrink-0"
+                          loading="lazy"
+                          onerror="this.style.display='none'"
+                        />
+                        <div>
+                          <a href={p.website} target="_blank" rel="noopener noreferrer" class="text-white font-bold hover:text-[#0066FF] transition-colors">
+                            {p.name}
+                          </a>
+                          {p.name !== p.legal_name && (
+                            <p class="text-xs text-slate-500 mt-0.5 leading-tight">{p.legal_name}</p>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-4 py-4">
+                      <span class="inline-flex items-center gap-1.5 text-slate-300 font-medium">
+                        <span class="text-base">{countryFlag(p.country)}</span>
+                        {countryNames[p.country] || p.country}
+                      </span>
+                    </td>
+                    <td class="px-4 py-4">
+                      <div class="flex flex-wrap gap-1.5">
+                        {p.services.slice(0, 4).map(s => (
+                          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-[#0066FF]/10 text-[#0066FF]/80 border border-[#0066FF]/15 whitespace-nowrap">
+                            {serviceLabels[s]?.it || s}
+                          </span>
+                        ))}
+                        {p.services.length > 4 && (
+                          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-white/[0.05] text-slate-500 border border-white/[0.08]">
+                            +{p.services.length - 4}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td class="px-4 py-4">
+                      <span class="text-slate-350 font-bold">{p.eu_countries_count || '—'}</span>
+                      {p.passported_countries.includes('IT') && (
+                        <span class="ml-1 text-xs" title="Opera in Italia">🇮🇹</span>
+                      )}
+                    </td>
+                    <td class="px-4 py-4 text-right text-slate-400 whitespace-nowrap">
+                      {p.authorization_date || '—'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Cards (Mobile) -->
+          <div class="md:hidden divide-y divide-white/[0.03]" id="mica-cards-mobile">
+            {notableProviders.map((p) => (
+              <div class="mica-row p-4.5 hover:bg-white/[0.02] transition-colors"
+                   data-name={`${p.name} ${p.legal_name}`.toLowerCase()}
+                   data-country={p.country}
+                   data-services={p.services.join(',')}>
+                <div class="flex items-center gap-3.5 mb-3.5">
+                  <img
+                    src={getFaviconUrl(p.website)}
+                    alt=""
+                    class="w-9 h-9 rounded-lg bg-white/[0.05] shrink-0"
+                    loading="lazy"
+                    onerror="this.style.display='none'"
+                  />
+                  <div class="flex-1 min-w-0">
+                    <a href={p.website} target="_blank" rel="noopener noreferrer" class="text-white font-bold text-base hover:text-[#0066FF] transition-colors block truncate">
+                      {p.name}
+                    </a>
+                    <p class="text-xs text-slate-500 truncate">{p.legal_name}</p>
+                  </div>
+                  <span class="text-base shrink-0">{countryFlag(p.country)}</span>
+                </div>
+                <div class="flex flex-wrap gap-1 mb-2">
+                  {p.services.slice(0, 3).map(s => (
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#0066FF]/10 text-[#0066FF]/80 border border-[#0066FF]/15">
+                      {serviceLabels[s]?.it || s}
+                    </span>
+                  ))}
+                  {p.services.length > 3 && (
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-white/[0.05] text-slate-500 border border-white/[0.08]">
+                      +{p.services.length - 3}
+                    </span>
+                  )}
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-slate-500">
+                  <span>Opera in <strong class="text-slate-400">{p.eu_countries_count}</strong> paesi EU {p.passported_countries.includes('IT') ? '🇮🇹' : ''}</span>
+                  <span>{p.authorization_date || '—'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- No Results -->
+          <div id="mica-no-results" class="hidden p-10 text-center text-slate-500 text-sm">
+            Nessun exchange trovato per i filtri selezionati.
+          </div>
+        </details>
+      </section>
+
+      <!-- F.A.Q. -->
+      <section id="faq" class="scroll-mt-24">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 px-1">Domande Frequenti (F.A.Q)</h2>
+        <div class="space-y-3">
+          {faqItems.map((item) => (
+            <Accordion title={item.domanda}>
+              <p class="text-[15px] font-medium leading-relaxed" set:html={item.risposta}></p>
+            </Accordion>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</Layout>
+
+<style>
+  .mica-filter-pill input:checked + span {
+    background: rgba(0, 102, 255, 0.15);
+    border-color: rgba(0, 102, 255, 0.4);
+    color: #0066FF;
+  }
+  details[open] .details-chevron {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script is:inline>
+  (function initMicaPageFilter() {
+    function setup() {
+      var searchInput = document.getElementById('mica-search');
+      var countryFilter = document.getElementById('mica-country-filter');
+      var shownCount = document.getElementById('mica-shown-count');
+      var noResults = document.getElementById('mica-no-results');
+      var serviceCheckboxes = document.querySelectorAll('.mica-svc-filter');
+
+      // Featured exchanges filter
+      var filterMica = document.getElementById('filter-mica');
+      var filterMifid = document.getElementById('filter-mifid');
+      var filterPsd2 = document.getElementById('filter-psd2');
+
+      if (filterMica && filterMifid && filterPsd2) {
+        function updateFeaturedFilter() {
+          var micaChecked = filterMica.checked;
+          var mifidChecked = filterMifid.checked;
+          var psd2Checked = filterPsd2.checked;
+
+          var lblMica = document.getElementById('label-filter-mica');
+          var lblMifid = document.getElementById('label-filter-mifid');
+          var lblPsd2 = document.getElementById('label-filter-psd2');
+
+          if (lblMica) {
+            lblMica.classList.toggle('border-amber-500/35', micaChecked);
+            lblMica.classList.toggle('bg-amber-500/5', micaChecked);
+            lblMica.classList.toggle('text-white', micaChecked);
+          }
+          if (lblMifid) {
+            lblMifid.classList.toggle('border-blue-500/35', mifidChecked);
+            lblMifid.classList.toggle('bg-blue-500/5', mifidChecked);
+            lblMifid.classList.toggle('text-white', mifidChecked);
+          }
+          if (lblPsd2) {
+            lblPsd2.classList.toggle('border-emerald-500/35', psd2Checked);
+            lblPsd2.classList.toggle('bg-emerald-500/5', psd2Checked);
+            lblPsd2.classList.toggle('text-white', psd2Checked);
+          }
+
+          var cards = document.querySelectorAll('.featured-card');
+          var matched = 0;
+          cards.forEach(function(card) {
+            var hasMica = card.getAttribute('data-mica') === 'true';
+            var hasMifid = card.getAttribute('data-mifid') === 'true';
+            var hasPsd2 = card.getAttribute('data-psd2') === 'true';
+
+            var match = true;
+            if (micaChecked && !hasMica) match = false;
+            if (mifidChecked && !hasMifid) match = false;
+            if (psd2Checked && !hasPsd2) match = false;
+
+            if (match) {
+              card.style.display = '';
+              matched++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          var noMatchEl = document.getElementById('featured-no-results');
+          if (noMatchEl) {
+            noMatchEl.classList.toggle('hidden', matched > 0);
+          }
+        }
+
+        filterMica.addEventListener('change', updateFeaturedFilter);
+        filterMifid.addEventListener('change', updateFeaturedFilter);
+        filterPsd2.addEventListener('change', updateFeaturedFilter);
+        updateFeaturedFilter();
+      }
+
+      if (!searchInput || !countryFilter) return;
+
+      function filterRows() {
+        var query = searchInput.value.toLowerCase().trim();
+        var country = countryFilter.value;
+        var checkedServices = [];
+        serviceCheckboxes.forEach(function(cb) {
+          if (cb.checked) checkedServices.push(cb.value);
+        });
+
+        var rows = document.querySelectorAll('.mica-row');
+        var visibleCount = 0;
+
+        rows.forEach(function(row) {
+          var name = row.getAttribute('data-name') || '';
+          var rowCountry = row.getAttribute('data-country') || '';
+          var rowServices = (row.getAttribute('data-services') || '').split(',');
+
+          var matchSearch = !query || name.includes(query);
+          var matchCountry = !country || rowCountry === country;
+          var matchServices = checkedServices.length === 0 || checkedServices.every(function(s) {
+            return rowServices.includes(s);
+          });
+
+          if (matchSearch && matchCountry && matchServices) {
+            row.style.display = '';
+            if (row.tagName === 'TR') {
+              visibleCount++;
+            }
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        if (shownCount) shownCount.textContent = visibleCount;
+        if (noResults) {
+          noResults.classList.toggle('hidden', visibleCount > 0);
+        }
+      }
+
+      searchInput.addEventListener('input', filterRows);
+      countryFilter.addEventListener('change', filterRows);
+      serviceCheckboxes.forEach(function(cb) {
+        cb.addEventListener('change', filterRows);
+      });
+    }
+
+    // Support Astro page transitions
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup);
+    } else {
+      setup();
+    }
+    document.addEventListener('astro:page-load', setup);
+  })();
+</script>

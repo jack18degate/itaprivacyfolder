@@ -1,0 +1,227 @@
+{
+  "page_title": "Cold Wallets & Hot Wallets",
+  "page_description": "The key to true sovereignty lies in how you store your funds. Think of a Hardware Wallet (or Cold Wallet) as a real safe: it's a physical device that isolates your passwords from the internet, making them impossible to steal even by the most powerful viruses. Hot Wallets, on the other hand, are like your 'everyday wallet' (app on your phone or browser): they are always connected to the internet and perfect for quick payments and operations, but less secure for storing a lifetime of savings.",
+  "hardware_wallets": [
+    {
+      "nome": "Trezor",
+      "prezzo": "~ €79",
+      "tipo": "Physical Device (USB)",
+      "chain": "Multichain",
+      "caratteristiche": [
+        "Open-Source firmware",
+        "Secure Element EAL6+",
+        "Shamir Backup support"
+      ],
+      "sicurezza": "Maximum",
+      "pro": [
+        "The company cannot extract the keys",
+        "Fantastic desktop interface (Trezor Suite)",
+        "Best value for money"
+      ],
+      "link": "https://trezor.io",
+      "logo": "https://www.google.com/s2/favicons?domain=trezor.io&sz=128"
+    },
+    {
+      "nome": "BitBox",
+      "prezzo": "~ €139",
+      "tipo": "Physical Device (USB-C)",
+      "chain": "Multichain / BTC Only",
+      "caratteristiche": [
+        "Native MicroSD Backup",
+        "Open Source Architecture",
+        "Available in Bitcoin-Only version"
+      ],
+      "sicurezza": "Extreme",
+      "pro": [
+        "Dual security chip",
+        "Stealth design (looks like a regular USB)",
+        "Excellent anti-tamper"
+      ],
+      "link": "https://bitbox.swiss",
+      "logo": "https://www.google.com/s2/favicons?domain=bitbox.swiss&sz=128"
+    },
+    {
+      "nome": "Ledger",
+      "prezzo": "~ €149",
+      "tipo": "Physical Device (Bluetooth)",
+      "chain": "Multichain (+5500 assets)",
+      "caratteristiche": [
+        "Bluetooth",
+        "Secure Element CC EAL5+",
+        "Built-in battery"
+      ],
+      "sicurezza": "High",
+      "pro": [
+        "iOS integration via Bluetooth",
+        "Thousands of supported altcoins",
+        "Ledger Live app"
+      ],
+      "link": "https://www.ledger.com",
+      "logo": "https://www.google.com/s2/favicons?domain=www.ledger.com&sz=128"
+    },
+    {
+      "nome": "SafePal",
+      "prezzo": "~ €49",
+      "tipo": "Physical Device (Air-gapped/QR)",
+      "chain": "Multichain (EVM, BTC, SOL...)",
+      "caratteristiche": [
+        "Air-gapped via camera",
+        "Secure Element EAL5+",
+        "Excellent App integration"
+      ],
+      "sicurezza": "High",
+      "pro": [
+        "Unbeatable price for a hardware wallet",
+        "Fully offline (no Bluetooth/USB)",
+        "Massive altcoin support"
+      ],
+      "link": "https://safepal.com",
+      "logo": "https://www.google.com/s2/favicons?domain=safepal.com&sz=128"
+    }
+  ],
+  "hot_wallets": [
+    {
+      "nome": "DeGate Web3 Wallet",
+      "tipo": "Hot Wallet (App) — Integrated cross-chain swap; gas paid in USDC. Designed for European users managing assets across multiple blockchains.",
+      "chain": "EVM (Eth, Base, BSC), Solana & Bitcoin",
+      "caratteristiche": [
+        "Pure Self-Custodial",
+        "Zero-Knowledge Proofs",
+        "Automated Gas Fees",
+        "Cross-Chain Swap"
+      ],
+      "sicurezza": "High (Smart Contract)",
+      "pro": [
+        "Unified balance across all networks",
+        "No need to buy Gas tokens to move around",
+        "The best UX for Web3"
+      ],
+      "link": "https://app.degate.com/?s=jack18&utm_source=en_privacy_site&utm_content=wallets",
+      "logo": "https://www.google.com/s2/favicons?domain=degate.com&sz=128"
+    },
+    {
+      "nome": "Rabby Wallet",
+      "tipo": "Browser / Mobile App",
+      "chain": "Multichain EVM (Ethereum, Arbitrum...)",
+      "caratteristiche": [
+        "PRE-signature transaction simulation",
+        "Automatic network switching",
+        "Built-in Phishing alert"
+      ],
+      "sicurezza": "Medium (Browser/App)",
+      "pro": [
+        "Fully replaces Metamask with improved UX",
+        "Prevents classic drainer hacks",
+        "Natively integrated by DeBank"
+      ],
+      "link": "https://rabby.io",
+      "logo": "https://www.google.com/s2/favicons?domain=rabby.io&sz=128"
+    },
+    {
+      "nome": "Phantom",
+      "tipo": "Browser / Mobile App",
+      "chain": "Solana, Ethereum, Bitcoin",
+      "caratteristiche": [
+        "Smooth NFT management",
+        "In-app liquid staking",
+        "Built-in DEX aggregator"
+      ],
+      "sicurezza": "Medium (Browser/App)",
+      "pro": [
+        "Perfect Solana ecosystem",
+        "Fast in-app browser",
+        "Also supports Bitcoin Taproot"
+      ],
+      "link": "https://phantom.app",
+      "logo": "https://www.google.com/s2/favicons?domain=phantom.app&sz=128"
+    },
+    {
+      "nome": "Sparrow Wallet",
+      "tipo": "Desktop Only",
+      "chain": "Bitcoin Only",
+      "caratteristiche": [
+        "Full Coin Control",
+        "Connection to your own Electrum Node",
+        "PayNym support"
+      ],
+      "sicurezza": "High (Desktop + Tor)",
+      "pro": [
+        "Absolute privacy on Bitcoin",
+        "Allows routing over the Tor network",
+        "No data tracking"
+      ],
+      "link": "https://sparrowwallet.com",
+      "logo": "https://www.google.com/s2/favicons?domain=sparrowwallet.com&sz=128"
+    },
+    {
+      "nome": "Cake Wallet",
+      "tipo": "Mobile / Desktop",
+      "chain": "Monero, Bitcoin, Litecoin",
+      "caratteristiche": [
+        "Built-in DEX Swap (Tor)",
+        "Privacy First",
+        "Multi-Wallet management"
+      ],
+      "sicurezza": "High (Mobile Privacy)",
+      "pro": [
+        "The go-to App for using Monero on the go",
+        "Integrated crypto-to-crypto swaps without KYC",
+        "Fully Open Source"
+      ],
+      "link": "https://cakewallet.com",
+      "logo": "https://www.google.com/s2/favicons?domain=cakewallet.com&sz=128"
+    },
+    {
+      "nome": "Exodus",
+      "tipo": "Desktop / Mobile App",
+      "chain": "Universal Multichain",
+      "caratteristiche": [
+        "Stunning user interface",
+        "Integrated crypto-to-crypto exchange",
+        "Native Trezor integration"
+      ],
+      "sicurezza": "Medium (Desktop/App)",
+      "pro": [
+        "Ideal for complete beginners",
+        "Built-in portfolio tracker",
+        "No registration required"
+      ],
+      "link": "https://exodus.com",
+      "logo": "https://www.google.com/s2/favicons?domain=exodus.com&sz=128"
+    }
+  ],
+  "faq": [
+    {
+      "domanda": "If I lose my Ledger or Trezor, or it gets crushed under a truck, do I lose everything?",
+      "risposta": "ABSOLUTELY NOT. The crypto is on the blockchain, not 'inside' the device. The only thing that matters is the Seed Phrase (the 12 or 24 secret words) given to you at first setup. If you wrote down those words on paper, you can buy a new hardware wallet of any brand, enter those words, and you'll have immediate access to all your funds."
+    },
+    {
+      "domanda": "Where should I save my Seed Phrase?",
+      "risposta": "NEVER digitally. Never photograph it with your phone, never put it on Google Drive, iCloud, iPhone Notes, or send it to yourself on Telegram. Write it on a piece of paper and lock it in a safe, or engrave it on fireproof steel plates (e.g., Cryptosteel)."
+    },
+    {
+      "domanda": "Is Metamask secure?",
+      "risposta": "Yes, if used properly. But for everyday use in the modern DeFi world, Rabby Wallet is vastly superior in terms of preventive protection. Rabby visually shows you WHAT you are about to sign and whether the contract is malicious, blocking you BEFORE you hand your tokens over to hackers."
+    },
+    {
+      "domanda": "What is an Air-Gapped connection?",
+      "risposta": "It's the highest level of security (e.g., Foundation Passport). The device doesn't connect via USB or Bluetooth to the PC. It exclusively uses the camera scanner: you point the wallet at a QR Code, the wallet signs offline, and then you scan a QR code from the PC. Impossible to hack online."
+    },
+    {
+      "domanda": "How does a cross-chain Swap work from a self-custodial wallet?",
+      "risposta": "Traditionally, swapping assets between different blockchains from a self-custodial wallet requires using external bridges or opening multiple dApps in sequence — a technical process with non-trivial security risks. Some next-generation wallets integrate multi-chain Swap aggregation directly into the app, simplifying the flow. Among currently available examples: <a href=\"https://app.degate.com/?s=jack18&utm_source=en_privacy_site&utm_content=wallets\" target=\"_blank\" class=\"text-[#0066FF] hover:underline\">DeGate Wallet</a>, which aggregates liquidity across multiple chains and allows paying gas in USDC. Note: being self-custodial wallets, the user maintains direct control of their own keys and funds."
+    },
+    {
+      "domanda": "What are the safe methods to buy a hardware wallet?",
+      "risposta": "There are strict basic rules (OpSec) to prevent your personal data from falling into the wrong hands. 1) <strong>Buy ONLY from the official website</strong> of the manufacturer (never use Amazon or third-party resellers where the chain of custody may be compromised). 2) <strong>NEVER use gifted</strong> or used hardware wallets. 3) <strong>Minimize data:</strong> use a pseudonym or don't enter your real name if possible. 4) <strong>Don't use your home address:</strong> data leaks happen (see Ledger in 2020), have the package shipped to a Locker (e.g., InPost, Amazon Hub) or your workplace."
+    },
+    {
+      "domanda": "What is the difference between a Custodial and Self-Custodial wallet?",
+      "risposta": "In a Custodial wallet (like on a centralized exchange such as Binance or Coinbase), the company holds your private keys and you only have a web account. If they go bankrupt, freeze withdrawals, or get hacked, you lose everything. In a Self-Custodial wallet, only you own and know the Seed Phrase. As the cypherpunk mantra says: <em>'Not your keys, not your coins'</em>."
+    },
+    {
+      "domanda": "Is it safe to use a wallet on my everyday smartphone?",
+      "risposta": "Hot Wallets on smartphones (e.g., Trust Wallet, MetaMask, Rabby) are perfect for holding small amounts, for daily use, or for quickly interacting with dApps. However, they should never be used as the main vault for a lifetime of savings: smartphones are constantly connected to the internet, download third-party apps, and can fall victim to malware or keyloggers. For your main funds, always use an offline Hardware Wallet."
+    }
+  ]
+}

@@ -1,0 +1,418 @@
+---
+/**
+ * MicaRegistry.astro
+ * 
+ * Displays the ESMA MiCA-authorized CEX registry with:
+ * - Privacy warning banner
+ * - EU regulation explanation (MiCA, MiFID II, PSD2)
+ * - Searchable/filterable table of authorized providers
+ */
+
+interface Props {
+  lang?: 'it' | 'en';
+}
+
+const { lang = 'it' } = Astro.props;
+
+import micaData from '../data/mica_registry.json';
+
+const providers = micaData.providers;
+const lastUpdated = micaData.last_updated;
+const totalProviders = micaData.total_providers;
+
+// Texts
+const texts = {
+  it: {
+    sectionTitle: 'Registro CEX Autorizzati MiCA (ESMA)',
+    sectionSubtitle: `${totalProviders} exchange centralizzati autorizzati in Europa — aggiornamento automatico giornaliero dal registro ufficiale ESMA`,
+    privacyTitle: '⚠️ Attenzione: Un CEX è la scelta peggiore per la tua privacy',
+    privacyText: `Usare un Exchange Centralizzato significa <strong class="text-white">consegnare volontariamente la tua identità finanziaria</strong> a un'azienda privata che è <strong class="text-white">obbligata per legge</strong> a condividerla con le autorità fiscali di tutta Europa.`,
+    privacyItems: [
+      '<strong class="text-white">KYC Totale:</strong> Documento d\'identità, selfie, prova di residenza, verifica bancaria — sanno esattamente chi sei.',
+      '<strong class="text-white">DAC8 Reporting:</strong> Ogni tua transazione, deposito e prelievo viene trasmessa automaticamente all\'Agenzia delle Entrate del tuo Paese.',
+      '<strong class="text-white">Custodial:</strong> Non possiedi le tue chiavi private. L\'azienda può congelare, sequestrare o perdere i tuoi fondi in qualsiasi momento (ricordi FTX?).',
+      '<strong class="text-white">Profilazione:</strong> Il tuo pattern di trading, le tue abitudini e i tuoi volumi sono analizzati e possono essere condivisi con terze parti.',
+    ],
+    privacyConclusion: 'Se <strong>devi</strong> usare un CEX, almeno assicurati che sia regolamentato MiCA. Questo registro ti aiuta a verificarlo. Ma ricorda: la vera libertà finanziaria passa per DEX e self-custody.',
+    regTitle: 'Le 3 Licenze Europee per i Crypto-Asset',
+    micaDesc: 'La licenza fondamentale. Senza MiCA un exchange <strong class="text-white">non può operare legalmente</strong> in Europa dal 2025. Copre custodia, scambio, esecuzione ordini e trasferimento di crypto-asset.',
+    mifidDesc: 'Per servizi d\'investimento tradizionali (azioni, derivati). Alcuni CEX la ottengono per offrire prodotti finanziari regolamentati oltre alle crypto.',
+    psdDesc: 'Per servizi di pagamento (bonifici, carte). Necessaria per gli exchange che offrono anche servizi bancari e di pagamento.',
+    tableTitle: 'Exchange Autorizzati',
+    searchPlaceholder: 'Cerca exchange...',
+    filterCountry: 'Filtra per paese',
+    allCountries: 'Tutti i paesi',
+    colName: 'Exchange',
+    colCountry: 'Paese',
+    colDate: 'Autorizzato',
+    colServices: 'Servizi',
+    colPassport: 'Paesi EU',
+    lastUpdate: 'Ultimo aggiornamento',
+    sourceLabel: 'Fonte: Registro ufficiale ESMA',
+    noResults: 'Nessun exchange trovato per i filtri selezionati.',
+    operaIn: 'Opera in',
+    paesi: 'paesi EU',
+    servizi: 'servizi autorizzati',
+  },
+  en: {
+    sectionTitle: 'MiCA-Authorized CEX Registry (ESMA)',
+    sectionSubtitle: `${totalProviders} centralized exchanges authorized in Europe — daily auto-update from the official ESMA register`,
+    privacyTitle: '⚠️ Warning: A CEX is the worst choice for your privacy',
+    privacyText: `Using a Centralized Exchange means <strong class="text-white">voluntarily surrendering your financial identity</strong> to a private company that is <strong class="text-white">legally obligated</strong> to share it with tax authorities across Europe.`,
+    privacyItems: [
+      '<strong class="text-white">Full KYC:</strong> ID documents, selfie, proof of residence, bank verification — they know exactly who you are.',
+      '<strong class="text-white">DAC8 Reporting:</strong> Every transaction, deposit and withdrawal is automatically reported to your country\'s tax authority.',
+      '<strong class="text-white">Custodial:</strong> You don\'t own your private keys. The company can freeze, seize or lose your funds at any time (remember FTX?).',
+      '<strong class="text-white">Profiling:</strong> Your trading patterns, habits and volumes are analyzed and can be shared with third parties.',
+    ],
+    privacyConclusion: 'If you <strong>must</strong> use a CEX, at least make sure it\'s MiCA-regulated. This registry helps you verify that. But remember: true financial freedom lies in DEX and self-custody.',
+    regTitle: 'The 3 European Crypto-Asset Licenses',
+    micaDesc: 'The fundamental license. Without MiCA, an exchange <strong class="text-white">cannot legally operate</strong> in Europe from 2025. Covers custody, exchange, order execution and crypto-asset transfers.',
+    mifidDesc: 'For traditional investment services (stocks, derivatives). Some CEX obtain it to offer regulated financial products beyond crypto.',
+    psdDesc: 'For payment services (bank transfers, cards). Required for exchanges that also offer banking and payment services.',
+    tableTitle: 'Authorized Exchanges',
+    searchPlaceholder: 'Search exchange...',
+    filterCountry: 'Filter by country',
+    allCountries: 'All countries',
+    colName: 'Exchange',
+    colCountry: 'Country',
+    colDate: 'Authorized',
+    colServices: 'Services',
+    colPassport: 'EU Countries',
+    lastUpdate: 'Last updated',
+    sourceLabel: 'Source: Official ESMA Register',
+    noResults: 'No exchanges found for the selected filters.',
+    operaIn: 'Operates in',
+    paesi: 'EU countries',
+    servizi: 'authorized services',
+  }
+};
+
+const t = texts[lang];
+const serviceLabels = micaData.service_labels;
+
+// Get unique countries for filter
+const uniqueCountries = [...new Set(providers.map(p => p.country))].sort();
+
+// Country name map
+const countryNames: Record<string, string> = {
+  AT: 'Austria', BE: 'Belgium', BG: 'Bulgaria', CY: 'Cyprus', CZ: 'Czech Republic',
+  DE: 'Germany', DK: 'Denmark', EE: 'Estonia', EL: 'Greece', ES: 'Spain',
+  FI: 'Finland', FR: 'France', GR: 'Greece', HR: 'Croatia', HU: 'Hungary',
+  IE: 'Ireland', IS: 'Iceland', IT: 'Italy', LI: 'Liechtenstein', LT: 'Lithuania',
+  LU: 'Luxembourg', LV: 'Latvia', MT: 'Malta', NL: 'Netherlands', NO: 'Norway',
+  PL: 'Poland', PT: 'Portugal', RO: 'Romania', SE: 'Sweden', SI: 'Slovenia',
+  SK: 'Slovakia',
+};
+
+// Helper to safely extract hostname from URL
+function getFaviconUrl(website: string): string {
+  if (!website) return '';
+  try {
+    const hostname = new URL(website).hostname;
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
+  } catch {
+    return '';
+  }
+}
+---
+
+<section id="mica-registry" class="scroll-mt-24 mt-12 mb-12">
+  <!-- Privacy Warning Banner -->
+  <div class="bento-card p-5 md:p-7 border-red-500/30 bg-gradient-to-br from-red-900/15 to-red-900/5 relative overflow-hidden mb-8">
+    <div class="absolute top-0 right-0 w-48 h-48 rounded-full bg-red-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-red-500/5 translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+    <div class="relative z-10">
+      <h3 class="text-lg md:text-xl font-bold text-red-400 mb-3 flex items-center gap-2">
+        <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+        {t.privacyTitle}
+      </h3>
+      <p class="text-slate-400 text-[15px] leading-relaxed mb-4" set:html={t.privacyText}></p>
+      <ul class="space-y-2.5 text-sm text-slate-400 mb-4">
+        {t.privacyItems.map(item => (
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-red-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+            <span set:html={item}></span>
+          </li>
+        ))}
+      </ul>
+      <div class="bg-black/30 rounded-xl p-4 border border-red-500/10">
+        <p class="text-sm text-slate-300 leading-relaxed" set:html={t.privacyConclusion}></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Title -->
+  <div class="mb-8">
+    <div class="inline-block px-3 py-1 mb-3 border border-amber-500/20 bg-amber-500/10 rounded-full text-xs font-bold tracking-wider text-amber-500 uppercase">MiCA Register</div>
+    <h2 class="text-xl md:text-2xl font-bold text-white mb-2">{t.sectionTitle}</h2>
+    <p class="text-slate-400 text-sm">{t.sectionSubtitle}</p>
+  </div>
+
+  <!-- EU Regulation Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <!-- MiCA Card -->
+    <div class="bento-card p-5 border-[#0066FF]/20 bg-gradient-to-br from-[#0066FF]/8 to-transparent relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-20 h-20 rounded-full bg-[#0066FF]/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-[#0066FF]/15 border border-[#0066FF]/30 flex items-center justify-center shrink-0">
+            <svg class="w-4.5 h-4.5 text-[#0066FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-base">MiCA</h4>
+            <span class="text-[11px] text-[#0066FF] font-bold uppercase tracking-wider">Essenziale</span>
+          </div>
+        </div>
+        <p class="text-slate-400 text-xs leading-relaxed" set:html={t.micaDesc}></p>
+      </div>
+    </div>
+
+    <!-- MiFID II Card -->
+    <div class="bento-card p-5 border-purple-500/15 bg-gradient-to-br from-purple-900/8 to-transparent relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-20 h-20 rounded-full bg-purple-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-purple-500/15 border border-purple-500/30 flex items-center justify-center shrink-0">
+            <svg class="w-4.5 h-4.5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-base">MiFID II</h4>
+            <span class="text-[11px] text-purple-400 font-bold uppercase tracking-wider">{lang === 'it' ? 'Investimenti' : 'Investments'}</span>
+          </div>
+        </div>
+        <p class="text-slate-400 text-xs leading-relaxed" set:html={t.mifidDesc}></p>
+      </div>
+    </div>
+
+    <!-- PSD2 Card -->
+    <div class="bento-card p-5 border-orange-500/15 bg-gradient-to-br from-orange-900/8 to-transparent relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-20 h-20 rounded-full bg-orange-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-orange-500/15 border border-orange-500/30 flex items-center justify-center shrink-0">
+            <svg class="w-4.5 h-4.5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-base">PSD2</h4>
+            <span class="text-[11px] text-orange-400 font-bold uppercase tracking-wider">{lang === 'it' ? 'Pagamenti' : 'Payments'}</span>
+          </div>
+        </div>
+        <p class="text-slate-400 text-xs leading-relaxed" set:html={t.psdDesc}></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registry Table -->
+  <div class="bento-card p-0 overflow-hidden border-white/[0.04]">
+    <!-- Table Header -->
+    <div class="p-5 md:p-6 border-b border-white/[0.05] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <h3 class="text-lg font-bold text-white">{t.tableTitle}</h3>
+        <p class="text-xs text-slate-500 mt-1">
+          {t.lastUpdate}: <span class="text-slate-400 font-semibold">{lastUpdated}</span> — 
+          <a href={micaData.source_url} target="_blank" rel="noopener noreferrer" class="text-[#0066FF] hover:underline">{t.sourceLabel}</a>
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <!-- Search -->
+        <div class="relative">
+          <svg class="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input 
+            type="text" 
+            id="mica-search" 
+            placeholder={t.searchPlaceholder}
+            class="w-full sm:w-56 pl-10 pr-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-[#0066FF]/40 focus:ring-1 focus:ring-[#0066FF]/20 transition-all"
+          />
+        </div>
+        <!-- Country Filter -->
+        <select 
+          id="mica-country-filter"
+          class="px-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-slate-300 focus:outline-none focus:border-[#0066FF]/40 appearance-none cursor-pointer pr-8 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23666%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22/%3E%3C/svg%3E')] bg-[length:16px] bg-[right_8px_center] bg-no-repeat"
+        >
+          <option value="">{t.allCountries}</option>
+          {uniqueCountries.map(code => (
+            <option value={code}>{countryNames[code] || code} ({code})</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <!-- Provider Count -->
+    <div class="px-5 md:px-6 py-3 bg-white/[0.01] border-b border-white/[0.03]">
+      <p class="text-xs text-slate-500" id="mica-results-count">
+        <span class="text-slate-400 font-bold" id="mica-shown-count">{totalProviders}</span> / {totalProviders} exchange
+      </p>
+    </div>
+
+    <!-- Table (Desktop) -->
+    <div class="hidden md:block overflow-x-auto">
+      <table class="w-full text-sm" id="mica-table">
+        <thead>
+          <tr class="border-b border-white/[0.05] text-left text-xs text-slate-500 uppercase tracking-wider">
+            <th class="px-6 py-3.5 font-bold">{t.colName}</th>
+            <th class="px-4 py-3.5 font-bold">{t.colCountry}</th>
+            <th class="px-4 py-3.5 font-bold">{t.colDate}</th>
+            <th class="px-4 py-3.5 font-bold">{t.colServices}</th>
+            <th class="px-4 py-3.5 font-bold text-right">{t.colPassport}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/[0.03]">
+          {providers.map((p, idx) => (
+            <tr class="mica-row hover:bg-white/[0.02] transition-colors" 
+                data-name={`${p.name} ${p.legal_name}`.toLowerCase()} 
+                data-country={p.country}>
+              <td class="px-6 py-3.5">
+                <div class="flex items-center gap-3">
+                  <img 
+                    src={getFaviconUrl(p.website)} 
+                    alt="" 
+                    class="w-6 h-6 rounded-md bg-white/[0.05] shrink-0"
+                    loading="lazy"
+                    onerror="this.style.display='none'"
+                  />
+                  <div>
+                    <a href={p.website} target="_blank" rel="noopener noreferrer" class="text-white font-semibold hover:text-[#0066FF] transition-colors">
+                      {p.name}
+                    </a>
+                    {p.name !== p.legal_name && (
+                      <p class="text-[11px] text-slate-600 mt-0.5 leading-tight">{p.legal_name}</p>
+                    )}
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5">
+                <span class="inline-flex items-center gap-1.5 text-slate-300 text-xs font-medium">
+                  <span class="text-base">{p.country === 'AT' ? '🇦🇹' : p.country === 'BE' ? '🇧🇪' : p.country === 'BG' ? '🇧🇬' : p.country === 'CY' ? '🇨🇾' : p.country === 'CZ' ? '🇨🇿' : p.country === 'DE' ? '🇩🇪' : p.country === 'DK' ? '🇩🇰' : p.country === 'EE' ? '🇪🇪' : p.country === 'ES' ? '🇪🇸' : p.country === 'FI' ? '🇫🇮' : p.country === 'FR' ? '🇫🇷' : p.country === 'GR' ? '🇬🇷' : p.country === 'HR' ? '🇭🇷' : p.country === 'HU' ? '🇭🇺' : p.country === 'IE' ? '🇮🇪' : p.country === 'IS' ? '🇮🇸' : p.country === 'IT' ? '🇮🇹' : p.country === 'LI' ? '🇱🇮' : p.country === 'LT' ? '🇱🇹' : p.country === 'LU' ? '🇱🇺' : p.country === 'LV' ? '🇱🇻' : p.country === 'MT' ? '🇲🇹' : p.country === 'NL' ? '🇳🇱' : p.country === 'NO' ? '🇳🇴' : p.country === 'PL' ? '🇵🇱' : p.country === 'PT' ? '🇵🇹' : p.country === 'RO' ? '🇷🇴' : p.country === 'SE' ? '🇸🇪' : p.country === 'SI' ? '🇸🇮' : p.country === 'SK' ? '🇸🇰' : '🏳️'}</span>
+                  {p.country}
+                </span>
+              </td>
+              <td class="px-4 py-3.5 text-slate-400 text-xs whitespace-nowrap">
+                {p.authorization_date || '—'}
+              </td>
+              <td class="px-4 py-3.5">
+                <div class="flex flex-wrap gap-1">
+                  {p.services.slice(0, 4).map(s => (
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#0066FF]/10 text-[#0066FF]/80 border border-[#0066FF]/15 whitespace-nowrap">
+                      {serviceLabels[s]?.[lang] || s}
+                    </span>
+                  ))}
+                  {p.services.length > 4 && (
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-white/[0.05] text-slate-500 border border-white/[0.08]">
+                      +{p.services.length - 4}
+                    </span>
+                  )}
+                </div>
+              </td>
+              <td class="px-4 py-3.5 text-right">
+                <span class="text-slate-300 text-xs font-bold">{p.eu_countries_count || '—'}</span>
+                {p.passported_countries.includes('IT') && (
+                  <span class="ml-1 text-[10px]" title="Opera in Italia">🇮🇹</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards (Mobile) -->
+    <div class="md:hidden divide-y divide-white/[0.03]" id="mica-cards-mobile">
+      {providers.map((p, idx) => (
+        <div class="mica-row p-4 hover:bg-white/[0.02] transition-colors" 
+             data-name={`${p.name} ${p.legal_name}`.toLowerCase()} 
+             data-country={p.country}>
+          <div class="flex items-center gap-3 mb-3">
+            <img 
+              src={getFaviconUrl(p.website)} 
+              alt="" 
+              class="w-8 h-8 rounded-lg bg-white/[0.05] shrink-0"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
+            <div class="flex-1 min-w-0">
+              <a href={p.website} target="_blank" rel="noopener noreferrer" class="text-white font-bold text-sm hover:text-[#0066FF] transition-colors block truncate">
+                {p.name}
+              </a>
+              <p class="text-[11px] text-slate-600 truncate">{p.legal_name}</p>
+            </div>
+            <span class="text-base shrink-0">{p.country === 'AT' ? '🇦🇹' : p.country === 'BE' ? '🇧🇪' : p.country === 'BG' ? '🇧🇬' : p.country === 'CY' ? '🇨🇾' : p.country === 'CZ' ? '🇨🇿' : p.country === 'DE' ? '🇩🇪' : p.country === 'DK' ? '🇩🇰' : p.country === 'EE' ? '🇪🇪' : p.country === 'ES' ? '🇪🇸' : p.country === 'FI' ? '🇫🇮' : p.country === 'FR' ? '🇫🇷' : p.country === 'GR' ? '🇬🇷' : p.country === 'HR' ? '🇭🇷' : p.country === 'HU' ? '🇭🇺' : p.country === 'IE' ? '🇮🇪' : p.country === 'IS' ? '🇮🇸' : p.country === 'IT' ? '🇮🇹' : p.country === 'LI' ? '🇱🇮' : p.country === 'LT' ? '🇱🇹' : p.country === 'LU' ? '🇱🇺' : p.country === 'LV' ? '🇱🇻' : p.country === 'MT' ? '🇲🇹' : p.country === 'NL' ? '🇳🇱' : p.country === 'NO' ? '🇳🇴' : p.country === 'PL' ? '🇵🇱' : p.country === 'PT' ? '🇵🇹' : p.country === 'RO' ? '🇷🇴' : p.country === 'SE' ? '🇸🇪' : p.country === 'SI' ? '🇸🇮' : p.country === 'SK' ? '🇸🇰' : '🏳️'}</span>
+          </div>
+          <div class="flex flex-wrap gap-1 mb-2">
+            {p.services.slice(0, 3).map(s => (
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#0066FF]/10 text-[#0066FF]/80 border border-[#0066FF]/15">
+                {serviceLabels[s]?.[lang] || s}
+              </span>
+            ))}
+            {p.services.length > 3 && (
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-white/[0.05] text-slate-500 border border-white/[0.08]">
+                +{p.services.length - 3}
+              </span>
+            )}
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-slate-500">
+            <span>{t.operaIn} <strong class="text-slate-400">{p.eu_countries_count}</strong> {t.paesi}</span>
+            <span>{p.authorization_date || '—'}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- No Results -->
+    <div id="mica-no-results" class="hidden p-10 text-center text-slate-500 text-sm">
+      {t.noResults}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // MiCA Registry search & filter
+  (function initMicaFilter() {
+    function setup() {
+      const searchInput = document.getElementById('mica-search');
+      const countryFilter = document.getElementById('mica-country-filter');
+      const shownCount = document.getElementById('mica-shown-count');
+      const noResults = document.getElementById('mica-no-results');
+      
+      if (!searchInput || !countryFilter) return;
+      
+      function filterRows() {
+        const query = searchInput.value.toLowerCase().trim();
+        const country = countryFilter.value;
+        const rows = document.querySelectorAll('.mica-row');
+        let visible = 0;
+        
+        rows.forEach(row => {
+          const name = row.getAttribute('data-name') || '';
+          const rowCountry = row.getAttribute('data-country') || '';
+          
+          const matchesSearch = !query || name.includes(query);
+          const matchesCountry = !country || rowCountry === country;
+          
+          if (matchesSearch && matchesCountry) {
+            row.style.display = '';
+            visible++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+        
+        if (shownCount) shownCount.textContent = visible;
+        if (noResults) {
+          noResults.classList.toggle('hidden', visible > 0);
+        }
+      }
+      
+      searchInput.addEventListener('input', filterRows);
+      countryFilter.addEventListener('change', filterRows);
+    }
+    
+    // Support Astro page transitions
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup);
+    } else {
+      setup();
+    }
+    document.addEventListener('astro:page-load', setup);
+  })();
+</script>

@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const page_title = "Cookie Policy";
+const page_description = "Informativa sull'utilizzo dei cookie su privacy-crypto.com.";
+---
+
+<Layout title={page_title} description={page_description} maxWidth="max-w-3xl">
+  <header class="mb-8 border-b border-white/[0.05] pb-6">
+    <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 text-white">Cookie Policy</h1>
+    <p class="text-slate-400 text-lg leading-relaxed">Ultimo aggiornamento: Maggio 2026</p>
+  </header>
+
+  <div class="prose prose-invert prose-slate max-w-none">
+    <div class="bento-card p-6 border border-white/[0.05] bg-white/[0.02]">
+        <p class="text-slate-300 mb-4">
+            Questo sito web utilizza cookie e tecnologie simili per garantire il corretto funzionamento delle procedure e migliorare l'esperienza di navigazione, nel rispetto della privacy degli utenti.
+        </p>
+        
+        <h3 class="text-xl font-bold text-white mt-6 mb-3">1. Cookie Tecnici Strettamente Necessari</h3>
+        <p class="text-slate-400 mb-4">
+            Utilizziamo esclusivamente cookie tecnici necessari al funzionamento basilare del sito. Ad esempio, memorizziamo localmente la preferenza riguardante il tema grafico (modalità chiara / modalità scura). Questi dati rimangono sul tuo dispositivo e non vengono trasmessi a noi o a terzi. Tali cookie non richiedono il consenso preventivo dell'utente.
+        </p>
+
+        <h3 class="text-xl font-bold text-white mt-6 mb-3">2. Cookie Analitici e di Terze Parti</h3>
+        <p class="text-slate-400 mb-4">
+            Per le statistiche del sito web utilizziamo <strong>Umami Analytics</strong>, una soluzione privacy-friendly e open-source progettata specificamente per rispettare il GDPR senza la necessità di utilizzare cookie traccianti. Umami non raccoglie dati personali, non traccia gli utenti attraverso diversi siti e i dati raccolti sono completamente anonimizzati e aggregati. 
+        </p>
+
+        <h3 class="text-xl font-bold text-white mt-6 mb-3">3. Come Gestire i Cookie</h3>
+        <p class="text-slate-400 mb-4">
+            Poiché utilizziamo solo cookie strettamente necessari, non è presente un banner di consenso. Puoi in ogni caso configurare il tuo browser web per rifiutare tutti i cookie. Tieni presente che disabilitando i cookie tecnici locali, la preferenza per il tema grafico scuro/chiaro verrà persa ad ogni ricaricamento della pagina.
+        </p>
+
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "domanda": "Can the Tax Authorities 'see' what I have on my Ledger or Trezor?",
+    "risposta": "No, Tax Authorities do not possess omniscient technologies to automatically scan offline physical devices. However, they monitor how regularly you move funds from domestic Exchanges to external addresses (using the public Blockchain). Owning a Hardware Wallet fully protects you from bank seizures or digital hackers, but by law you are required to voluntarily declare the equivalent value in advance in your tax filings.",
+    "tags": "ledger trezor tax authorities controls see balance",
+    "href": "/en/wallets",
+    "link_label": "Hardware Wallet Security"
+  },
+  {
+    "id": 2,
+    "domanda": "Regulatory Registry: What do registered Exchanges (e.g., Binance, Young Platform) report?",
+    "risposta": "Exchanges registered with financial regulatory bodies are required to send periodic reports to the Government disclosing: your exact personal data (KYC), total balance at the beginning and end of the period, and the number of fiat-to-crypto transactions executed. Essentially, this registry completely eliminates any form of anonymity if you use centralized Exchanges with a domestic license.",
+    "tags": "registry binance young platform kyc card exchange information controls quarterly",
+    "href": "/en/exchange",
+    "link_label": "Discover No-KYC Platforms"
+  },
+  {
+    "id": 3,
+    "domanda": "Does using a VPN make me anonymous when I make Blockchain transactions?",
+    "risposta": "False. A VPN exclusively masks your IP address (geolocation) from anyone intercepting the local connection with the network provider, preventing them from associating your physical connection with your movements. But the Blockchain remains 100% transparent and accessible to everyone: every payment or receipt on-chain is publicly carved forever. A VPN solves Internet-side surveillance, not cryptocurrency-side surveillance.",
+    "tags": "vpn anonymous ip privacy blockchain transparency tracked hiding",
+    "href": "/en/miscellaneous",
+    "link_label": "Go to VPN Security"
+  },
+  {
+    "id": 4,
+    "domanda": "Is buying Crypto with cash or P2P (Peer-to-Peer) illegal?",
+    "risposta": "There is no law that prohibits the purchase and sale of digital software (such as Bitcoin) between two consenting private citizens. Platforms like HodlHodl serve solely as a bulletin board between seller and buyer, thus minimizing corporate KYC. However, one must be mindful of regulated cash thresholds, or use clean SEPA bank transfers.",
+    "tags": "p2p cash peer bisq hodlhodl peach illegal laundering exchange private",
+    "href": "/en/exchange",
+    "link_label": "P2P Exchange List"
+  },
+  {
+    "id": 5,
+    "domanda": "Can law enforcement trace my identity if they have my MetaMask/Ledger address?",
+    "risposta": "If that address has interacted even 'a single time' with an Exchange where you provided documents (KYC with your ID), the answer is YES. Through forensic software like Chain Analysis, they trace all outputs, formally linking your real identity to all the countless downstream wallets where you've sent even tiny amounts from that identified Exchange.",
+    "tags": "identity kyc government law enforcement trace address 0x eth btc track metamask",
+    "href": "/en/exchange",
+    "link_label": "P2P Privacy Analysis"
+  },
+  {
+    "id": 6,
+    "domanda": "I've never withdrawn my Crypto to Euros in my bank account, do I still need to pay or declare?",
+    "risposta": "Yes. Many jurisdictions apply extensive rules: there is a formal obligation for 'Tax Monitoring'. Regardless of where your funds are located, current laws may require tax reporting at year-end, paying stamp duty on holdings and potential capital gains taxes in case of conversion to fiat.",
+    "tags": "declaration taxes withdraw cashout monitoring never sold",
+    "href": "/en/guide",
+    "link_label": "Read Tax Regulations"
+  },
+  {
+    "id": 7,
+    "domanda": "I've lost my crypto, lost the Backup (Seed), or the Exchange shut down. What do I do about taxes?",
+    "risposta": "If you suffered an irreversible Hack and theft of funds, and had previously declared them properly, the only regulatory shield to legally explain the loss — in order to stop declaring that asset year after year to tax authorities — is to have a formal police report filed for 'password loss/digital infiltration'. Without one, tax authorities will formally assume you still possess them, penalizing you for undocumented evasion on vanished funds.",
+    "tags": "stolen lost hack drainer tax report police report taken lost",
+    "href": "/en/guide",
+    "link_label": "Legal Tax Resources"
+  },
+  {
+    "id": 8,
+    "domanda": "If I sell Bitcoin by converting it to Stablecoins (e.g., USDT), do I have to pay capital gains tax?",
+    "risposta": "In many jurisdictions, converting cryptocurrencies (e.g., BTC) into Stablecoins (e.g., USDT/USDC) constitutes a 'taxable event'. This means the conversion is treated equivalently to selling for fiat currency, and you must calculate and pay taxes on any capital gains generated.",
+    "tags": "usdt stablecoin usdc conversion taxes capital gains rate usdt to btc",
+    "href": "/en/guide",
+    "link_label": "Tax Tables and Exemptions"
+  },
+  {
+    "id": 9,
+    "domanda": "Staking and Cashback: How are crypto yields or passive interest taxed?",
+    "risposta": "All passive yields provided or distributed with certainty by automated networks (annualized Staking Rewards) typically do not fall under the speculative capital gains bracket. They are generally classified as pure 'Capital Income', incurring a substitute tax calculated on the equivalent fiat value at the exact moment they are credited to your wallet.",
+    "tags": "staking reward cashback airdrop yields interest passive income delegation calculation",
+    "href": "/en/guide",
+    "link_label": "Staking/DeFi Guidelines"
+  },
+  {
+    "id": 10,
+    "domanda": "Are crypto holdings subject to wealth taxes or stamp duties?",
+    "risposta": "In many jurisdictions, crypto holdings may be subject to wealth taxes or reporting requirements. Some countries impose annual taxes on the portfolio's equivalent value at year-end, while others require detailed reporting without direct taxation. Check your local tax regulations for specific rates and thresholds, as rules vary significantly between jurisdictions.",
+    "tags": "wealth tax stamp duty holdings calculation percentage pay how much reporting",
+    "href": "/en/guide",
+    "link_label": "Crypto Tax Calculation Models"
+  },
+  {
+    "id": 11,
+    "domanda": "SEPA Block Reasons: Why do banks block or reject Exchange transfers?",
+    "risposta": "European Banks are terrified by the scale of audits and criminal Anti-Money Laundering (AML) directives from internal Banking KYC. The high friction with crypto has convinced the majority to deploy draconian Algorithms. If you suddenly make transfers of significant amounts (e.g., over €10,000) not in line with your income profile, anti-fraud systems freeze the funds and account until you provide adequate tax documentation.",
+    "tags": "blocked account bank closure transfer aml rejected suspicious blocks frozen money verification",
+    "href": "/en/spend",
+    "link_label": "Discover Banking Alternatives"
+  },
+  {
+    "id": 12,
+    "domanda": "What changes with sweeping international automatic exchange of information directives on cryptocurrencies?",
+    "risposta": "Under international automatic exchange of information frameworks (such as the EU's DAC8 directive and the OECD's Crypto-Asset Reporting Framework), crypto service providers operating in participating jurisdictions are being required to automatically report users' identification data and account balances directly to the tax agencies of their respective countries of residence. Essentially, CEXs will increasingly function as informational extensions of government tax authorities worldwide.",
+    "tags": "dac8 international regulation transparency automatic exchange reporting law agency oecd carf",
+    "href": "/en/guide",
+    "link_label": "Check New Authority Exposure"
+  },
+  {
+    "id": 13,
+    "domanda": "How can I protect a Hot Wallet from theft (drainers) and malicious links?",
+    "risposta": "The evolution of Web3 security has led to the creation of next-generation wallets that integrate proactive features. Instead of simply signing everything that is clicked, these wallets simulate the transaction in the background (pre-execution) and analyze smart contracts, blocking or flagging theft attempts (drainers) with a red alert. Among market examples that adopt these advanced security filters are Rabby Wallet for browser extension and DeGate Wallet for an integrated app experience.",
+    "tags": "hot wallet metamask rabby degate security drainer hack theft protect",
+    "href": "/en/wallets",
+    "link_label": "Wallet App Model Comparison"
+  },
+  {
+    "id": 14,
+    "domanda": "Airdrops (Network Token Gifts): Do I have to pay explicit taxes if I just hold them?",
+    "risposta": "Subject to a certain regulatory gap, recent tax authority guidance by analogy suggests that airdrops should be classified as capital gains received at a zero entry cost. In summary, tax authorities require payment of taxes on the entire equivalent value at the time of liquidation or receipt of the free asset.",
+    "tags": "airdrop gift taxes unexpected hold holding gifted",
+    "href": "/en/guide",
+    "link_label": "See Detailed Regulations"
+  },
+  {
+    "id": 15,
+    "domanda": "Can I register anonymously or bypass country restrictions with a Palau Identity Certificate (RNS.ID)?",
+    "risposta": "The Island of Palau issues digital identity certificates (RNS.ID). However, large centralized Exchanges (Tier 1 like Binance or Bybit) often block these accounts if they detect inconsistencies between the document, the actual IP address, or if they require paper proof of residence (utility bill). This method is not sufficient to reliably bypass advanced KYC controls.",
+    "tags": "palau rnsid account foreign residence vpn identify documents identity kyc passport fake id bypass",
+    "href": "/en/miscellaneous",
+    "link_label": "Analyzing the Identity Market"
+  },
+  {
+    "id": 16,
+    "domanda": "Digital NFTs for pure Collectibles/Art. Do they need to be declared in tax filings?",
+    "risposta": "Yes. Despite being considered digital art or collectibles, NFTs fall under the definition of crypto-assets for tax authorities. They must therefore be declared in tax monitoring filings, and in capital gains filings in case of sales with significant profits.",
+    "tags": "nft art opensea tax filing photo apes collectibles declare taxes cryptoart art cryptokitties",
+    "href": "/en/guide",
+    "link_label": "Tax Treaty on Generic CryptoAssets"
+  },
+  {
+    "id": 17,
+    "domanda": "I have Binance and a Ledger: Does moving crypto from my CEX to Cold Hardware at home count as Capital Gains (Taxable Event)?",
+    "risposta": "No! Absolutely categorically no. Simply transferring or making a fiduciary peer-to-peer transfer from your left digital wallet to your right hardware wallet is considered and regulated as a logically neutral exempt transaction (Transfer without liquidation). It does not trigger a taxable base or reportable withdrawal as long as the owner remains the same undivided entity.",
+    "tags": "move transfer from binance to ledger from ledger to exchange taxes capital gains send crypto send wallet",
+    "href": "/en/wallets",
+    "link_label": "Golden Rules for Central Transfers"
+  },
+  {
+    "id": 18,
+    "domanda": "Safe Cash-Out and Excessive Banking AML: How to withdraw €60,000 to my account without triggering alerts?",
+    "risposta": "One of the biggest concerns is getting your funds back through a large bank transfer. The banking system is very strict: don't hope to hide, but proactively notify the bank. Contact your branch manager warning them in advance about the incoming transfer. Bring complete documentation: A) The transaction history (CSV/PDF format) downloaded from the Exchange to prove the speculative and legitimate origin of the funds. B) Copies of past years' Tax Declarations, preferably certified by your accountant, to demonstrate complete prior tax transparency.",
+    "tags": "withdraw large funds amount cashout bank transfer 50k withdraw euros profit large assets cash fiat withdraw",
+    "href": "/en/spend",
+    "link_label": "Cash Off-Ramp and Spending Resources"
+  }
+]

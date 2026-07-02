@@ -1,0 +1,19 @@
+{
+  "page_title": "Network VPN",
+  "page_description": "La tua identità di rete. Perchè navigare nel Web3 o operare smart contract senza una VPN equivale ad urlare i tuoi dati finanziari al provider internet locale.",
+  "sections": [
+    {
+      "titolo": "Perché le VPN sono fondamentali in ambito Crypto?",
+      "spiegazione": "Una Virtual Private Network (VPN) maschera il tuo indirizzo IP, crittografando tutto il traffico dati in entrata e in uscita dal tuo dispositivo verso l'estero. Anche se usi MetaMask in anonimo, quando effettui una transazione dal tuo PC casalingo senza VPN, il router svela istantaneamente al tuo Provider Nazionale (TIM, Fastweb, ecc.) che quel preciso IP domestico ha inviato fondi a quel contratto su Ethereum. Non sei anonimo."
+    },
+    {
+      "titolo": "La Trappola delle VPN 'Gratis'",
+      "spiegazione": "Non scaricare MAI la prima VPN gratuita dallo store. I servizi VPN gratuiti (inclusi molti 'falsi famosi') guadagnano proprio registrando ogni tua sessione in un database e vendendo il log delle tue navigazioni a server pubblicitari. Se un ente richiede i tabulati, queste aziende li consegnano distruggendo il tuo layer di sicurezza."
+    },
+    {
+      "titolo": "L'obbligo del 'No-Log' Assoluto",
+      "spiegazione": "L'unico scudo approvato nella community Web3 è l'utilizzo esclusivo di servizi 'Zero-Log / No-Log'. Si tratta di software Open Source creati per statuto aziendale (o per architettura server RAM-Only) così da non riuscire volutamente a memorizzare nemmeno un millisecondo della tua navigazione in memoria. Se l'ente bussa ai loro server, non trovano letteralmente i dischi rigidi da cui estrarre i dati.",
+      "raccomandata": "Mullvad VPN"
+    }
+  ]
+}

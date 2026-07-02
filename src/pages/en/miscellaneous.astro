@@ -1,0 +1,239 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Accordion from '../../components/Accordion.astro';
+import idData from '../../data/en/identity.json';
+import vpnData from '../../data/en/vpn.json';
+
+const page_title = "Miscellaneous Resources (Digital ID, VPN, Tools)";
+const page_description = "A collection of essential tools for your privacy: alternative foreign digital identities, No-Log VPN networks for safe browsing, and additional high-privacy solutions.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "en",
+  "mainEntity": idData.faq.map(item => ({
+    "@type": "Question",
+    "name": item.domanda,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.risposta.replace(/<[^>]+>/g, '') // Strip HTML for schema
+    }
+  }))
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://privacy-crypto.com/en/" },
+    { "@type": "ListItem", "position": 2, "name": "Miscellaneous Resources" }
+  ]
+};
+---
+
+<Layout title={page_title} description="Essential resources for online privacy: no-log VPNs, decentralized digital identities, and high-privacy phone SIMs to protect your data." lang="en" maxWidth="max-w-[1300px] xl:max-w-[1400px]">
+
+  <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 xl:gap-12 items-start mt-2">
+    <!-- Sidebar -->
+    <div class="hidden lg:block w-[240px] xl:w-[270px] shrink-0 sticky top-24 order-2 lg:order-1">
+      <div class="bento-card p-6 border-white/[0.03] shadow-2xl bg-[#0a0a12]">
+         <h4 class="text-xs uppercase tracking-widest font-black text-slate-600 mb-5">Guide Index</h4>
+         <nav class="flex flex-col space-y-3.5">
+            <a href="#id-palau" class="text-sm text-slate-500 hover:text-[#03a66d] font-medium flex items-center justify-between group transition-colors">Palau RNS.ID<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#id-alternative" class="text-sm text-slate-500 hover:text-[#0066FF] font-medium flex items-center justify-between group transition-colors">Other Global IDs<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#vpn" class="text-sm text-slate-500 hover:text-red-500 font-medium flex items-center justify-between group transition-colors">VPN Tunnel<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#extra" class="text-sm text-slate-500 hover:text-orange-500 font-medium flex items-center justify-between group transition-colors">Extra & Guides<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <hr class="border-white/[0.03]" />
+            <a href="#faq" class="text-sm text-slate-500 hover:text-purple-400 font-medium flex items-center justify-between group transition-colors">F.A.Q.<svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+         </nav>
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-0 space-y-6 lg:space-y-10 order-1 lg:order-2 w-full">
+      <header class="mb-6 lg:mb-8 border-b border-white/[0.05] pb-5 lg:pb-6">
+        <div class="inline-block px-3 py-1 mb-3 border border-[#0066FF]/20 bg-[#0066FF]/10 rounded-full text-xs font-bold tracking-wider text-[#0066FF] uppercase">Directory</div>
+        <h1 class="text-2xl lg:text-4xl font-extrabold tracking-tight mb-3 text-white">{page_title}</h1>
+        <div class="p-4 lg:p-5 bg-[#0a0a12] border-l-[3px] border-[#0066FF] rounded-r-xl">
+          <p class="text-slate-400 text-[15px] md:text-base leading-relaxed">{page_description}</p>
+        </div>
+      </header>
+
+      <!-- SECTION 1: DIGITAL IDENTITY -->
+      <div class="mb-4">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">1. Digital Identities (Palau ID)</h2>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">{idData.page_description}</p>
+      </div>
+      
+      <section id="id-palau" class="scroll-mt-24">
+        <div class="w-full bento-card p-6 lg:p-10 border border-[#03a66d]/40 bg-gradient-to-br from-[#03a66d]/10 via-transparent to-transparent shadow-[0_0_60px_-15px_rgba(3,166,109,0.4)] relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+             <svg class="w-32 h-32 text-[#03a66d]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+
+          <div class="flex justify-between items-start mb-6 relative z-10">
+             <div>
+               <div class="inline-block px-3 py-1 bg-[#03a66d]/10 border border-[#03a66d]/30 text-[#03a66d] text-xs font-bold rounded-full uppercase tracking-wider mb-4">Official RNS.ID Program</div>
+               <h3 class="text-2xl md:text-3xl font-black text-white mb-3">{idData.hero_info.titolo}</h3>
+               <p class="text-slate-400 text-sm md:text-base leading-relaxed max-w-xl">{idData.hero_info.sottotitolo}</p>
+             </div>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-8 relative z-10">
+             <div class="bg-[var(--bg-input)] backdrop-blur p-4 md:p-5 rounded-2xl border border-[var(--border-card)]">
+               <span class="block text-slate-500 text-xs uppercase tracking-wider font-bold mb-1">Base Cost</span>
+               <span class="font-bold text-xl text-white">{idData.hero_info.costo}</span>
+             </div>
+             <div class="bg-[var(--bg-input)] backdrop-blur p-4 md:p-5 rounded-2xl border border-[var(--border-card)]">
+               <span class="block text-slate-500 text-xs uppercase tracking-wider font-bold mb-1">Issuance Time</span>
+               <span class="font-semibold text-sm text-slate-300">{idData.hero_info.tempi}</span>
+             </div>
+          </div>
+
+          <a href={idData.hero_info.link_ufficiale} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center bg-white text-black font-bold px-6 py-3.5 md:py-4 rounded-xl text-base hover:bg-slate-200 transition-colors w-full shadow-lg relative z-10">
+            Apply on the Official Website
+            <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <section id="id-alternative" class="scroll-mt-24">
+        <h4 class="text-xl md:text-2xl font-bold text-white mb-5 px-1 flex items-center gap-2.5">
+            <div class="w-1.5 h-6 bg-[#0066FF] rounded-full"></div>
+            Global Alternatives
+        </h4>
+        <div class="space-y-4">
+          {idData.other_ids.map(id => (
+            <div class="bento-card border-[#0066FF]/10 p-5 md:p-6">
+              <div class="flex justify-between items-center mb-3">
+                 <h5 class="text-base md:text-lg font-bold text-white">{id.titolo}</h5>
+                 <span class="text-xs font-semibold px-2.5 py-1 bg-white/[0.05] rounded-lg text-slate-400">{id.spesa}</span>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed">{id.descrizione}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- SECTION 2: VPN NETWORK -->
+      <div class="mb-4 mt-16">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3" id="vpn">2. VPN Networks</h2>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">{vpnData.page_description}</p>
+      </div>
+
+      <div class="space-y-6">
+      {vpnData.sections.map((sec, index) => (
+        <section class="scroll-mt-24">
+          <h4 class="text-lg md:text-xl font-bold text-white mb-4 px-1 flex items-center gap-2.5 tracking-tight">
+            <div class={`w-1 h-5 rounded-full ${index === 0 ? 'bg-purple-500' : index === 1 ? 'bg-red-500' : 'bg-[#03a66d]'}`}></div>
+            {sec.titolo}
+          </h4>
+          
+          <div class="bento-card relative p-6">
+            <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-1">{sec.spiegazione}</p>
+            
+            {sec.raccomandata && (
+              <div class="mt-4 p-3.5 bg-white/[0.02] border border-white/[0.06] rounded-xl flex flex-wrap items-center gap-3 w-fit">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#03a66d] border border-[#03a66d]/30 bg-[#03a66d]/10 px-2.5 py-1 rounded-lg">Recommended</span>
+                <span class="text-white font-bold text-sm ml-1">{sec.raccomandata}</span>
+                <a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer" class="ml-4 flex items-center gap-1.5 text-sm text-[#03a66d] hover:text-white transition-colors bg-black/50 px-3 py-1.5 rounded-lg border border-white/[0.08]">
+                  Discover ➡
+                </a>
+              </div>
+            )}
+          </div>
+        </section>
+      ))}
+      </div>
+
+      <!-- SECTION 3: EXTRA & GUIDES -->
+      <div class="mb-4 mt-16" id="extra">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">3. Extra Tools & Guides</h2>
+      </div>
+
+      <section class="scroll-mt-24">
+        <div class="space-y-4">
+            <!-- BTCPay POS High Privacy SIM -->
+            <div class="bento-card border-orange-500/10 p-5 md:p-6">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">High Privacy SIM (Saremmo)</h4>
+                 <span class="text-xs font-semibold px-2.5 py-1 bg-white/[0.05] rounded-lg text-slate-400">Flexible Tool</span>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">Obtain a SIM card while minimizing the exposure of your identity documents. Useful for signing up to web services while preserving your primary phone number and mitigating the risk of SIM swap attacks.</p>
+              <a href="https://btcpay.priorato.org/apps/4MPLLHPGGbk1bWB1Tmy7ie7dUdo3/pos" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2 border border-orange-500/15 bg-orange-500/5 hover:bg-orange-500/10 hover:border-orange-500/40 rounded-xl transition-all duration-300 group cursor-pointer">
+                  <span class="text-xs font-medium tracking-wider text-orange-500 group-hover:text-orange-400">Buy on BTCPay POS</span>
+              </a>
+            </div>
+
+            <!-- Turtlecute Guides -->
+            <div class="bento-card border-[#0066FF]/10 p-5 md:p-6">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">Italian Guides (Turtlecute)</h4>
+                 <span class="text-xs font-semibold px-2.5 py-1 bg-white/[0.05] rounded-lg text-slate-400">Educational Resource</span>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">An extensive collection of technical articles and guides entirely in Italian about Bitcoin, Privacy, Nodes, and digital sovereignty.</p>
+              <a href="https://turtlecute.org/posts/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2 border border-[#0066FF]/15 bg-[#0066FF]/5 hover:bg-[#0066FF]/10 hover:border-[#0066FF]/40 rounded-xl transition-all duration-300 group cursor-pointer">
+                  <span class="text-xs font-medium tracking-wider text-[#0066FF] group-hover:text-blue-400">Explore the Guides</span>
+              </a>
+            </div>
+
+            <!-- PlanB Academy -->
+            <div class="bento-card border-[#03a66d]/10 p-5 md:p-6">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">PlanB Academy</h4>
+                 <span class="text-xs font-semibold px-2.5 py-1 bg-white/[0.05] rounded-lg text-slate-400">Educational Resource</span>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">Free in-depth tutorials and educational materials on Bitcoin, wallets, and financial privacy.</p>
+              <a href="https://planb.academy/en/tutorials/wallet" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2 border border-[#03a66d]/15 bg-[#03a66d]/5 hover:bg-[#03a66d]/10 hover:border-[#03a66d]/40 rounded-xl transition-all duration-300 group cursor-pointer">
+                  <span class="text-xs font-medium tracking-wider text-[#03a66d] group-hover:text-green-400">Visit the Academy</span>
+              </a>
+            </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: OPSEC AND PERSONAL SECURITY -->
+      <div class="mb-4 mt-16" id="opsec">
+         <h2 class="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight border-b border-white/[0.1] pb-3">4. Personal Security (OpSec)</h2>
+         <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mt-3">Protecting your crypto doesn't just mean safeguarding your private keys — it means protecting yourself and your physical identity from real-world consequences (kidnapping, extortion, home burglaries).</p>
+      </div>
+
+      <section class="scroll-mt-24">
+        <div class="space-y-4">
+            <div class="bento-card border-red-500/10 p-5 md:p-6 bg-gradient-to-br from-red-500/5 to-transparent">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">The Data Leak Risk</h4>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">Centralized companies constantly suffer data breaches. The <strong>Ledger Leak of 2020</strong> exposed the first name, last name, phone number, and home address of over 270,000 crypto users. If you have a significant balance and your home address ends up online associated with the fact that you own crypto, you become a target for extortion and kidnapping. <strong>Golden rule:</strong> NEVER use your real address to have hardware wallets shipped. Use lockers, pickup points, or offices.</p>
+            </div>
+            
+            <div class="bento-card border-red-500/10 p-5 md:p-6 bg-gradient-to-br from-red-500/5 to-transparent">
+              <div class="flex justify-between items-center mb-3">
+                 <h4 class="text-base md:text-lg font-bold text-white">Tax Software and KYC</h4>
+              </div>
+              <p class="text-sm md:text-[15px] text-slate-400 leading-relaxed mb-4">Avoid entering real documents, real names, or real addresses on web platforms for automatic tax reporting (such as Koinly, Blockpit). Use pseudonyms and dedicated email addresses. The same applies to related apps and services. The less you link your physical identity on-chain, the more your safety is preserved.</p>
+            </div>
+        </div>
+      </section>
+
+      <!-- Combined FAQ -->
+      <section id="faq" class="scroll-mt-24 mt-16">
+        <h3 class="text-xl md:text-2xl font-bold text-white mb-5 px-1 flex items-center gap-2.5">
+            <div class="w-1.5 h-6 bg-purple-500 rounded-full"></div>
+            Frequently Asked Questions (Digital ID)
+        </h3>
+        <div class="space-y-2.5">
+          {idData.faq.map(f => (
+            <Accordion title={f.domanda}>
+              <p class="text-sm md:text-[15px] font-medium leading-relaxed" set:html={f.risposta}></p>
+            </Accordion>
+          ))}
+        </div>
+      </section>
+      
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</Layout>

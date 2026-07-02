@@ -1,0 +1,178 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
+      "source": "/exchange/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/exchange/",
+      "permanent": false
+    },
+    {
+      "source": "/acquisto/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/purchase/",
+      "permanent": false
+    },
+    {
+      "source": "/spend/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/spend/",
+      "permanent": false
+    },
+    {
+      "source": "/wallets/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/wallets/",
+      "permanent": false
+    },
+    {
+      "source": "/privacy-coins/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/privacy-coins/",
+      "permanent": false
+    },
+    {
+      "source": "/varie/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/miscellaneous/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/",
+      "permanent": false
+    },
+    {
+      "source": "/chi-siamo/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/about-us/",
+      "permanent": false
+    },
+    {
+      "source": "/contatti/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/contact/",
+      "permanent": false
+    },
+    {
+      "source": "/privacy-policy/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/privacy-policy/",
+      "permanent": false
+    },
+    {
+      "source": "/cookie-policy/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/cookie-policy/",
+      "permanent": false
+    },
+    {
+      "source": "/communities/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/communities/",
+      "permanent": false
+    },
+    {
+      "source": "/fisco/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
+      "source": "/fisco/:path*",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/come-usare-zec-shielded/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/come-usare-zec-shielded/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/cos%C3%A8-un-self-custody-wallet/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/self-custody-wallet/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/crypto-card-e-fisco-differenze-tra-carte-custodial/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/crypto-card-differences/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/guida-avanzata-monero/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/guida-avanzata-monero/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/near-confidential-mode-guida/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/near-confidential-mode-guida/",
+      "permanent": false
+    },
+    {
+      "source": "/guide/binance-micar-self-custody-wallet/",
+      "has": [{ "type": "header", "key": "x-vercel-ip-country", "value": "^(?!IT$).*$" }],
+      "missing": [{ "type": "cookie", "key": "lang-pref" }],
+      "destination": "/en/guide/binance-micar-self-custody-wallet/",
+      "permanent": false
+    }
+  ]
+}

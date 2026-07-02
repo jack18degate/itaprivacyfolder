@@ -1,0 +1,20 @@
+---
+interface Props {
+  text: string;
+  variant?: 'green' | 'red' | 'gray' | 'blue' | 'orange' | 'yellow';
+}
+const { text, variant = 'gray' } = Astro.props;
+
+const colors = {
+  green: 'bg-green-900/30 text-green-400 border-green-800/40',
+  red: 'bg-red-900/30 text-red-400 border-red-800/40',
+  gray: 'bg-white/[0.04] text-slate-400 border-white/[0.08]',
+  blue: 'bg-blue-900/30 text-blue-400 border-blue-800/40',
+  orange: 'bg-orange-900/30 text-orange-400 border-orange-800/40',
+  yellow: 'bg-yellow-900/30 text-yellow-500 border-yellow-800/40'
+};
+---
+
+<span class={`inline-block px-2.5 py-1 text-xs font-semibold uppercase tracking-wider rounded-full border ${colors[variant]}`}>
+  {text}
+</span>

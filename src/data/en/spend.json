@@ -1,0 +1,73 @@
+{
+  "page_title": "Spend Crypto in the Real World",
+  "page_description": "The final cycle of financial sovereignty. Discover platforms to convert your cryptocurrencies into goods, gift cards, and precious metals in complete anonymity without the use of fiat banking intermediaries.",
+  "carte_crypto": [
+    {
+      "nome": "DeGate Card",
+      "badge": "Coming Q3 2026",
+      "kyc": "Full KYC Required",
+      "caratteristiche": ["Self-Custodial Wallet", "On-Chain Authorization", "Payment in USDC"],
+      "pro": ["No balance held by the provider", "Funds always under your control"],
+      "link": "https://card.degate.com/?utm_source=article_cryptocard_en",
+      "logo": "https://www.google.com/s2/favicons?domain=degate.com&sz=128"
+    },
+    {
+      "nome": "MetaMask Card",
+      "badge": "Consensys",
+      "kyc": "Full KYC Required",
+      "caratteristiche": ["Linea, Base, Solana networks", "Spend in USDC", "Mastercard network"],
+      "pro": ["No top-up necessary", "Use your MetaMask balance"],
+      "link": "https://metamask.io/card",
+      "logo": "https://www.google.com/s2/favicons?domain=metamask.io&sz=128"
+    }
+  ],
+  "gift_cards": [
+    {
+      "nome": "Bitrefill",
+      "badge": "Global leader",
+      "kyc": "Email Only",
+      "caratteristiche": ["Millions of supported stores", "Amazon/Retail vouchers", "Native Lightning Network"],
+      "pro": ["Zero identity (No-KYC)", "Lightning fast", "Use Bitcoin like Cash"],
+      "link": "https://bitrefill.com/invite/cvesahqf",
+      "logo": "https://www.google.com/s2/favicons?domain=bitrefill.com&sz=128"
+    }
+  ],
+  "beni_fisici": [
+    {
+      "nome": "TaoMarks",
+      "badge": "Privacy Market",
+      "kyc": "No Registration",
+      "caratteristiche": ["Privacy-focused e-commerce", "Multi-crypto"],
+      "pro": ["Network of independent sellers", "Pay directly on-chain"],
+      "link": "https://www.taomark.com/",
+      "logo": "https://www.google.com/s2/favicons?domain=taomark.com&sz=128"
+    },
+    {
+      "nome": "Buy For Me Proxy",
+      "badge": "Proxy Shopping",
+      "kyc": "Privacy Layer Proxy",
+      "caratteristiche": ["They physically buy for you", "Disconnects you from Amazon"],
+      "pro": ["Anonymity in shipments", "Pay the Proxy in BTC, they pay in Fiat"],
+      "link": "https://buyforme.taomark.com/",
+      "logo": "https://www.google.com/s2/favicons?domain=buyforme.taomark.com&sz=128"
+    }
+  ],
+  "faq": [
+    {
+      "domanda": "Why is buying Gift Cards the preferred method for privacy-maximalists?",
+      "risposta": "Because it breaks the chain heuristic. By paying for a gift card on-chain (even better via Lightning), you get a barcode usable at the store checkout, without registering credit cards, IBANs, or accounts in your name."
+    },
+    {
+      "domanda": "But doesn't the delivery driver know my address?",
+      "risposta": "Yes, if you use your real name. For maximum privacy, proxy shoppers like BuyForMe (or using a PO box under a different name) solve this problem by paying third parties in crypto to handle the Fiat purchase on your behalf, ensuring zero direct links to your wallet."
+    },
+    {
+      "domanda": "Can I buy cars or houses directly with cryptocurrencies?",
+      "risposta": "Yes, the crypto-friendly real estate and automotive market is expanding. There are dealerships and real estate agencies (especially abroad, e.g., Dubai, Portugal) that accept direct payments in USDT or BTC without going through traditional bank transfers, although KYC regulations vary from country to country."
+    },
+    {
+      "domanda": "How do I pay taxes if I buy physical goods with crypto?",
+      "risposta": "Caution: purchasing a physical good with cryptocurrencies constitutes a taxable event (a \"realization\"). In many jurisdictions, the difference between the initial purchase cost of the crypto and its value at the time you buy the good is subject to normal capital gains taxation."
+    }
+  ]
+}

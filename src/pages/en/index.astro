@@ -1,0 +1,432 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GlobalSearch from '../../components/GlobalSearch.astro';
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Privacy Crypto Toolkit",
+  "alternateName": "Privacy Crypto",
+  "url": "https://privacy-crypto.com/en/",
+  "description": "Web3 toolkit, guides and resources for privacy-conscious crypto users.",
+  "inLanguage": "en",
+  "keywords": "financial privacy, no-kyc crypto, hardware wallet, dex exchange, spend crypto, no kyc crypto cards, no-log vpn, privacy coins, monero xmr, zcash zec, blockchain surveillance, chain analysis",
+  "about": [
+    { "@type": "Thing", "name": "Financial Privacy", "sameAs": "https://en.wikipedia.org/wiki/Privacy" },
+    { "@type": "Thing", "name": "Cryptocurrency", "sameAs": "https://en.wikipedia.org/wiki/Cryptocurrency" },
+    { "@type": "Thing", "name": "Know Your Customer", "sameAs": "https://en.wikipedia.org/wiki/Know_your_customer" },
+    { "@type": "Thing", "name": "Web3", "sameAs": "https://en.wikipedia.org/wiki/Web3" },
+    { "@type": "Thing", "name": "Blockchain Analysis", "sameAs": "https://en.wikipedia.org/wiki/Blockchain_analysis" },
+    { "@type": "Thing", "name": "Privacy Coins", "sameAs": "https://en.wikipedia.org/wiki/Privacy_coin" }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Privacy Crypto Team",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://privacy-crypto.com/favicon.svg"
+    }
+  },
+  "sponsor": {
+    "@type": "Organization",
+    "name": "DeGate",
+    "url": "https://degate.com"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://privacy-crypto.com/en/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+---
+
+<Layout title="Privacy Toolkit for Crypto Users" maxWidth="max-w-6xl" lang="en">
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION — ~100vh
+       ═══════════════════════════════════════════ -->
+  <section class="relative flex flex-col items-center justify-center text-center pt-8 pb-12 lg:pt-12 lg:pb-16">
+    
+    <!-- Radial blue glow behind -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[900px] lg:h-[900px] rounded-full bg-[radial-gradient(ellipse,rgba(0,102,255,0.12)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 max-w-3xl mx-auto px-4">
+
+      
+      <h1 class="text-[40px] sm:text-[52px] md:text-[60px] lg:text-[72px] font-extrabold tracking-tight leading-[1.05] mb-6 text-white">
+        Master your<br>
+        Financial <span class="text-[#0066FF]">Privacy</span>.
+      </h1>
+      
+      <p class="text-slate-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-8">
+        Web3 toolkit, guides and resources for privacy-conscious crypto users.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+        <a href="#the-context" class="flex items-center gap-2.5 px-7 py-3.5 bg-[#0066FF] hover:bg-[#0055DD] text-white font-semibold text-base rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
+          Explore the Toolkit
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+
+      </div>
+
+      <div class="text-sm leading-relaxed text-slate-400 bg-white/[0.02] border border-white/[0.06] px-5 py-3.5 rounded-2xl max-w-lg mx-auto flex items-start sm:items-center text-left sm:text-center gap-3">
+        <svg class="w-5 h-5 text-[#03a66d] shrink-0 mt-0.5 sm:mt-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span><strong class="text-white">Privacy</strong> is not Tax Evasion, it is a <strong class="text-white">Right</strong>. It means protecting your data beyond what is strictly required by law.</span>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
+      <svg class="w-6 h-6 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  <section class="relative z-50 mb-16 lg:mb-24">
+    <GlobalSearch lang="en" />
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — PROTECTING YOUR FINANCIAL SOVEREIGNTY
+       ═══════════════════════════════════════════ -->
+  <section id="the-context" class="reveal relative py-16 lg:py-24 scroll-mt-24">
+    <!-- Subtle blue glow -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(0,102,255,0.08)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <!-- Text on the left -->
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-[#0066FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <span class="text-sm font-semibold text-[#0066FF] tracking-wide">The Context</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-[#0066FF]">They See Everything.</span><br>
+          Your On-Chain Life is Public.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Chain analysis firms like Chainalysis, Elliptic, and CipherTrace map every public blockchain transaction. Combined with KYC data from exchanges, governments and corporations can link your identity to every on-chain move you make. Financial surveillance has never been this pervasive.
+        </p>
+        
+        <a href="/en/privacy-coins/" class="inline-flex items-center gap-2 px-6 py-3 bg-[#0066FF] hover:bg-[#0055DD] text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/35">
+          Protect Your Privacy
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <!-- Stats on the right -->
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5">
+          <span class="text-4xl lg:text-5xl font-extrabold text-white mb-1" data-counter="100">100<span class="text-[#0066FF]">%</span></span>
+          <span class="text-sm text-slate-500 font-medium">Of Bitcoin transactions are fully transparent</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5">
+          <span class="text-4xl lg:text-5xl font-extrabold text-white mb-1">500<span class="text-[#0066FF]">+</span></span>
+          <span class="text-sm text-slate-500 font-medium">Government agencies using chain analysis</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5">
+          <span class="text-4xl lg:text-5xl font-extrabold text-white mb-1">$0</span>
+          <span class="text-sm text-slate-500 font-medium">Cost for anyone to trace your on-chain activity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — EXCHANGE
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative py-16 lg:py-24 border-t border-white/[0.05]">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(249,115,22,0.06)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z"/></svg>
+          <span class="text-sm font-semibold text-orange-500 tracking-wide">Exchanges (CEX & DEX)</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-orange-500">Take Back Control.</span><br>
+          Choose where you trade.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Traditional CEXs freeze your funds and report every transaction to authorities. DEXs let you swap crypto anonymously, instantly, and with 100% censorship resistance.
+        </p>
+        
+        <a href="/en/exchange/" class="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 hover:bg-orange-500 text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-orange-500/20 hover:shadow-orange-500/35">
+          Compare CEX & DEX
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-orange-500/20 bg-gradient-to-br from-orange-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Zero KYC</span>
+          <span class="text-sm text-slate-500 font-medium">No documents required on DEXs</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-orange-500/20 bg-gradient-to-br from-orange-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">100<span class="text-orange-500">%</span></span>
+          <span class="text-sm text-slate-500 font-medium">Self-custody of your funds</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-orange-500/20 bg-gradient-to-br from-orange-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">None</span>
+          <span class="text-sm text-slate-500 font-medium">Account freezes or blocks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4 — WALLETS
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative py-16 lg:py-24 border-t border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(3,166,109,0.06)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-[#03a66d]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+          <span class="text-sm font-semibold text-[#03a66d] tracking-wide">Wallets</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-[#03a66d]">Not your keys?</span><br>
+          Not your crypto.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Keeping your funds on an exchange is like leaving them at a bank. Discover the best hardware and hot wallets to protect your assets from hackers, corporate bankruptcies, and government seizures.
+        </p>
+        
+        <a href="/en/wallets/" class="inline-flex items-center gap-2 px-6 py-3 bg-[#03a66d] hover:bg-[#028b5b] text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/35">
+          Choose your Wallet
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-[#03a66d]/20 bg-gradient-to-br from-[#03a66d]/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Hardware</span>
+          <span class="text-sm text-slate-500 font-medium">Maximum security for long-term savings</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-[#03a66d]/20 bg-gradient-to-br from-[#03a66d]/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Hot Wallet</span>
+          <span class="text-sm text-slate-500 font-medium">Speed and usability for DeFi operations</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-[#03a66d]/20 bg-gradient-to-br from-[#03a66d]/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">12<span class="text-[#03a66d]">/</span>24</span>
+          <span class="text-sm text-slate-500 font-medium">Seed Phrase words to safeguard</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5 — BUY CRYPTO
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative py-16 lg:py-24 border-t border-white/[0.05]">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(234,179,8,0.06)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span class="text-sm font-semibold text-yellow-500 tracking-wide">Buy Crypto</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-yellow-500">Enter Crypto</span><br>
+          without leaving a trace.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Buying crypto via bank transfer on a CEX means being catalogued forever. Explore on-ramp and P2P alternatives to convert fiat into Bitcoin and crypto while minimizing KYC and preserving your privacy.
+        </p>
+        
+        <a href="/en/purchase/" class="inline-flex items-center gap-2 px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/35">
+          Purchase Methods
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-yellow-500/20 bg-gradient-to-br from-yellow-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">P2P</span>
+          <span class="text-sm text-slate-500 font-medium">Direct exchange between people (Peer-to-Peer)</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-yellow-500/20 bg-gradient-to-br from-yellow-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Light KYC</span>
+          <span class="text-sm text-slate-500 font-medium">Brokers with low limits and minimal checks</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-yellow-500/20 bg-gradient-to-br from-yellow-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Cash</span>
+          <span class="text-sm text-slate-500 font-medium">Purchase via cash and physical ATMs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 6 — SPEND CRYPTO
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative pt-16 lg:pt-24 pb-16 lg:pb-24 border-t border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(168,85,247,0.06)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          <span class="text-sm font-semibold text-purple-500 tracking-wide">Spend Crypto</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-purple-500">Close the Loop.</span><br>
+          Live on Crypto.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Converting back to fiat means re-entering the banking system and exposing yourself to surveillance. Learn how to spend your crypto directly on gift cards, real-world purchases, and precious metals — closing the loop of the circular economy.
+        </p>
+        
+        <a href="/en/spend/" class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-purple-500/20 hover:shadow-purple-500/35">
+          Discover how to Spend
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Zero</span>
+          <span class="text-sm text-slate-500 font-medium">Banks involved in your purchases</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Gift Card</span>
+          <span class="text-sm text-slate-500 font-medium">Shop on Amazon, groceries and travel</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Proxy</span>
+          <span class="text-sm text-slate-500 font-medium">Online shopping protected by intermediaries</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 7 — PRIVACY COINS
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative py-16 lg:py-24 border-t border-white/[0.05]">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(244,63,94,0.06)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span class="text-sm font-semibold text-rose-500 tracking-wide">Privacy Coins</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-rose-500">Absolute Anonymity.</span><br>
+          Untraceable Cryptocurrencies.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Bitcoin and most cryptocurrencies are pseudonymous and fully transparent. Discover what Privacy Coins are, like Monero (read the <a href="/en/guide/guida-avanzata-monero/" class="text-rose-400 hover:underline font-semibold">Advanced XMR Guide</a>) and Zcash (read the <a href="/en/guide/come-usare-zec-shielded/" class="text-rose-400 hover:underline font-semibold">ZEC Shielded Guide</a>), and why they represent the only true digital cash of Web3.
+        </p>
+        
+        <a href="/en/privacy-coins/" class="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-rose-500/20 hover:shadow-rose-500/35">
+          Explore Privacy Coins
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-rose-500/20 bg-gradient-to-br from-rose-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">XMR</span>
+          <span class="text-sm text-slate-500 font-medium">Monero: the gold standard of anonymity</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-rose-500/20 bg-gradient-to-br from-rose-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">ZKP</span>
+          <span class="text-sm text-slate-500 font-medium">Zero-Knowledge Proofs (Zcash)</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-rose-500/20 bg-gradient-to-br from-rose-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">Untraceable</span>
+          <span class="text-sm text-slate-500 font-medium">Impossible to link funds to identity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 8 — MISCELLANEOUS
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative py-16 lg:py-24 border-t border-white/[0.05]">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(6,182,212,0.06)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
+      <div class="flex-1 max-w-xl">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg class="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <span class="text-sm font-semibold text-cyan-500 tracking-wide">Miscellaneous Resources</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight mb-5">
+          <span class="text-cyan-500">360° Defense.</span><br>
+          Essential tools.
+        </h2>
+        
+        <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-6">
+          Financial privacy requires solid foundations. Explore complementary resources like no-log VPNs, censorship-resistant digital identities, and high-privacy SIM cards to protect your communications.
+        </p>
+        
+        <a href="/en/miscellaneous/" class="inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-[15px] rounded-xl transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35">
+          Explore Resources
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      
+      <div class="flex-1 w-full max-w-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div class="reveal reveal-delay-1 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">VPN</span>
+          <span class="text-sm text-slate-500 font-medium">Anonymous browsing with no logs</span>
+        </div>
+        <div class="reveal reveal-delay-2 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">High Privacy</span>
+          <span class="text-sm text-slate-500 font-medium">International SIM cards</span>
+        </div>
+        <div class="reveal reveal-delay-3 bento-card flex flex-col items-center lg:items-start text-center lg:text-left p-5 border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-transparent">
+          <span class="text-3xl lg:text-4xl font-extrabold text-white mb-1">ID</span>
+          <span class="text-sm text-slate-500 font-medium">Decentralized digital identities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 9 — FINAL CTA + SPONSOR
+       ═══════════════════════════════════════════ -->
+  <section class="reveal relative py-16 lg:py-24">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[radial-gradient(ellipse,rgba(0,102,255,0.1)_0%,transparent_70%)] pointer-events-none z-0"></div>
+    
+    <div class="relative z-10 text-center max-w-2xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
+        Protect your<br><span class="text-[#0066FF]">Independence.</span>
+      </h2>
+      <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-8">
+        Your financial privacy starts with a single step. Explore the tools, choose your protocols, and take back control.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/en/purchase/" class="flex items-center gap-2.5 px-8 py-4 bg-[#0066FF] hover:bg-[#0055DD] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
+          Get Started
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+</Layout>

@@ -1,0 +1,73 @@
+{
+  "page_title": "Spendere Crypto nel Mondo Reale",
+  "page_description": "Il ciclo finale della sovranità finanziaria. Scopri le piattaforme per convertire le tue criptovalute in beni, gift card e metalli preziosi in totale anonimato senza l'uso di intermediari bancari fiat.",
+  "carte_crypto": [
+    {
+      "nome": "DeGate Card",
+      "badge": "In Arrivo Q3 2026",
+      "kyc": "Full KYC Obbligatorio",
+      "caratteristiche": ["Wallet Self-Custodial", "Autorizzazione On-Chain", "Pagamento in USDC"],
+      "pro": ["Nessun saldo custodito dal provider", "Fondi sempre sotto il tuo controllo"],
+      "link": "https://card.degate.com/?utm_source=article_cryptocard_it",
+      "logo": "https://www.google.com/s2/favicons?domain=degate.com&sz=128"
+    },
+    {
+      "nome": "MetaMask Card",
+      "badge": "Consensys",
+      "kyc": "Full KYC Obbligatorio",
+      "caratteristiche": ["Reti Linea, Base, Solana", "Spesa in USDC", "Circuito Mastercard"],
+      "pro": ["Nessun top-up necessario", "Usa il saldo del tuo MetaMask"],
+      "link": "https://metamask.io/card",
+      "logo": "https://www.google.com/s2/favicons?domain=metamask.io&sz=128"
+    }
+  ],
+  "gift_cards": [
+    {
+      "nome": "Bitrefill",
+      "badge": "Leader globale",
+      "kyc": "Solo Email",
+      "caratteristiche": ["Milioni di store supportati", "Buoni Amazon/Esselunga", "Lightning Network nativo"],
+      "pro": ["Zero identità (No-KYC)", "Velocissimo", "Usa Bitcoin come Cash"],
+      "link": "https://bitrefill.com/invite/cvesahqf",
+      "logo": "https://www.google.com/s2/favicons?domain=bitrefill.com&sz=128"
+    }
+  ],
+  "beni_fisici": [
+    {
+      "nome": "TaoMarks",
+      "badge": "Privacy Market",
+      "kyc": "Senza Registrazione",
+      "caratteristiche": ["E-commerce privacy-focused", "Multi-crypto"],
+      "pro": ["Reticolo di venditori indipendenti", "Paga direttamente on-chain"],
+      "link": "https://www.taomark.com/",
+      "logo": "https://www.google.com/s2/favicons?domain=taomark.com&sz=128"
+    },
+    {
+      "nome": "Buy For Me Proxy",
+      "badge": "Proxy Shopping",
+      "kyc": "Privacy Layer Proxy",
+      "caratteristiche": ["Comprano fisicamente per te", "Ti sganciano da Amazon"],
+      "pro": ["Anonimato nelle spedizioni", "Paga il Proxy in BTC, loro pagano in Fiat"],
+      "link": "https://buyforme.taomark.com/",
+      "logo": "https://www.google.com/s2/favicons?domain=buyforme.taomark.com&sz=128"
+    }
+  ],
+  "faq": [
+    {
+      "domanda": "Perché comprare Gift Cards è il metodo preferito dai privacy-maximalist?",
+      "risposta": "Perché spezza l'euristica della chain. Pagando una gift card on-chain (meglio ancora tramite Lightning), ottieni un codice barcode usabile alla cassa del supermercato, senza registrare carte di credito, IBAN o conti intestati a te."
+    },
+    {
+      "domanda": "Ma il fattorino Amazon non conosce il mio indirizzo?",
+      "risposta": "Sì, se usi il tuo nome vero. Per estremizzare, i proxy shopper come BuyForMe (o l'uso di fermoposta in falsi nomi) risolvono questo problema pagando terzi in crypto per far gestire l'acquisto Fiat al posto tuo, garantendo zero collegamenti diretti al tuo wallet."
+    },
+    {
+      "domanda": "Posso comprare automobili o case direttamente in criptovalute?",
+      "risposta": "Sì, il mercato immobiliare e automotive crypto-friendly è in espansione. Esistono concessionari ed agenzie immobiliari (specie all'estero, es. Dubai, Portogallo) che accettano pagamenti diretti in USDT o BTC senza passare per bonifici bancari classici, sebbene le norme KYC varino da nazione a nazione."
+    },
+    {
+      "domanda": "Come pago le tasse se compro beni fisici con le crypto?",
+      "risposta": "Attenzione: l'acquisto di un bene fisico con criptovalute costituisce un evento fiscalmente rilevante (un \"realizzo\"). In Italia, la differenza tra il costo di acquisto iniziale della crypto e il suo valore nel momento in cui compri il bene è soggetta alla normale tassazione sulle plusvalenze (33%)."
+    }
+  ]
+}

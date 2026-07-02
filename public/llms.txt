@@ -1,0 +1,214 @@
+# Italian Privacy Toolkit — llms.txt
+
+> Privacy Toolkit per utenti crypto italiani. Normative, exchange, wallet e strumenti per proteggere la tua indipendenza finanziaria.
+
+## Informazioni sul sito
+- Nome: Italian Privacy Toolkit (Privacy Crypto)
+- URL: https://privacy-crypto.com
+- Lingua: Italiano (it)
+- Tipo: Portale educativo su privacy finanziaria e criptovalute
+- Target: Utenti crypto italiani
+
+## Sezioni principali
+
+### Fisco & Tasse
+- URL: https://privacy-crypto.com/fisco/
+- Contenuto: Obblighi fiscali crypto in Italia, DAC8 2026, tassazione al 33%, IVAFE 0,2%, neutralità crypto-to-crypto, FAQ interattive
+
+### DAC8 Guida Completa
+- URL: https://privacy-crypto.com/fisco/dac8-guida-completa/
+- Contenuto: Guida definitiva alla direttiva europea DAC8. Impatto su utenti crypto italiani, CARF, CRS, come funziona la sorveglianza finanziaria automatizzata
+
+### Exchange (CEX vs DEX)
+- URL: https://privacy-crypto.com/exchange/
+- Contenuto: Confronto tra exchange centralizzati (CEX) e decentralizzati (DEX). KYC, custodia, rischio DAC8, censorship resistance
+
+### Exchange Crypto Autorizzati MiCA in Europa
+- URL: https://privacy-crypto.com/exchange-crypto-mica/
+- Contenuto: Registro ufficiale degli exchange crypto autorizzati MiCA (Regolamento EU 2023/1114) dal registro ESMA, aggiornato quotidianamente. Lista completa dei CASP autorizzati con servizi offerti (custodia, scambio fiat-crypto, trading platform, esecuzione ordini), paesi EU in cui operano, e data di autorizzazione. Include spiegazione di MiCA, MiFID II e PSD2. Filtri interattivi per servizio e paese. Warning sulla privacy: KYC obbligatorio, DAC8 reporting, rischi custodial.
+
+### Acquista Crypto
+- URL: https://privacy-crypto.com/acquisto/
+- Contenuto: Metodi di acquisto crypto con privacy: P2P (no-KYC), On-Ramp light KYC, confronto piattaforme
+
+### Portafogli & Storage
+- URL: https://privacy-crypto.com/wallets/
+- Contenuto: Confronto hardware wallet (Trezor, Ledger) e hot wallet (Rabby, Phantom). Self-custody, seed phrase, sicurezza
+
+### Spendi Crypto
+- URL: https://privacy-crypto.com/spend/
+- Contenuto: Come spendere crypto direttamente: gift card no-KYC, proxy buyer per acquisti fisici su Amazon, beni reali
+
+### Privacy Coins
+- URL: https://privacy-crypto.com/privacy-coins/
+- Contenuto: Cosa sono le privacy coins (Monero XMR, Zcash ZEC). Tecnologie di anonimizzazione, ring signatures, zk-SNARKs
+
+### Risorse Varie
+- URL: https://privacy-crypto.com/varie/
+- Contenuto: VPN no-log (Mullvad), identità digitali (Palau RNS.ID), SIM no-KYC, sicurezza personale (OpSec)
+
+### Guide & Tutorial
+- URL: https://privacy-crypto.com/guide/
+- Contenuto: Articoli approfonditi su self-custody wallet, privacy finanziaria, crypto card e best practices crypto
+
+#### Cos'è un self-custody wallet
+- URL: https://privacy-crypto.com/guide/cos%C3%A8-un-self-custody-wallet/
+- Contenuto: Guida completa al concetto di self-custody wallet. Differenze con le app bancarie, cos'è la seed phrase, portabilità delle 12 parole, checklist di sicurezza
+
+#### Crypto Card e Fisco: Differenze tra Carte Custodial e Self-Custody
+- URL: https://privacy-crypto.com/guide/crypto-card-e-fisco-differenze-tra-carte-custodial/
+- Contenuto: Analisi delle differenze fiscali e tecniche tra carte crypto custodial e self-custody. Impatto CRS, come funzionano le carte non-custodial (MetaMask Card, Gnosis Pay, DeGate Card), obblighi per residenti fiscali italiani
+
+#### Guida Avanzata Monero
+- URL: https://privacy-crypto.com/guide/guida-avanzata-monero/
+- Contenuto: Guida avanzata all'utilizzo di Monero (XMR). Ring Signatures, RingCT, Stealth Addresses, configurazione wallet, best practices per la privacy on-chain
+
+#### Come Usare ZEC Shielded
+- URL: https://privacy-crypto.com/guide/come-usare-zec-shielded/
+- Contenuto: Tutorial pratico sulle transazioni shielded di Zcash (ZEC). Configurazione wallet shielded, zk-SNARKs, differenze tra pool trasparente e pool schermato
+
+#### NEAR Confidential Mode Guida
+- URL: https://privacy-crypto.com/guide/near-confidential-mode-guida/
+- Contenuto: Guida al Confidential Mode di NEAR Protocol. Come attivare transazioni riservate, architettura privacy-preserving, casi d'uso per utenti italiani
+
+## Temi chiave
+- Privacy finanziaria e criptovalute
+- DAC8 (Direttiva Europea 2023/2226)
+- Tassazione crypto Italia (33% plusvalenze, 0,2% IVAFE)
+- Self-custody e decentralizzazione
+- Exchange decentralizzati (DEX) vs centralizzati (CEX)
+- Know Your Customer (KYC) e alternative no-KYC
+- Privacy coins (Monero, Zcash)
+- Hardware wallet e seed phrase
+- MiCA (Markets in Crypto-Assets Regulation, EU 2023/1114) — CASP authorization
+- Registro ESMA exchange autorizzati
+- Carte crypto custodial vs self-custody e obblighi CRS
+- OpSec e sicurezza personale
+
+## Fatti Chiave (Dati Citabili)
+- DAC8 entra in vigore il 1° gennaio 2026 in Italia
+- Tassazione plusvalenze crypto in Italia: 33% (dal 2026)
+- IVAFE (imposta di bollo) sulle cripto-attività: 0,2% annuo
+- CARF (Crypto-Asset Reporting Framework): 47 Paesi aderenti entro il 2027
+- I wallet self-custodial (non-custodial) sono fuori dal perimetro di segnalazione DAC8
+- Gli smart contract on-chain non sono soggetti agli obblighi DAC8
+- Lo scambio crypto-to-crypto non genera plusvalenza tassabile in Italia
+- La soglia di esenzione per le plusvalenze crypto è stata abolita dal 2024
+- DeGate Wallet: wallet self-custodial con Swap cross-chain integrato, gas pagato in USDC
+- MiCA (Markets in Crypto-Assets Regulation): dal 30 giugno 2025, tutti i crypto-asset service provider devono essere autorizzati CASP per operare nell'UE
+- Il registro ESMA elenca tutti i CASP autorizzati MiCA in Europa
+- Un exchange MiCA-compliant NON protegge la privacy: KYC obbligatorio e reporting DAC8 automatico
+- Monero (XMR): privacy coin con anonimato by default (Ring Signatures, RingCT, Stealth Addresses)
+- Zcash (ZEC): privacy coin con zk-SNARKs e transazioni shielded opzionali
+
+## Note
+- Il sito è puramente educativo e non costituisce consulenza finanziaria
+- Sponsor: DeGate Wallet (self-custody con swap integrato)
+- Aggiornato regolarmente con nuove normative e strumenti
+
+---
+
+# English Privacy Toolkit — llms.txt (English Version)
+
+> Privacy Toolkit for crypto users. Regulations, exchange, wallet, purchase methods, spend methods, privacy coins, and tools to protect your financial independence.
+
+## Site Information
+- Name: Privacy Crypto Toolkit
+- URL: https://privacy-crypto.com/en/
+- Language: English (en)
+- Type: Educational portal on financial privacy and cryptocurrencies
+- Target: Privacy-conscious crypto users worldwide
+
+## Main Sections
+
+### Tax & Regulations (IT Reference)
+- URL: https://privacy-crypto.com/fisco/
+- Content: Italian crypto tax obligations, DAC8 2026, 33% capital gains tax, 0.2% IVAFE stamp duty, crypto-to-crypto tax neutrality, interactive FAQ. Content in Italian — reference for EU-wide DAC8 implications.
+
+### DAC8 Complete Guide (IT Reference)
+- URL: https://privacy-crypto.com/fisco/dac8-guida-completa/
+- Content: Definitive guide to the EU DAC8 directive (2023/2226). Impact on Italian crypto users, CARF, CRS, automated financial surveillance mechanisms. Content in Italian — essential reference for understanding DAC8 reporting scope across the EU.
+
+### Exchange (CEX vs DEX)
+- URL: https://privacy-crypto.com/en/exchange/
+- Content: Comparison between centralized exchanges (CEX) and decentralized exchanges (DEX). KYC requirements, custody models, DAC8 reporting risk, and censorship resistance.
+
+### MiCA-Compliant Crypto Exchanges in Europe
+- URL: https://privacy-crypto.com/en/mica-compliant-crypto-exchanges/
+- Content: Official register of MiCA-authorized crypto exchanges (EU Regulation 2023/1114) from the ESMA register, updated daily. Complete list of authorized CASPs with services offered (custody, fiat-crypto exchange, trading platform, order execution), EU countries where they operate, and authorization dates. Includes explanation of MiCA, MiFID II, and PSD2. Interactive filters by service and country. Privacy warning: mandatory KYC, DAC8 reporting, custodial risks.
+
+### Purchase Crypto
+- URL: https://privacy-crypto.com/en/purchase/
+- Content: Methods to purchase crypto with privacy: P2P (no-KYC) and Light-KYC On-Ramp options. Platform comparison and privacy trade-offs.
+
+### Wallets & Storage
+- URL: https://privacy-crypto.com/en/wallets/
+- Content: Comparison of hardware wallets (Trezor, Ledger) and hot wallets (Rabby, Phantom). Self-custody, seed phrases, and security best practices.
+
+### Spend Crypto
+- URL: https://privacy-crypto.com/en/spend/
+- Content: How to spend crypto directly: no-KYC gift cards, proxy buyers for physical goods (Amazon, etc.), and real-world assets.
+
+### Privacy Coins
+- URL: https://privacy-crypto.com/en/privacy-coins/
+- Content: Introduction to privacy coins (Monero XMR, Zcash ZEC). Anonymization technologies: ring signatures, RingCT, Stealth Addresses (Monero), zk-SNARKs and shielded transactions (Zcash).
+
+### Miscellaneous Resources
+- URL: https://privacy-crypto.com/en/miscellaneous/
+- Content: No-log VPNs (Mullvad), digital identities (Palau RNS.ID), high-privacy SIM cards, and personal security (OpSec).
+
+### Guides & Tutorials
+- URL: https://privacy-crypto.com/en/guide/
+- Content: Detailed articles on self-custody wallets, crypto cards, privacy coins, and financial privacy best practices.
+
+#### What is a self-custody wallet
+- URL: https://privacy-crypto.com/en/guide/self-custody-wallet/
+- Content: Comprehensive guide to the concept of self-custody wallets. Differences from bank apps, seed phrase definition, portability of the 12-word mnemonic, and security checklists.
+
+#### Crypto Cards: Differences between Custodial and Self-Custodial Cards
+- URL: https://privacy-crypto.com/en/guide/crypto-card-differences/
+- Content: Technical and fiscal analysis of custodial vs. self-custodial crypto cards. How non-custodial cards work (MetaMask Card, Gnosis Pay, DeGate Card), CRS impact, and financial privacy implications.
+
+#### Advanced Monero Guide
+- URL: https://privacy-crypto.com/en/guide/guida-avanzata-monero/
+- Content: Advanced guide to using Monero (XMR). Ring Signatures, RingCT, Stealth Addresses, wallet configuration, and best practices for on-chain privacy.
+
+#### How to Use ZEC Shielded Transactions
+- URL: https://privacy-crypto.com/en/guide/come-usare-zec-shielded/
+- Content: Practical tutorial on Zcash (ZEC) shielded transactions. Shielded wallet setup, zk-SNARKs explained, and differences between transparent and shielded pools.
+
+#### NEAR Confidential Mode Guide
+- URL: https://privacy-crypto.com/en/guide/near-confidential-mode-guida/
+- Content: Guide to NEAR Protocol's Confidential Mode. How to enable private transactions, privacy-preserving architecture, and practical use cases.
+
+## Key Themes
+- Financial privacy and cryptocurrencies
+- DAC8 (EU Directive 2023/2226) and its impact on crypto users
+- Crypto taxation in the EU (Italy: 33% capital gains, 0.2% IVAFE)
+- Self-custody and decentralization
+- Decentralized (DEX) vs. Centralized (CEX) exchanges
+- Know Your Customer (KYC) and no-KYC alternatives
+- Privacy coins (Monero, Zcash)
+- Hardware wallets and seed phrases
+- MiCA (Markets in Crypto-Assets Regulation, EU 2023/1114) — CASP authorization and ESMA register
+- Custodial vs. self-custodial crypto cards and CRS obligations
+- OpSec and personal security
+
+## Key Facts (Citable Data)
+- DAC8 takes effect on January 1, 2026 in the EU
+- Italy crypto capital gains tax: 33% (from 2026)
+- IVAFE (stamp duty) on crypto-assets: 0.2% annually
+- CARF (Crypto-Asset Reporting Framework): 47 countries by 2027
+- Self-custodial (non-custodial) wallets are outside DAC8 reporting scope
+- On-chain smart contracts are not subject to DAC8 obligations
+- DeGate Wallet: self-custodial wallet with integrated cross-chain Swap, gas paid in USDC
+- MiCA (Markets in Crypto-Assets Regulation): from June 30, 2025, all crypto-asset service providers must be CASP-authorized to operate in the EU
+- The ESMA register lists all MiCA-authorized CASPs in Europe
+- A MiCA-compliant exchange does NOT protect privacy: mandatory KYC and automatic DAC8 reporting
+- Monero (XMR): privacy coin with default anonymity (Ring Signatures, RingCT, Stealth Addresses)
+- Zcash (ZEC): privacy coin with zk-SNARKs and optional shielded transactions
+
+## Notes
+- The site is educational only and does not constitute financial advice
+- Sponsor: DeGate Wallet (self-custody with integrated swaps)
+- Regularly updated with new tools, resources, and regulatory changes

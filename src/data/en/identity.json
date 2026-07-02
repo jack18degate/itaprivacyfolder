@@ -1,0 +1,41 @@
+{
+  "page_title": "Digital Identities (Palau ID)",
+  "page_description": "Explore legal and official strategies to obtain foreign digital identities. Protect your data from traditional KYC by operating with e-resident IDs.",
+  "hero_info": {
+    "titolo": "Republic of Palau ID",
+    "sottotitolo": "Revolutionary digital identity program issued by a national sovereignty and stored on the blockchain. Perfect legal tool for use on Asian apps and exchanges.",
+    "costo": "From $248 for the card (1 year) | $1000 (10 years)",
+    "tempi": "Physical: Shipping in 2-3 weeks. Digital: 48h.",
+    "link_ufficiale": "https://rns.id"
+  },
+  "other_ids": [
+    {
+      "titolo": "Liberland E-Residency",
+      "spesa": "Free / A few $ in gas fees",
+      "descrizione": "A micronation not formally recognized, but which issues on-chain IDs. Rarely accepted on major exchanges, but very useful in pure Crypto-native contexts or pre-sales."
+    },
+    {
+      "titolo": "Estonia e-Residency",
+      "spesa": "From €100",
+      "descrizione": "Official European program. Great for opening banks or companies in Estonia without being born there. Be aware though, Estonia shares tax data with Europe (complies with CRS)."
+    }
+  ],
+  "faq": [
+    {
+      "domanda": "Is Palau ID a citizenship? Does it give me a new Passport?",
+      "risposta": "No. You are not a citizen of Palau and you do not get an island passport. You obtain a government-issued 'Identity Card' and a Digital Residency approved by their parliament. It formally functions as a personal identity document."
+    },
+    {
+      "domanda": "Where is Palau ID accepted for KYC Checks?",
+      "risposta": "The physical and digital RNS.ID card has an acceptance rate of over 90% on major free market operators such as Binance, Bybit, KuCoin, OKX, Gate.io, and most global P2P operations. However, it is often rejected by ultra-regulated US entities (like Coinbase), due to the jurisdiction that governs US AML verifications."
+    },
+    {
+      "domanda": "Can I evade taxes by registering on Binance with a Palau card?",
+      "risposta": "Absolutely Not. Palau does NOT provide you with TAX residency. You are still required to declare your capital to the State where you live for more than 183 days per year. The intrinsic advantage of Palau ID is Data Privacy: if an Asian exchange suffers a data breach (hack), your national ID card or personal driver's license with sensitive local data won't be stolen — only the Palau card (which doesn't contain your local tax identification number)."
+    },
+    {
+      "domanda": "Does RNS.ID use NFTs?",
+      "risposta": "The platform stores the encrypted version of your ID as a 'Soulbound' NFT (meaning non-transferable and strictly bound to you) on the blockchain. However, you are not forced to use it online: they literally ship you the physical polycarbonate plastic card like a regular driver's license."
+    }
+  ]
+}

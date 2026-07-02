@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const page_title = "Chi Siamo";
+const page_description = "Scopri il progetto dietro privacy-crypto.com e la nostra missione educativa per diffondere la consapevolezza sulla privacy finanziaria.";
+---
+
+<Layout title={page_title} description={page_description} maxWidth="max-w-4xl">
+  <header class="mb-8 border-b border-white/[0.05] pb-6">
+    <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 text-white">Chi Siamo</h1>
+    <p class="text-slate-400 text-lg leading-relaxed">{page_description}</p>
+  </header>
+
+  <div class="prose prose-invert prose-slate max-w-none">
+    <div class="bento-card p-6 md:p-8 mb-8 border border-[#0066FF]/20 bg-[#0066FF]/5">
+        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-[#0066FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            La Nostra Missione Educativa
+        </h2>
+        <p class="text-slate-300 leading-relaxed mb-4">
+            <strong>privacy-crypto.com</strong> nasce come un hub puramente informativo ed educativo, rivolto in particolare agli utenti italiani. Il nostro obiettivo è raccogliere e catalogare gli strumenti, le normative e le migliori pratiche legate alla privacy digitale e all'uso consapevole delle criptovalute.
+        </p>
+        <p class="text-slate-300 leading-relaxed">
+            In un panorama web3 sempre più complesso e spesso costellato da truffe, crediamo sia fondamentale avere un punto di riferimento chiaro che spieghi come mantenere la sovranità sui propri dati e sulle proprie finanze.
+        </p>
+    </div>
+
+    <h3 class="text-xl font-bold text-white mt-8 mb-4">Cosa NON Facciamo</h3>
+    <ul class="space-y-3 text-slate-400 mb-8 list-none pl-0">
+        <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            <span><strong>Nessuna Consulenza Finanziaria:</strong> Non forniamo segnali di trading, non consigliamo investimenti e non promettiamo rendimenti. Tutte le informazioni sono rigorosamente didattiche.</span>
+        </li>
+        <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            <span><strong>Nessuna Raccolta Fondi:</strong> Non accetteremo mai depositi, non chiederemo le tue chiavi private e non gestiremo mai fondi per conto terzi. Se qualcuno ti contatta a nostro nome chiedendo fondi, è una truffa.</span>
+        </li>
+    </ul>
+
+    <h3 class="text-xl font-bold text-white mt-8 mb-4">Indipendenza e Sicurezza</h3>
+    <p class="text-slate-400 leading-relaxed mb-6">
+        Selezioniamo e recensiamo strumenti (come wallet self-custody, exchange e VPN) basandoci su criteri di sicurezza, approccio open-source e rispetto per la privacy dell'utente. Il nostro contenuto è pensato per aiutarti a fare la <em>tua</em> ricerca in modo più consapevole e sicuro (DYOR - Do Your Own Research).
+    </p>
+
+  </div>
+</Layout>

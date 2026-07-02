@@ -1,0 +1,30 @@
+{
+  "page_title": "Communities & Meetups",
+  "page_description": "Connect with other cypherpunks, traders, and privacy advocates around the world.",
+  "telegram": [
+    {
+      "nome": "Bitcoin Italia Podcast",
+      "descrizione": "The group of the historic Italian Bitcoin broadcast. (Italian language)",
+      "link": "https://t.me/bitcoinita"
+    },
+    {
+      "nome": "DeFi Italia",
+      "descrizione": "Focus on decentralized finance, yield farming, and smart contracts. (Italian language)",
+      "link": "https://t.me/defi_italia"
+    }
+  ],
+  "meetups": [
+    {
+      "citta": "Milan",
+      "nome": "Satoshi Spritz Milano",
+      "frequenza": "Monthly",
+      "descrizione": "Historic group for meeting up over drinks to discuss P2P and BTC."
+    },
+    {
+      "citta": "Rome",
+      "nome": "Roma Crypto Meetup",
+      "frequenza": "Bi-monthly",
+      "descrizione": "Discussions on regulations, trading, and networking."
+    }
+  ]
+}

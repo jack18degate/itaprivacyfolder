@@ -1,0 +1,58 @@
+---
+import { getHreflangAlternates, type Lang } from '../i18n/utils';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalURL?: string;
+  lang?: Lang;
+}
+
+const {
+  title,
+  description,
+  image = '/og-image.jpg',
+  lang = 'it',
+} = Astro.props;
+
+// Assicuriamoci che l'URL canonico finisca con / per evitare problemi con Search Console
+let currentPath = Astro.url.pathname;
+if (!currentPath.endsWith('/') && currentPath !== '') {
+  currentPath += '/';
+}
+// Rimuovi eventuali index.html dalla fine
+currentPath = currentPath.replace(/\/index\.html\/?$/, '/');
+
+const canonicalURL = Astro.props.canonicalURL || new URL(currentPath, Astro.site || 'https://privacy-crypto.com').href;
+const socialImageURL = new URL(image, Astro.site || 'https://privacy-crypto.com').href;
+---
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- hreflang — Bilingual IT/EN -->
+{getHreflangAlternates(currentPath, lang).map(alt => (
+  <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+))}
+
+<!-- Content Language -->
+<meta http-equiv="content-language" content={lang} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={`${title} | ${lang === 'en' ? 'Privacy Crypto Toolkit' : 'Italian Privacy Toolkit'}`} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'it_IT'} />
+<meta property="og:locale:alternate" content={lang === 'en' ? 'it_IT' : 'en_US'} />
+<meta property="og:site_name" content={lang === 'en' ? 'Privacy Crypto Toolkit' : 'Italian Privacy Toolkit'} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={`${title} | ${lang === 'en' ? 'Privacy Crypto Toolkit' : 'Italian Privacy Toolkit'}`} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={socialImageURL} />
+<meta property="twitter:site" content="@privacy_crypto" />
